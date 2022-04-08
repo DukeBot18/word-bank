@@ -79,25 +79,34 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    margin-top: 3vh;
 }
 
 .word-phrases {
     display: flex;
     align-items: flex-end;
 }
-
-.answer {
-    color: var(--mainWhite);
-    border-bottom: 2px solid var(--lightkeyBGColor);
+.letter-box {
+    border: 1px solid var(--lightkeyBGColor);
     min-height: 50px;
-    min-width: 32px;
+    min-width: 38px;
     width: 100%;
     margin: 5px;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: flex-end;
-    line-height: 70%;
+}
+
+.answer {
+    color: var(--mainWhite);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     user-select: none;
+    text-transform: capitalize;
+    visibility: hidden;
 }
 
 .blank {
@@ -146,6 +155,10 @@ html {
     font-weight: 500;
     font-size: 2.2rem;
     color: var(--accentColor-3);
+}
+
+.box-3 {
+    color: var(--accentColor-4);
 }
 
 /* Bankroll */

@@ -21,7 +21,7 @@ let insertPhrase = document.querySelector(".phrase-container");
         insertPhrase.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
         let tempElement = document.getElementById(`word-phrase-${i}`);
         for(let j = 0; j < words[i].length; j++) {
-            tempElement.innerHTML += `<span class="answer">${words[i][j]}</span>`;
+            tempElement.innerHTML += `<div class="letter-box"><span class="answer">${words[i][j]}</span></div>`;
         }
         if (i != words.length - 1) {
             tempElement.innerHTML += '<span class="answer blank"> </span>';
