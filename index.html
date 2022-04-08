@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Alpha$Bet</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Link in Styles -->
+        <link href="/style.css" rel="stylesheet">
+        <!-- scripts -->
+        <script type="module" defer src="/main.js"></script>
+    </head>
+
+    <body> 
+        <main class="page-wrapper">
+            <div class="main-container">
+                <div class="content-container">
+                    <!-- FIRST DIV -->
+                    <div class="section-container top-container">
+                        <div>
+                            <h1>Alpha$Bet</h1>
+                        </div>
+                        <div>
+                            <!-- Dark to light mode setting button in this div -->
+                            <div class="settings-container">
+                                <button class="settings-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -2 24 24" width="24" fill="currentColor"><path d="M12.253.335A10.086 10.086 0 0 0 8.768 8c0 4.632 3.068 8.528 7.232 9.665A9.555 9.555 0 0 1 9.742 20C4.362 20 0 15.523 0 10S4.362 0 9.742 0c.868 0 1.71.117 2.511.335z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- SECOND DIV -->
+                    <div class="section-container">
+                        <!-- hint section -->
+                        <section>
+                            <header><u>HINT!</u></header>
+                            <!-- generate hint based on phrase -->
+                            <p id="hint"></p>
+                        </section>
+                    </div>
+
+                    <!-- THIRD div for phrase generation -->
+                    <div class="section-container">
+                        <!-- phrase generated from API using JS -->
+                            <div class="phrase-container"></div>
+                    </div>
+
+                    <!-- FOURTH div encompassing guesses & Bankroll with Letters  -->
+                    <div class="section-container">
+                        <!-- || guesses & Bankroll div -->
+                        <div class="play-container">
+                            <div class="info-container">
+                                <!-- Guesses -->
+                                <div class="info-inner expand-info">
+                                    <section>
+                                        <header id="guesses"><u>Guesses</u></header>
+                                        <div class="guess-boxes-container">
+                                            <!-- boxes for number of guesses -->
+                                            <div class="guess-box box-1">X</div>
+                                            <div class="guess-box box-2">X</div>
+                                            <div class="guess-box box-3"></div>
+                                            <div class="guess-box box-4"></div>
+                                            <div class="guess-box box-5"></div>
+                                            <div class="guess-box box-6"></div>
+                                            <div class="guess-box box-7"></div>
+                                            <div class="guess-box box-8"></div>
+                                            <div class="guess-box box-9"></div>
+                                            <div class="guess-box box-10"></div>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <!-- Bankroll -->
+                                <div class="info-inner">
+                                    <section>
+                                        <header><u>Bankroll</u></header>
+                                        <p id="bankroll"></p>
+                                    </section>
+                                </div>
+                            </div>
+
+                            <!-- Alphabet -->
+                            <div class="letter-container">
+                                <section>
+                                    <!-- 10 letters -->
+                                    <div class="letters-div">
+                                        <div class="letter">a<sup>$30</sup></div>
+                                        <div class="letter">b<sup>$30</sup></div>
+                                        <div class="letter">c<sup>$30</sup></div>
+                                        <div class="letter">d<sup>$30</sup></div>
+                                        <div class="letter">e<sup>$30</sup></div>
+                                        <div class="letter">f<sup>$30</sup></div>
+                                        <div class="letter">g<sup>$30</sup></div>
+                                        <div class="letter">h<sup>$30</sup></div>
+                                        <div class="letter">i<sup>$30</sup></div>
+                                        <div class="letter">j<sup>$30</sup></div>
+                                    </div>
+
+                                    <!-- 9 letters -->
+                                    <div class="letters-div">
+                                        <div class="spacer-half"></div>
+                                        <div class="letter">k<sup>$30</sup></div>
+                                        <div class="letter">l<sup>$30</sup></div>
+                                        <div class="letter">m<sup>$30</sup></div>
+                                        <div class="letter">n<sup>$30</sup></div>
+                                        <div class="letter">o<sup>$30</sup></div>
+                                        <div class="letter">p<sup>$30</sup></div>
+                                        <div class="letter">q<sup>$30</sup></div>
+                                        <div class="letter">r<sup>$30</sup></div>
+                                        <div class="letter">s<sup>$30</sup></div>
+                                        <div class="spacer-half"></div>
+                                    </div>
+
+                                    <!-- 7 letters plus enter -->
+                                    <div class="letters-div">
+                                        <div class="spacer-half"></div>
+                                        <div class="letter enter">Enter</div>
+                                        <div class="letter">t<sup>$30</sup></div>
+                                        <div class="letter">u<sup>$30</sup></div>
+                                        <div class="letter">v<sup>$30</sup></div>
+                                        <div class="letter">w<sup>$30</sup></div>
+                                        <div class="letter">x<sup>$30</sup></div>
+                                        <div class="letter">y<sup>$30</sup></div>
+                                        <div class="letter">z<sup>$30</sup></div>
+                                        <div class="spacer-half"></div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+
+
+</html>
