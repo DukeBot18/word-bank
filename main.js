@@ -13,13 +13,19 @@ let answerLength = phrase["phrase"].length;
 console.log(phrase["phrase"]);
 console.log(answerLength);
 
+
+// get all words in phrase in an array 
+let words = phrase["phrase"].split(" ");
+console.log(words); 
+
+
 // amount of words in phrase
-let words = phrase["phrase"].match(/\s/g).length + 1;
-console.log(words);
+// let words = phrase["phrase"].match(/\s/g).length + 1;
+// console.log(words);
 
 // element to insert phrase
 let insertPhrase = document.querySelector(".phrase-container");
-console.log(insertPhrase);
+
 
 // for (let i = 0; i < words; i++) {
     for( let i = 0; i < answerLength; i++) {

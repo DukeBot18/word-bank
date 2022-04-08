@@ -6,8 +6,8 @@ const phraseObject = {
         phrase: "A Beautiful Mind"
     },
     two: {
-        hint: "Person that loves farting in mouths",
-        phrase: "Lucia Whalen"
+        hint: "This person was part of Young Money",
+        phrase: "Charlie"
     }
 }
 
