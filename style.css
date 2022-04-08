@@ -106,6 +106,10 @@ html {
     align-items: center;
     user-select: none;
     text-transform: capitalize;
+    color: var(--accentColor-1);
+}
+
+.non-visible {
     visibility: hidden;
 }
 
@@ -150,11 +154,16 @@ html {
     margin-top: 10px;
     min-height: 70px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     font-weight: 500;
     font-size: 2.2rem;
     color: var(--accentColor-3);
+}
+
+.deduction {
+    font-size: x-small;
 }
 
 .box-3 {
@@ -199,8 +208,35 @@ html {
     transition: .2s;
     flex: 1 1;
 }
+.highlight {
+    background-color: var(--accentColor-2);
+}
+
+.correct {
+    background-color: var(--accentColor-4);
+    opacity: .4;
+}
+
+.incorrect {
+    background-color: var(--accentColor-3);
+    opacity: .4;
+}
 
 .enter {
+    min-height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 4px;
+    user-select: none;
+    border: 2px solid transparent;
+    background-color: var(--lightkeyBGColor);
+    text-transform: capitalize;
+    transition: .2s;
     flex: 1.75 1.75;
 }
 
@@ -208,7 +244,8 @@ html {
     flex: 0.5 1;
 }
 
-.letter:hover {
+.letter:hover,
+.enter:hover {
     opacity: .8;
 }
 
