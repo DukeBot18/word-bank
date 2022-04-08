@@ -7,7 +7,7 @@ const phraseObject = {
     },
     two: {
         hint: "This person was part of Young Money",
-        phrase: "Charlie"
+        phrase: "Charlie Mooshie Moosh'ie Meishie tooshie"
     }
 }
 

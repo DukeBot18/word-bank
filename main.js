@@ -1,36 +1,44 @@
 // Import phrase data
 import { phraseObject } from "./phrases.js";
 
+// || Generated content from Phrase data || //
+
 // Generate phrase for the day
 const values = Object.values(phraseObject);
-console.log(values);
 
+// Randomly choose one phrase
 let phrase = values[Math.floor(Math.random() * values.length)];
-console.log(phrase);
-
-// length of all characters in phrase
-let answerLength = phrase["phrase"].length;
-console.log(phrase["phrase"]);
-console.log(answerLength);
-
 
 // get all words in phrase in an array 
 let words = phrase["phrase"].split(" ");
-console.log(words); 
-
-
-// amount of words in phrase
-// let words = phrase["phrase"].match(/\s/g).length + 1;
-// console.log(words);
 
 // element to insert phrase
 let insertPhrase = document.querySelector(".phrase-container");
 
 
 // for (let i = 0; i < words; i++) {
-    for( let i = 0; i < answerLength; i++) {
-    insertPhrase.innerHTML += `<span class="answer">${phrase["phrase"][i]}</span>`;
+    for(let i = 0; i < words.length; i++) {
+        insertPhrase.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
+        let tempElement = document.getElementById(`word-phrase-${i}`);
+        for(let j = 0; j < words[i].length; j++) {
+            tempElement.innerHTML += `<span class="answer">${words[i][j]}</span>`;
+        }
+        if (i != words.length - 1) {
+            tempElement.innerHTML += '<span class="answer blank"> </span>';
+        }
     }
+
+// add hint 
+let hint = phrase["hint"];
+
+let hintBtn = document.querySelector(".hint-btn");
+
+hintBtn.addEventListener("click", function() {
+    let element = document.querySelector("#hint");
+    element.innerHTML = hint;
+})
+
+// || Bankroll Manipulation || //
 
 // Bankroll
 let money = 1000;

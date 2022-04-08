@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Alpha$Bet</title>
+        <title>WordBank</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Link in Styles -->
@@ -18,7 +18,7 @@
                     <!-- FIRST DIV -->
                     <div class="section-container top-container">
                         <div>
-                            <h1>Alpha$Bet</h1>
+                            <h1>Word<span class="header-title">Bank</span></h1>
                         </div>
                         <div>
                             <!-- Dark to light mode setting button in this div -->
@@ -26,26 +26,23 @@
                                 <button class="settings-btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -2 24 24" width="24" fill="currentColor"><path d="M12.253.335A10.086 10.086 0 0 0 8.768 8c0 4.632 3.068 8.528 7.232 9.665A9.555 9.555 0 0 1 9.742 20C4.362 20 0 15.523 0 10S4.362 0 9.742 0c.868 0 1.71.117 2.511.335z"></path></svg>
                                 </button>
+                                <button class="settings-btn hint-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -1.5 24 24" width="24" fill="currentColor"><path d="M11 14.565H8v-8a1 1 0 1 0-2 0v8H3V13.31a7 7 0 1 1 8 0v1.255zm0 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h8z"></path></svg>
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <!-- SECOND DIV -->
-                    <div class="section-container">
-                        <!-- hint section -->
-                        <section>
-                            <header><u>HINT!</u></header>
-                            <!-- generate hint based on phrase -->
+                        <div>
                             <p id="hint"></p>
-                        </section>
+                        </div>
                     </div>
 
-                    <!-- THIRD div for phrase generation -->
+                    <!-- SECOND div for phrase generation -->
                     <div class="section-container">
                         <!-- phrase generated from API using JS -->
                             <div class="phrase-container"></div>
                     </div>
 
-                    <!-- FOURTH div encompassing guesses & Bankroll with Letters  -->
+                    <!-- THIRD div encompassing guesses & Bankroll with Letters  -->
                     <div class="section-container">
                         <!-- || guesses & Bankroll div -->
                         <div class="play-container">
@@ -71,7 +68,7 @@
                                 </div>
 
                                 <!-- Bankroll -->
-                                <div class="info-inner">
+                                <div class="info-inner bottomm-info">
                                     <section>
                                         <header><u>Bankroll</u></header>
                                         <p id="bankroll"></p>

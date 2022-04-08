@@ -29,20 +29,18 @@ html {
 
 .page-wrapper {
     position: relative;
-    border: 2px solid green;
 }
 
 .main-container {
     height: 90vh;
-    border: 2px solid purple;
-    margin-top: 5vh;
+    margin-top: 2vh;
 }
 
 .content-container {
     max-width: 800px;
     margin: 0 auto;
     width: 100%;
-    height: 100%;
+    min-height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -50,10 +48,8 @@ html {
     border-radius: 2px;
 }
 
-.section-container {
-    border: 1px solid red;
-}
 
+/* || FIRST container */
 
 .top-container {
     display: flex;
@@ -71,32 +67,44 @@ html {
     margin-bottom: 8px;
 }
 
-/* || THIRD container */
-.phrase-container {
-    color: var(--mainWhite);
-    font-size: 2.5rem;
+.header-title {
+    color: var(--accentColor-5);
 }
 
+/* || SECOND container */
 .phrase-container {
+    color: var(--mainWhite);
+    font-size: 2.2rem;
     display: flex;
-    
     flex-wrap: wrap;
-    column-gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.word-phrases {
+    display: flex;
+    align-items: flex-end;
 }
 
 .answer {
     color: var(--mainWhite);
-    border-bottom:2px solid var(--lightkeyBGColor);
-    min-height: 60px;
-    max-width: 50px;
+    border-bottom: 2px solid var(--lightkeyBGColor);
+    min-height: 50px;
+    min-width: 32px;
     width: 100%;
+    margin: 5px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    line-height: 70%;
+    user-select: none;
 }
 
+.blank {
+    border: none;
+}
 
-/* || FOURTH container */
+/* || THIRD container */
 .play-container {
     display: flex;
     flex-direction: column;
@@ -110,10 +118,14 @@ html {
     row-gap: 10px;
 }
 
+.bottomm-info {
+    margin-bottom: 3vh;
+}
 
 .expand-info {
     width: 100%;
     text-align: center;
+    margin-top: 3vh;
 }
 
 /* Guesses */
@@ -154,6 +166,7 @@ html {
     width: 100%;
     margin: 0 auto 8px;
     touch-action: manipulation;
+    column-gap: 5px;
 }
 
 .letter {
@@ -171,7 +184,6 @@ html {
     background-color: var(--lightkeyBGColor);
     text-transform: capitalize;
     transition: .2s;
-    margin-right: 5px;
     flex: 1 1;
 }
 
@@ -199,12 +211,13 @@ sup {
     background-color: var(--lightkeyBGColor);
     border: none;
     border-radius: 2px;
+    margin: 10px;
 }
 .settings-btn:hover {
     cursor: pointer;
 }
 
-/* || Font styles */
+/* || Font and text color styles */
 header {
     font-size: 1.5rem;
     color: var(--mainWhite);
@@ -217,4 +230,10 @@ h1 {
 /* || JS manipulated classes */
 .money {
     color: var(--accentColor-5);
+}
+
+#hint {
+    color: var(--mainWhite);
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
