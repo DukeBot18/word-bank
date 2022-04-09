@@ -15,8 +15,6 @@ let words = phrase["phrase"].split(" ");
 // element to insert phrase
 let insertPhrase = document.querySelector(".phrase-container");
 
-
-// for (let i = 0; i < words; i++) {
     for(let i = 0; i < words.length; i++) {
         insertPhrase.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
         let tempElement = document.getElementById(`word-phrase-${i}`);
@@ -28,72 +26,133 @@ let insertPhrase = document.querySelector(".phrase-container");
         }
     }
 
-// add hint 
-let hint = phrase["hint"];
 
-let hintBtn = document.querySelector(".hint-btn");
+// || Bankroll and Guesses || //
 
-hintBtn.addEventListener("click", function() {
-    let element = document.querySelector("#hint");
-    element.innerHTML = hint;
-})
-
-// || Bankroll Manipulation || //
-
-// Bankroll
+// Initial bankroll
 let money = 1000;
 let currentMoney = document.querySelector("#bankroll");
 
 currentMoney.innerHTML = "$ " + money;
 
+
+// Initial guesses
+let guessCount = 0;
+
 // Guesses
-let allGuessBxs = document.querySelectorAll(".guess-box");
-console.log(allGuessBxs);
+let guessArr = [...document.querySelectorAll(".guess-box")];
+console.log(guessArr);
 
 // Letters 
 const lettersArr = [...document.querySelectorAll(".letter")];
-console.log(lettersArr);
 
 for (let element of lettersArr) {
     element.addEventListener("click", function() {
-        console.log(element.textContent);
 
-        element.classList.add("highlight");
-
-        // enter element for next click even Need a PROMISE
-        let enterElm = document.querySelector(".enter");
-        console.log(enterElm);
-        if(enterElm.clicked == true) {
-            console.log("TRUE");
+        // if letter already chosen exit
+        if (element.classList.contains("incorrect") || element.classList.contains("correct"))
+        {
+            return;
         }
-        // TODO: above
-        
-        // Get letter and subsequent dollar value
-        let tempArr = element.textContent.split("$");
 
-        // Subtrack from available money
-        money -= tempArr[1];
-        currentMoney.innerHTML = "$ " + money;
-
-        // Add letters in hidden phrase if guessed correct
-        if (phrase["phrase"].includes(tempArr[0])) {
-
-            // Change letter color if its in phrase
-            element.classList.remove("highlight");
-            element.classList.add("correct")
-    
-            let answerArr = [...document.querySelectorAll(".answer")];
-
-            for (let i = 0; i < answerArr.length; i++){
-                if (answerArr[i].textContent == tempArr[0]) {
-                    // Remove class to make Letter visible
-                    answerArr[i].classList.remove("non-visible");
-                }
+        // check if other letters are highlighted without entering
+        for (let i = 0; i < lettersArr.length; i++) {
+            if (lettersArr[i].classList.contains("highlight")) {
+                lettersArr[i].classList.remove("highlight");
             }
         }
-        else {
-            element.classList.remove("highlight");
-            element.classList.add("incorrect");
-        }
-    })
+
+        element.classList.add("highlight");
+    });
 }
+
+// Check for enter button click and highlighted letter
+let enterBtn = document.querySelector(".enter");
+
+enterBtn.addEventListener("click", function() {
+    // get highlighted letter
+    let letter = document.querySelector(".highlight");
+    if (letter === null) {
+        return;
+    }
+    
+    // get value of letter and cost
+    let tempArr = letter.textContent.split("$");
+    console.log(tempArr);
+    console.log("hello");
+
+    let result = phrase["phrase"].includes(tempArr[0]);
+
+    // add guess to guess box
+    if (guessCount < guessArr.length) {
+        if(result) {
+            guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
+            guessArr[guessCount].firstElementChild.classList.add("correct-guess");
+            guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
+            guessArr[guessCount].lastElementChild.classList.add("correct-guess");
+        }
+        else {
+            guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
+            guessArr[guessCount].firstElementChild.classList.add("incorrect-guess");
+            guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
+            guessArr[guessCount].lastElementChild.classList.add("incorrect-guess");
+        }
+        guessCount++;
+    }
+
+    // subtrack letter cost from current money
+    money -= tempArr[1];
+    currentMoney.innerHTML = "$ " + money;
+
+    // add letters in hidden phrase if correct
+    if (result) {
+        // highlight letter as correct
+        letter.classList.remove("highlight");
+        letter.classList.add("correct");
+
+        // make visible correct letters in phrase
+        let answerArr = [...document.querySelectorAll(".answer")];
+
+        for (let i = 0; i < answerArr.length; i++) {
+            if (answerArr[i].textContent == tempArr[0]) {
+
+                // Remove class to make letter visible
+                answerArr[i].classList.remove("non-visible");
+            }
+        }
+    }
+    else {
+        // highlight letter as incorrect
+        letter.classList.remove("highlight");
+        letter.classList.add("incorrect");
+    }
+});
+
+// add hint 
+let hint = phrase["hint"];
+
+let hintBtn = document.querySelector(".hint-btn");
+
+// only allow one hint
+let hintCount = 0;
+
+hintBtn.addEventListener("click", function() {
+    if(guessCount < guessArr.length) {
+        if (hintCount == 0) {
+            let element = document.querySelector("#hint");
+            element.innerHTML = hint;
+    
+            // add hint to guessbox
+            guessArr[guessCount].firstElementChild.innerHTML = "h";
+            guessArr[guessCount].firstElementChild.classList.add("hint-guess");
+            guessArr[guessCount].lastElementChild.innerHTML = "-$100";
+            guessArr[guessCount].lastElementChild.classList.add("hint-guess");
+            guessCount++;
+            hintCount++;
+    
+            // subtrack money 
+            money -= 100;
+            currentMoney.innerHTML = "$ " + money;
+        }
+    }
+})

@@ -159,15 +159,14 @@ html {
     justify-content: center;
     font-weight: 500;
     font-size: 2.2rem;
-    color: var(--accentColor-3);
 }
 
 .deduction {
     font-size: x-small;
 }
 
-.box-3 {
-    color: var(--accentColor-4);
+.guess-outcome {
+    text-transform: capitalize;
 }
 
 /* Bankroll */
@@ -208,19 +207,6 @@ html {
     transition: .2s;
     flex: 1 1;
 }
-.highlight {
-    background-color: var(--accentColor-2);
-}
-
-.correct {
-    background-color: var(--accentColor-4);
-    opacity: .4;
-}
-
-.incorrect {
-    background-color: var(--accentColor-3);
-    opacity: .4;
-}
 
 .enter {
     min-height: 60px;
@@ -247,6 +233,33 @@ html {
 .letter:hover,
 .enter:hover {
     opacity: .8;
+}
+
+.highlight {
+    background-color: var(--accentColor-2);
+}
+
+.correct {
+    background-color: var(--accentColor-5);
+    opacity: .4;
+}
+
+.incorrect {
+    background-color: var(--accentColor-3);
+    opacity: .4;
+}
+
+.incorrect-guess {
+    color: var(--accentColor-3);
+}
+
+.correct-guess {
+    color:  var(--accentColor-5);
+}
+
+.incorrect:hover,
+.correct:hover {
+    opacity: .4;
 }
 
 sup {
@@ -277,13 +290,14 @@ h1 {
     color: var(--mainWhite);
 }
 
-/* || JS manipulated classes */
-.money {
-    color: var(--accentColor-5);
-}
-
+/* || Hint */
 #hint {
     color: var(--mainWhite);
     font-size: 1.2rem;
     margin-bottom: 10px;
+}
+
+.hint-guess {
+    text-transform: capitalize;
+    color: var(--accentColor-2);
 }
