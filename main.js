@@ -8,6 +8,12 @@ const values = Object.values(phraseObject);
 
 // Randomly choose one phrase
 let phrase = values[Math.floor(Math.random() * values.length)];
+console.log(phrase);
+console.log(phrase["category"]);
+
+// add category 
+let categoryDiv = document.querySelector(".category");
+categoryDiv.innerHTML = phrase["category"];
 
 // get all words in phrase in an array 
 let words = phrase["phrase"].split(" ");
@@ -15,11 +21,21 @@ let words = phrase["phrase"].split(" ");
 // element to insert phrase
 let insertPhrase = document.querySelector(".phrase-container");
 
+    // Dynamically create phrase boxes
     for(let i = 0; i < words.length; i++) {
         insertPhrase.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
         let tempElement = document.getElementById(`word-phrase-${i}`);
         for(let j = 0; j < words[i].length; j++) {
-            tempElement.innerHTML += `<div contenteditable="true" class="letter-box"><span class="answer non-visible">${words[i][j]}</span></div>`;
+
+            // make apostrophe's visible
+            let apostropheRegex = /'/;
+            if (apostropheRegex.test(words[i][j])) {
+                tempElement.innerHTML += `<div class="letter-box"><span class="answer">${words[i][j]}</span></div>`;
+            }
+            // all other letters hidden
+            else {
+                tempElement.innerHTML += `<div contenteditable="true" class="letter-box"><span class="answer non-visible">${words[i][j]}</span></div>`;
+            }
         }
         if (i != words.length - 1) {
             tempElement.innerHTML += '<div class="letter-box blank"><span class=" blank"> </span></div>';
@@ -35,15 +51,13 @@ let currentMoney = document.querySelector("#bankroll");
 
 currentMoney.innerHTML = "$ " + money;
 
-
 // Initial guesses
 let guessCount = 0;
 
-// Guesses
+// Guess Boxes
 let guessArr = [...document.querySelectorAll(".guess-box")];
-console.log(guessArr);
 
-// Letters 
+// Letter Boxes
 const lettersArr = [...document.querySelectorAll(".letter")];
 
 for (let element of lettersArr) {
@@ -78,9 +92,8 @@ enterBtn.addEventListener("click", function() {
     
     // get value of letter and cost
     let tempArr = letter.textContent.split("$");
-    console.log(tempArr);
-    console.log("hello");
-
+    
+    // see if guess was correct
     let result = phrase["phrase"].includes(tempArr[0]);
 
     // add guess to guess box
@@ -140,7 +153,7 @@ hintBtn.addEventListener("click", function() {
     if(guessCount < guessArr.length) {
         if (hintCount == 0) {
             let element = document.querySelector("#hint");
-            element.innerHTML = hint;
+            element.innerHTML = `<span>HINT: </span>${hint}`;
     
             // add hint to guessbox
             guessArr[guessCount].firstElementChild.innerHTML = "h";

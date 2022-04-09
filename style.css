@@ -71,6 +71,12 @@ html {
     color: var(--accentColor-5);
 }
 
+.category {
+    font-size: 2.2rem;
+    color: var(--mainWhite);
+    text-align: center;
+}
+
 /* || SECOND container */
 .phrase-container {
     color: var(--mainWhite);
@@ -295,6 +301,10 @@ h1 {
     color: var(--mainWhite);
     font-size: 1.2rem;
     margin-bottom: 10px;
+}
+
+#hint span {
+    color: var(--accentColor-2);
 }
 
 .hint-guess {

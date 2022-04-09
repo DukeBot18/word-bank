@@ -2,12 +2,19 @@
 // data object holding phrases
 const phraseObject = {
     one: {
-        hint: "Movie Title",
-        phrase: "a beautiful mind"
+        hint: "A janitor",
+        phrase: "a beautiful mind",
+        category: "Movie Title"    
     },
     two: {
-        hint: "This person was part of Young Money",
-        phrase: "charlie mooshie moosh'ie meishie tooshie"
+        hint: "He is never on time",
+        phrase: "chim chim chim",
+        category: "Person"
+    },
+    three: {
+        hint: "Part of Young Money",
+        phrase: "lil wayne",
+        category: "Person"
     }
 }
 
