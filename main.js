@@ -248,6 +248,8 @@ function letterOrGuess(...args) {
         else {
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+
+                    // add guess letter into box
                     let tempArr = args[1].textContent.split("$");
                     phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
                     return;

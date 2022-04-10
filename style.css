@@ -345,6 +345,10 @@ h1 {
     color: var(--accentColor-4);
 }
 
+.guessbox-highlight {
+    border: 2px solid var(--accentColor-4);
+}
+
 /* alert div */ 
 .alert-div {
     display: table;
