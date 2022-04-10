@@ -133,12 +133,39 @@ function enterLetter() {
     else {
         // check to make sure all phrase boxes filled
         for(let i = 0; i < phraseLettersArr.length; i++) {
-            if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") || !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                let alert = document.querySelector(".alert-div");
-                alert.innerHTML = "Please enter input for all boxes before entering";
-                setTimeout(removeElement, 2000);
-                return;
+            if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible")) {
+                if(!phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                    let alert = document.querySelector(".alert-div");
+                    alert.innerHTML = "Please enter input for all boxes before entering";
+                    setTimeout(removeElement, 2500);
+                    return;
+                }
+            }  
+        }
+
+        // if all boxes filled check against answer
+        for (let i = 0; i < phraseLettersArr.length; i++) {
+            if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                if (phraseLettersArr[i].lastElementChild.innerHTML == phraseLettersArr[i].firstElementChild.innerHTML) {
+                    phraseLettersArr[i].firstElementChild.classList.remove("non-visible");
+                }
+                // remove the guessed letters
+                phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
             }
+        }
+
+        // subtrack money from total for guess
+        money -= 150;
+        currentMoney.innerHTML = "$ " + money;
+
+        // add guess to guessbox
+        if (guessCount < guessArr.length) {
+
+            guessArr[guessCount].firstElementChild.innerHTML = "g";
+            guessArr[guessCount].firstElementChild.classList.add("guess-guess");
+            guessArr[guessCount].lastElementChild.innerHTML = "-$150";
+            guessArr[guessCount].lastElementChild.classList.add("guess-guess");
+            guessCount++;
         }
     }
 
@@ -155,7 +182,7 @@ let hintBtn = document.querySelector(".hint-btn");
 let hintCount = 0;
 
 hintBtn.addEventListener("click", function() {
-    if(guessCount < guessArr.length) {
+    if (guessCount < guessArr.length) {
         if (hintCount == 0) {
             let element = document.querySelector("#hint");
             element.innerHTML = `<span>HINT: </span>${hint}`;
@@ -264,6 +291,7 @@ function letterOrGuess(...args) {
 }
 
 
+// || ALERT FUNCTION || \\
 function removeElement() {
     let alertDiv = document.querySelector(".alert-div");
     alertDiv.innerHTML = "";
