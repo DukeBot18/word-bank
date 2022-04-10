@@ -1,15 +1,14 @@
 // Import phrase data
 import { phraseObject } from "./phrases.js";
 
-// || Generated content from Phrase data || //
+
+// || GENERATED CONTENT FROM DAILY PHRASE || \\
 
 // Generate phrase for the day
 const values = Object.values(phraseObject);
 
 // Randomly choose one phrase
 let phrase = values[Math.floor(Math.random() * values.length)];
-console.log(phrase);
-console.log(phrase["category"]);
 
 // add category 
 let categoryDiv = document.querySelector(".category");
@@ -34,16 +33,16 @@ let insertPhrase = document.querySelector(".phrase-container");
             }
             // all other letters hidden
             else {
-                tempElement.innerHTML += `<div contenteditable="true" class="letter-box"><span class="answer non-visible">${words[i][j]}</span></div>`;
+                tempElement.innerHTML += `<div class="letter-box"><span class="answer non-visible">${words[i][j]}</span></div>`;
             }
         }
         if (i != words.length - 1) {
-            tempElement.innerHTML += '<div class="letter-box blank"><span class=" blank"> </span></div>';
+            tempElement.innerHTML += '<div class="blank-box blank"><span class=" blank"> </span></div>';
         }
     }
 
 
-// || Bankroll and Guesses || //
+// || BANKROLL AND GUESSES || \\
 
 // Initial bankroll
 let money = 1000;
@@ -57,91 +56,97 @@ let guessCount = 0;
 // Guess Boxes
 let guessArr = [...document.querySelectorAll(".guess-box")];
 
-// Letter Boxes
-const lettersArr = [...document.querySelectorAll(".letter")];
 
-for (let element of lettersArr) {
-    element.addEventListener("click", function() {
+// || ENTERING USER INPUT || \\
 
-        // if letter already chosen exit
-        if (element.classList.contains("incorrect") || element.classList.contains("correct"))
-        {
-            return;
-        }
-
-        // check if other letters are highlighted without entering
-        for (let i = 0; i < lettersArr.length; i++) {
-            if (lettersArr[i].classList.contains("highlight")) {
-                lettersArr[i].classList.remove("highlight");
-            }
-        }
-
-        element.classList.add("highlight");
-    });
-}
-
-// Check for enter button click and highlighted letter
 let enterBtn = document.querySelector(".enter");
 
-enterBtn.addEventListener("click", function() {
-    // get highlighted letter
-    let letter = document.querySelector(".highlight");
-    if (letter === null) {
-        return;
-    }
-    
-    // get value of letter and cost
-    let tempArr = letter.textContent.split("$");
-    
-    // see if guess was correct
-    let result = phrase["phrase"].includes(tempArr[0]);
-
-    // add guess to guess box
-    if (guessCount < guessArr.length) {
-        if(result) {
-            guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
-            guessArr[guessCount].firstElementChild.classList.add("correct-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
-            guessArr[guessCount].lastElementChild.classList.add("correct-guess");
-        }
-        else {
-            guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
-            guessArr[guessCount].firstElementChild.classList.add("incorrect-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
-            guessArr[guessCount].lastElementChild.classList.add("incorrect-guess");
-        }
-        guessCount++;
-    }
-
-    // subtrack letter cost from current money
-    money -= tempArr[1];
-    currentMoney.innerHTML = "$ " + money;
-
-    // add letters in hidden phrase if correct
-    if (result) {
-        // highlight letter as correct
-        letter.classList.remove("highlight");
-        letter.classList.add("correct");
-
-        // make visible correct letters in phrase
-        let answerArr = [...document.querySelectorAll(".answer")];
-
-        for (let i = 0; i < answerArr.length; i++) {
-            if (answerArr[i].textContent == tempArr[0]) {
-
-                // Remove class to make letter visible
-                answerArr[i].classList.remove("non-visible");
-            }
-        }
-    }
-    else {
-        // highlight letter as incorrect
-        letter.classList.remove("highlight");
-        letter.classList.add("incorrect");
+// two events to enter letter
+enterBtn.addEventListener("click", enterLetter);
+document.addEventListener("keydown", function (event) {
+    if (event.key == "Enter") {
+        enterLetter();
     }
 });
 
-// add hint 
+function enterLetter() {
+
+    // || NON GUESS MODE || \\
+    if (!userGuessBtn.classList.contains("guess-mode")) {
+        // get highlighted letter
+        let letter = document.querySelector(".highlight");
+        if (letter === null) {
+            return;
+        }
+        
+        // get value of letter and cost
+        let tempArr = letter.textContent.split("$");
+        
+        // see if guess was correct
+        let result = phrase["phrase"].includes(tempArr[0]);
+
+        // add guess to guess box
+        if (guessCount < guessArr.length) {
+            if(result) {
+                guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
+                guessArr[guessCount].firstElementChild.classList.add("correct-guess");
+                guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
+                guessArr[guessCount].lastElementChild.classList.add("correct-guess");
+            }
+            else {
+                guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
+                guessArr[guessCount].firstElementChild.classList.add("incorrect-guess");
+                guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
+                guessArr[guessCount].lastElementChild.classList.add("incorrect-guess");
+            }
+            guessCount++;
+        }
+
+        // subtrack letter cost from current money
+        money -= tempArr[1];
+        currentMoney.innerHTML = "$ " + money;
+
+        // add letters in hidden phrase if correct
+        if (result) {
+            // highlight letter as correct
+            letter.classList.remove("highlight");
+            letter.classList.add("correct");
+
+            // make visible correct letters in phrase
+            let answerArr = [...document.querySelectorAll(".answer")];
+
+            for (let i = 0; i < answerArr.length; i++) {
+                if (answerArr[i].textContent == tempArr[0]) {
+
+                    // Remove class to make letter visible
+                    answerArr[i].classList.remove("non-visible");
+                }
+            }
+        }
+        else {
+            // highlight letter as incorrect
+            letter.classList.remove("highlight");
+            letter.classList.add("incorrect");
+        }
+    }
+    // || GUESS MODE ACTIVE || \\
+    else {
+        // check to make sure all phrase boxes filled
+        for(let i = 0; i < phraseLettersArr.length; i++) {
+            if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") || !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                let alert = document.querySelector(".alert-div");
+                alert.innerHTML = "Please enter input for all boxes before entering";
+                setTimeout(removeElement, 2000);
+                return;
+            }
+        }
+    }
+
+}
+
+
+// || HINT BUTTON || \\
+
 let hint = phrase["hint"];
 
 let hintBtn = document.querySelector(".hint-btn");
@@ -158,14 +163,108 @@ hintBtn.addEventListener("click", function() {
             // add hint to guessbox
             guessArr[guessCount].firstElementChild.innerHTML = "h";
             guessArr[guessCount].firstElementChild.classList.add("hint-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = "-$100";
+            guessArr[guessCount].lastElementChild.innerHTML = "-$150";
             guessArr[guessCount].lastElementChild.classList.add("hint-guess");
             guessCount++;
             hintCount++;
     
             // subtrack money 
-            money -= 100;
+            money -= 150;
             currentMoney.innerHTML = "$ " + money;
         }
     }
 })
+
+
+// || ROUTES TO ADDING LETTERS || \\
+
+// using guess input
+let userGuessBtn = document.querySelector(".make-guess-btn");
+userGuessBtn.addEventListener("click", function() {
+    letterOrGuess("guess");
+});
+
+// using letter input
+const lettersArr = [...document.querySelectorAll(".letter")];
+
+for (let element of lettersArr) {
+    element.addEventListener("click", function() {
+        letterOrGuess("letter", element);
+    });
+}
+    
+
+// || ADDING LETTERS TO HIDDEN BOXES || \\
+
+// get amount of letters
+let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
+
+function letterOrGuess(...args) {
+    console.log(args);
+
+    // GUESS MODE ACTIVE
+    if (userGuessBtn.classList.contains("guess-mode")) {
+
+        // exit guess mode
+        if (args.length == 1) {
+            userGuessBtn.classList.remove("guess-mode");
+            userGuessBtn.classList.remove("guess-highlight");
+
+            // remove current guesses
+            for(let i = 0; i < phraseLettersArr.length; i++) {
+                if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                    phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
+                }
+            }
+            return;
+        }
+        else {
+            for(let i = 0; i < phraseLettersArr.length; i++) {
+                if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                    let tempArr = args[1].textContent.split("$");
+                    phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
+                    return;
+                }
+            }
+        }
+    }
+
+    // GUESS MODE INACTIVE
+    else {
+        // if guess btn pressed turn guess mode on
+        if (args.length == 1) {
+            // remove any highlighted letters
+            for (let i = 0; i < lettersArr.length; i++) {
+                if (lettersArr[i].classList.contains("highlight")) {
+                    lettersArr[i].classList.remove("highlight");
+                }
+            }            
+            userGuessBtn.classList.add("guess-mode");
+            userGuessBtn.classList.add("guess-highlight");
+            return;
+        }
+        // else regular guess with letter
+        else {
+            // if letter already chosen exit
+            if (args[1].classList.contains("incorrect") || args[1].classList.contains("correct"))
+            {
+                return;
+            }
+
+            // check if other letters are highlighted without entering
+            for (let i = 0; i < lettersArr.length; i++) {
+                if (lettersArr[i].classList.contains("highlight")) {
+                    lettersArr[i].classList.remove("highlight");
+                }
+            }
+
+            args[1].classList.add("highlight");
+        }
+    }
+}
+
+
+function removeElement() {
+    let alertDiv = document.querySelector(".alert-div");
+    alertDiv.innerHTML = "";
+}

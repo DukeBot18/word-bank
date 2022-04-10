@@ -92,7 +92,8 @@ html {
     display: flex;
     align-items: flex-end;
 }
-.letter-box {
+.letter-box,
+.blank-box {
     border: 1px solid var(--lightkeyBGColor);
     min-height: 50px;
     min-width: 38px;
@@ -101,6 +102,21 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.added-guess-input {
+    font-style: normal;
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: var(--accentColor-4);
+    text-transform: capitalize;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
 }
 
 .answer {
@@ -214,7 +230,9 @@ html {
     flex: 1 1;
 }
 
-.enter {
+.enter,
+.make-guess-btn,
+.delete-btn {
     min-height: 60px;
     cursor: pointer;
     display: flex;
@@ -232,8 +250,12 @@ html {
     flex: 1.75 1.75;
 }
 
-.spacer-half {
-    flex: 0.5 1;
+.delete-btn {
+    flex: 1 1;
+}
+
+.spacer-third {
+    flex: 0.33 1;
 }
 
 .letter:hover,
@@ -243,6 +265,10 @@ html {
 
 .highlight {
     background-color: var(--accentColor-2);
+}
+
+.guess-highlight {
+    background-color: var(--accentColor-4);
 }
 
 .correct {
@@ -294,6 +320,7 @@ header {
 
 h1 {
     color: var(--mainWhite);
+    font-size: 2.75rem;
 }
 
 /* || Hint */
@@ -310,4 +337,13 @@ h1 {
 .hint-guess {
     text-transform: capitalize;
     color: var(--accentColor-2);
+}
+
+/* alert div */ 
+.alert-div {
+    display: table;
+    margin: 10px auto;
+    font-size: 1.2rem;
+    padding: 5px;
+    color: var(--accentColor-3);
 }
