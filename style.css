@@ -259,7 +259,9 @@ html {
 }
 
 .letter:hover,
-.enter:hover {
+.enter:hover,
+.delete-btn:hover,
+.make-guess-btn:hover {
     opacity: .8;
 }
 

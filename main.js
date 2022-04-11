@@ -205,12 +205,12 @@ hintBtn.addEventListener("click", function() {
 })
 
 
-// || ROUTES TO ADDING LETTERS || \\
+// || ROUTES TO ADDING OR DELETING LETTERS || \\
 
 // using guess input
 let userGuessBtn = document.querySelector(".make-guess-btn");
 userGuessBtn.addEventListener("click", function() {
-    letterOrGuess("guess");
+    letterGuessDelete("guess");
 });
 
 // using letter input
@@ -218,9 +218,15 @@ const lettersArr = [...document.querySelectorAll(".letter")];
 
 for (let element of lettersArr) {
     element.addEventListener("click", function() {
-        letterOrGuess("letter", element);
+        letterGuessDelete("letter", element);
     });
 }
+
+// deleting letters
+let deleteBtn = document.querySelector(".delete-btn");
+deleteBtn.addEventListener("click", function() {
+    letterGuessDelete("delete");
+})
     
 
 // || ADDING LETTERS TO HIDDEN BOXES || \\
@@ -228,13 +234,35 @@ for (let element of lettersArr) {
 // get amount of letters
 let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
 
-function letterOrGuess(...args) {
+function letterGuessDelete(...args) {
 
     // GUESS MODE ACTIVE
     if (userGuessBtn.classList.contains("guess-mode")) {
+        console.log(args[0]);
+
+        // if delete button clicked
+        if (args[0] == "delete") {
+            for (let i = phraseLettersArr.length - 1; i > 0; i--) {
+                if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
+
+                    let counter = 1;
+                    while (phraseLettersArr[i-counter] != undefined) {
+                        if (phraseLettersArr[i-counter].firstElementChild.classList.contains("non-visible")) {
+                            phraseLettersArr[i-counter].classList.add("guess-mode-current-guess-box");
+                            phraseLettersArr[i-counter].removeChild(phraseLettersArr[i-counter].lastElementChild);
+                            return;
+                        }
+                        else {
+                            counter++;
+                        }
+                    }
+                }
+            }
+        }
 
         // exit guess mode
-        if (args.length == 1) {
+        if (args[0] == "guess") {
             userGuessBtn.classList.remove("guess-mode");
             userGuessBtn.classList.remove("guess-highlight");
 
@@ -252,7 +280,7 @@ function letterOrGuess(...args) {
 
             return;
         }
-        else {
+        else if (args[0] == "letter") {
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
 
@@ -264,8 +292,15 @@ function letterOrGuess(...args) {
                     phraseLettersArr[i].classList.remove("guess-mode-current-guess-box")
 
                     // add highlight to next box
-                    if (phraseLettersArr[i+1] != undefined) {
-                    phraseLettersArr[i+1].classList.add("guess-mode-current-guess-box");
+                    let counter = 1;
+                    while (phraseLettersArr[i+counter] != undefined) {
+                        if (!phraseLettersArr[i+counter].firstElementChild.classList.contains("non-visible")) {
+                            counter++;
+                        }
+                        else {
+                            phraseLettersArr[i+counter].classList.add("guess-mode-current-guess-box");
+                            break
+                        }
                     }
 
                     return;
@@ -277,7 +312,7 @@ function letterOrGuess(...args) {
     // GUESS MODE INACTIVE
     else {
         // if guess btn pressed turn guess mode on
-        if (args.length == 1) {
+        if (args[0] == "guess") {
             // remove any highlighted letters
             for (let i = 0; i < lettersArr.length; i++) {
                 if (lettersArr[i].classList.contains("highlight")) {
@@ -291,7 +326,6 @@ function letterOrGuess(...args) {
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
 
-                    // add guess letter into box
                     phraseLettersArr[i].classList.add("guess-mode-current-guess-box")
                     return;
                 }
