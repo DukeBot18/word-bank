@@ -157,7 +157,8 @@ function enterLetter() {
         }
 
         // subtrack money from total for guess
-        money -= 150;
+        let guessSubtract = Math.ceil((money * 0.15) * 100) / 100;
+        money -= guessSubtract;
         currentMoney.innerHTML = "$ " + money;
 
         // add guess to guessbox
@@ -165,7 +166,7 @@ function enterLetter() {
 
             guessArr[guessCount].firstElementChild.innerHTML = "g";
             guessArr[guessCount].firstElementChild.classList.add("guess-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = "-$150";
+            guessArr[guessCount].lastElementChild.innerHTML = guessSubtract;
             guessArr[guessCount].lastElementChild.classList.add("guess-guess");
             guessCount++;
         }
