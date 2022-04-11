@@ -119,6 +119,7 @@ function enterLetter() {
                 if (answerArr[i].textContent == tempArr[0]) {
 
                     // Remove class to make letter visible
+                    answerArr[i].parentNode.classList.add("correct-letter-fade")
                     answerArr[i].classList.remove("non-visible");
                 }
             }
@@ -147,6 +148,7 @@ function enterLetter() {
         for (let i = 0; i < phraseLettersArr.length; i++) {
             if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                 if (phraseLettersArr[i].lastElementChild.innerHTML == phraseLettersArr[i].firstElementChild.innerHTML) {
+                    phraseLettersArr[i].classList.add("correct-letter-fade");
                     phraseLettersArr[i].firstElementChild.classList.remove("non-visible");
                 }
                 // remove the guessed letters
@@ -227,7 +229,6 @@ for (let element of lettersArr) {
 let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
 
 function letterOrGuess(...args) {
-    console.log(args);
 
     // GUESS MODE ACTIVE
     if (userGuessBtn.classList.contains("guess-mode")) {
@@ -242,7 +243,13 @@ function letterOrGuess(...args) {
                 if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                     phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
                 }
+                // remove highlighted box
+                if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                }
+                
             }
+
             return;
         }
         else {
@@ -252,6 +259,15 @@ function letterOrGuess(...args) {
                     // add guess letter into box
                     let tempArr = args[1].textContent.split("$");
                     phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
+
+                    // remove highlight from box
+                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box")
+
+                    // add highlight to next box
+                    if (phraseLettersArr[i+1] != undefined) {
+                    phraseLettersArr[i+1].classList.add("guess-mode-current-guess-box");
+                    }
+
                     return;
                 }
             }
@@ -267,9 +283,20 @@ function letterOrGuess(...args) {
                 if (lettersArr[i].classList.contains("highlight")) {
                     lettersArr[i].classList.remove("highlight");
                 }
-            }            
+            }
             userGuessBtn.classList.add("guess-mode");
             userGuessBtn.classList.add("guess-highlight");
+
+            // add phrase box highlight
+            for(let i = 0; i < phraseLettersArr.length; i++) {
+                if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+
+                    // add guess letter into box
+                    phraseLettersArr[i].classList.add("guess-mode-current-guess-box")
+                    return;
+                }
+            }          
+
             return;
         }
         // else regular guess with letter

@@ -198,7 +198,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--accentColor-5);
 }
@@ -349,6 +349,11 @@ h1 {
     border: 2px solid var(--accentColor-4);
 }
 
+.guess-mode-current-guess-box {
+    border: 1px solid var(--accentColor-4);
+    box-shadow: 0 0 3px 3px var(--accentColor-4);
+}
+
 /* alert div */ 
 .alert-div {
     display: table;
@@ -356,4 +361,15 @@ h1 {
     font-size: 1.2rem;
     padding: 5px;
     color: var(--accentColor-3);
+}
+
+/* correct letters fade */
+.correct-letter-fade {
+    animation: fade .8s;
+    animation-iteration-count: 1;
+}
+
+@keyframes fade {
+    from {background-color: var(--accentColor-1);}
+    to {background-color: var(--htmlBackground);}
 }
