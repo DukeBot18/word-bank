@@ -164,7 +164,7 @@ function enterLetter() {
         // add guess to guessbox
         if (guessCount < guessArr.length) {
 
-            guessArr[guessCount].firstElementChild.innerHTML = "g";
+            guessArr[guessCount].firstElementChild.innerHTML = "?";
             guessArr[guessCount].firstElementChild.classList.add("guess-guess");
             guessArr[guessCount].lastElementChild.innerHTML = guessSubtract;
             guessArr[guessCount].lastElementChild.classList.add("guess-guess");
@@ -191,7 +191,7 @@ hintBtn.addEventListener("click", function() {
             element.innerHTML = `<span>HINT: </span>${hint}`;
     
             // add hint to guessbox
-            guessArr[guessCount].firstElementChild.innerHTML = "h";
+            guessArr[guessCount].firstElementChild.innerHTML = "+";
             guessArr[guessCount].firstElementChild.classList.add("hint-guess");
             guessArr[guessCount].lastElementChild.innerHTML = "-$150";
             guessArr[guessCount].lastElementChild.classList.add("hint-guess");
