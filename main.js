@@ -67,6 +67,10 @@ document.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
         enterLetter();
     }
+    else if ((event.key >= "A" && event.key <= "Z") || (event.key >= "a" && event.key <= "z")) {
+        let letter = event.key;
+        letterGuessDelete("letter", "keyboard", letter);
+    }
 });
 
 function enterLetter() {
