@@ -56,7 +56,7 @@ html {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 2px solid var(--lightkeyBGColor);
+    border-bottom: 1px solid var(--keyBackground);
 }
 
 .top-container h1{
