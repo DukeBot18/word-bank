@@ -205,6 +205,40 @@ html {
 }
 
 /* Letter bank */
+@media only screen and (max-width: 550px) {
+    /* smaller than ipad */
+    .letter-container {
+        margin: 0 8px;
+    }
+ 
+    .letter,
+    .make-guess-btn {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .guess-boxes-container {
+        margin: 0 8px;
+        column-gap: 3px;
+    }  
+}
+
+@media only screen and (max-width: 460px) {
+    /* mobile phones */
+    sup {
+        font-size: 8px;
+        font-weight: 900;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    /* Galaxy phones */
+    sup {
+        font-size: 7px;
+    }
+}
+
 .letters-div {
     display: flex;
     width: 100%;
@@ -213,35 +247,28 @@ html {
     column-gap: 5px;
 }
 
+
 .letter {
-    min-height: 60px;
-    cursor: pointer;
+    flex: 1 1;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 5px;
-    border-radius: 4px;
-    user-select: none;
+    align-items: center;
+    cursor: pointer;
+    height: 80px;
     border: 2px solid transparent;
-    background-color: var(--lightkeyBGColor);
+    border-radius: 4px;
     text-transform: capitalize;
     transition: .2s;
-    flex: 1 1;
+    background-color: var(--lightkeyBGColor);
+    user-select: none;
+    height: 80px;
+    font-weight: 600;
 }
 
 .enter,
 .make-guess-btn,
 .delete-btn {
-    min-height: 60px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 5px;
+    height: 80px;
     border-radius: 4px;
     user-select: none;
     border: 2px solid transparent;
@@ -249,6 +276,10 @@ html {
     text-transform: capitalize;
     transition: .2s;
     flex: 1.75 1.75;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
 }
 
 .delete-btn {
@@ -300,7 +331,6 @@ html {
 
 /* letter dollar values */
 sup {
-    font-size: 9px;
     vertical-align: top;
     position: relative;
     top: -.5rem;

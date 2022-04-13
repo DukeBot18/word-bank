@@ -2,7 +2,7 @@
 // data object holding phrases
 const phraseObject = {
     one: {
-        hint: "A janitor",
+        hint: "Cryptography",
         phrase: "a beautiful mind",
         category: "Movie Title"    
     },
@@ -15,7 +15,12 @@ const phraseObject = {
         hint: "Part of Young Money",
         phrase: "lil wayne",
         category: "Person"
-    }
+    },
+    four: {
+        hint: "Janitor",
+        phrase: "good will hunting",
+        category: "Movie"
+    },
 }
 
 export { phraseObject };
