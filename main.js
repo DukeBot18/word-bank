@@ -67,9 +67,14 @@ document.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
         enterLetter();
     }
-    else if ((event.key >= "A" && event.key <= "Z") || (event.key >= "a" && event.key <= "z")) {
+    else if (event.key == "Backspace") {
+        letterGuessDelete("delete");
+    }
+    else {
         let letter = event.key;
-        letterGuessDelete("letter", "keyboard", letter);
+        if (/^[a-z]$/i.test(letter)) {
+            letterGuessDelete("letter", "keyboard", letter);
+        }
     }
 });
 
@@ -231,7 +236,7 @@ for (let element of lettersArr) {
 let deleteBtn = document.querySelector(".delete-btn");
 deleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
-})
+});
     
 
 // || ADDING LETTERS TO HIDDEN BOXES || \\
@@ -243,7 +248,6 @@ function letterGuessDelete(...args) {
 
     // GUESS MODE ACTIVE
     if (userGuessBtn.classList.contains("guess-mode")) {
-        console.log(args[0]);
 
         // if delete button clicked
         if (args[0] == "delete") {
@@ -261,7 +265,7 @@ function letterGuessDelete(...args) {
                         else {
                             counter++;
                         }
-                    }
+                    } 
                 }
             }
         }
@@ -289,26 +293,49 @@ function letterGuessDelete(...args) {
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
 
-                    // add guess letter into box
-                    let tempArr = args[1].textContent.split("$");
-                    phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
+                    // if keyboard input
+                    if (args[1] == "keyboard") {
+                        console.log(args[2]);
+                        phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${args[2]}</i>`;
 
-                    // remove highlight from box
-                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box")
+                        phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
 
-                    // add highlight to next box
-                    let counter = 1;
-                    while (phraseLettersArr[i+counter] != undefined) {
-                        if (!phraseLettersArr[i+counter].firstElementChild.classList.contains("non-visible")) {
-                            counter++;
+                        let counter = 1;
+                        while (phraseLettersArr[i+counter] != undefined) {
+                            if(!phraseLettersArr[i+counter].firstElementChild.classList.contains("non-visible")) {
+                                counter++;
+                            }
+                            else {
+                                phraseLettersArr[i+counter].classList.add("guess-mode-current-guess-box");
+                                break;
+                            }
                         }
-                        else {
-                            phraseLettersArr[i+counter].classList.add("guess-mode-current-guess-box");
-                            break
-                        }
+                        return;
+
                     }
 
-                    return;
+                    else {
+                        // add guess letter into box
+                        let tempArr = args[1].textContent.split("$");
+                        phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
+
+                        // remove highlight from box
+                        phraseLettersArr[i].classList.remove("guess-mode-current-guess-box")
+
+                        // add highlight to next box
+                        let counter = 1;
+                        while (phraseLettersArr[i+counter] != undefined) {
+                            if (!phraseLettersArr[i+counter].firstElementChild.classList.contains("non-visible")) {
+                                counter++;
+                            }
+                            else {
+                                phraseLettersArr[i+counter].classList.add("guess-mode-current-guess-box");
+                                break
+                            }
+                        }
+
+                        return;
+                    }
                 }
             }
         }
@@ -340,20 +367,25 @@ function letterGuessDelete(...args) {
         }
         // else regular guess with letter
         else {
-            // if letter already chosen exit
-            if (args[1].classList.contains("incorrect") || args[1].classList.contains("correct"))
-            {
-                return;
-            }
-
-            // check if other letters are highlighted without entering
-            for (let i = 0; i < lettersArr.length; i++) {
-                if (lettersArr[i].classList.contains("highlight")) {
-                    lettersArr[i].classList.remove("highlight");
+            if (args[1] == "keyboard") {
+                for(let i = 0; i <lettersArr.length; i++) {
+                    if (lettersArr[i].textContent[0] == args[2].toLowerCase()) {
+                        if (lettersArr[i].classList.contains("incorrect") || lettersArr[i].classList.contains("correct")) {
+                            return;
+                        }
+                        checkHighlight();
+                        lettersArr[i].classList.add("highlight");
+                    }
                 }
             }
-
-            args[1].classList.add("highlight");
+            else {
+                if (args[1].classList.contains("incorrect") || args[1].classList.contains("correct"))
+                {
+                    return;
+                }
+                checkHighlight();
+                args[1].classList.add("highlight");
+            }
         }
     }
 }
@@ -363,4 +395,14 @@ function letterGuessDelete(...args) {
 function removeElement() {
     let alertDiv = document.querySelector(".alert-div");
     alertDiv.innerHTML = "";
+}
+
+
+// || CHECK FOR HIGHLIGHT || \\
+function checkHighlight() {
+    for (let i = 0; i < lettersArr.length; i++) {
+        if (lettersArr[i].classList.contains("highlight")) {
+            lettersArr[i].classList.remove("highlight");
+        }
+    }
 }
