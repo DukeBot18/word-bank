@@ -167,7 +167,7 @@ function enterLetter() {
         // subtrack money from total for guess
         let guessSubtract = Math.ceil((money * 0.15) * 100) / 100;
         money -= guessSubtract;
-        currentMoney.innerHTML = "$ " + money;
+        currentMoney.innerHTML = "$ " + money.toFixed(2);
 
         // add guess to guessbox
         if (guessCount < guessArr.length) {
