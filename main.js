@@ -1,45 +1,17 @@
 // Import phrase data
 import { phraseObject } from "./phrases.js";
+import { resetPuzzle } from "./functions.js";
 
 // || GENERATED CONTENT FROM DAILY PHRASE || \\
 
-// Generate phrase for the day
-const values = Object.values(phraseObject);
-
-// Randomly choose one phrase
-let phrase = values[Math.floor(Math.random() * values.length)];
-
-// add category 
-let categoryDiv = document.querySelector(".category");
-categoryDiv.innerHTML = phrase["category"];
-
-// get all words in phrase in an array 
-let words = phrase["phrase"].split(" ");
-
 // element to insert phrase
 let insertPhrase = document.querySelector(".phrase-container");
+// add category 
+let categoryDiv = document.querySelector(".category");
 
-    // Dynamically create phrase boxes
-    for(let i = 0; i < words.length; i++) {
-        insertPhrase.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
-        let tempElement = document.getElementById(`word-phrase-${i}`);
-        for(let j = 0; j < words[i].length; j++) {
-
-            // make apostrophe's visible
-            let apostropheRegex = /'/;
-            if (apostropheRegex.test(words[i][j])) {
-                tempElement.innerHTML += `<div class="letter-box"><span class="answer">${words[i][j]}</span></div>`;
-            }
-            // all other letters hidden
-            else {
-                tempElement.innerHTML += `<div class="letter-box"><span class="answer non-visible">${words[i][j]}</span></div>`;
-            }
-        }
-        if (i != words.length - 1) {
-            tempElement.innerHTML += '<div class="blank-box blank"><span class=" blank"> </span></div>';
-        }
-    }
-
+// Reset puzzle once per day
+let dayInMilliseconds = 10000;
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv);
 
 // || BANKROLL AND GUESSES || \\
 
