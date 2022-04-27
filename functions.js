@@ -1,10 +1,16 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter };
+
+
+// puzzle
+let dailyPuzzle;
+
 
 function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, currentMoney) {
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
+    dailyPuzzle = puzzle["phrase"];
     let category = puzzle["category"];
     let hint = puzzle["hint"];
     generatePuzzle(arr, divContainer, categoryDiv, category, guessArr);
@@ -100,6 +106,13 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
     }
     else {
         money -= dollars;
-        currentMoney.innerHTML = "$ " + money;
+        currentMoney.innerHTML = "$ " + money.toFixed(0);
+    }
+}
+
+// check puzzle for correct letter
+function correctLetter(letter=undefined) {
+    if(letter != undefined) {
+        return dailyPuzzle.includes(letter);
     }
 }

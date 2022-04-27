@@ -1,8 +1,12 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter } from "./functions.js";
 
-// || GENERATED CONTENT FROM DAILY PHRASE || \\
+/*
+    ===================================
+    GENERATED CONTENT FROM DAILY PHRASE 
+    ===================================
+*/
 
 // content elements
 let insertPhrase = document.querySelector(".phrase-container");
@@ -10,6 +14,8 @@ let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
 let guessArr = [...document.querySelectorAll(".guess-box")];
 let currentMoney = document.querySelector("#bankroll");
+
+// add starting bankroll
 currentMoney.innerHTML = "$ " + money;
 
 // Reset puzzle once per day
@@ -17,12 +23,14 @@ let dayInMilliseconds = 10000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 
+
 // || ENTERING USER INPUT || \\
 
 let enterBtn = document.querySelector(".enter");
-
-// two events to enter letter
 enterBtn.addEventListener("click", enterLetter);
+
+
+// KEY EVENTS FOR USER INPUT
 document.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
         enterLetter();
@@ -52,7 +60,7 @@ function enterLetter() {
         let tempArr = letter.textContent.split("$");
         
         // see if guess was correct
-        let result = phrase["phrase"].includes(tempArr[0]);
+        let result = correctLetter(tempArr[0]);
 
         // add guess to guess box
         if (guessCount < guessArr.length) {
@@ -68,12 +76,11 @@ function enterLetter() {
                 guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
                 guessArr[guessCount].lastElementChild.classList.add("incorrect-guess");
             }
-            guessCount++;
+            guessAmount();
         }
 
         // subtrack letter cost from current money
-        money -= tempArr[1];
-        currentMoney.innerHTML = "$ " + money;
+        dollarAmount(currentMoney, tempArr[1]);
 
         // add letters in hidden phrase if correct
         if (result) {
@@ -127,8 +134,7 @@ function enterLetter() {
 
         // subtrack money from total for guess
         let guessSubtract = Math.ceil((money * 0.15) * 100) / 100;
-        money -= guessSubtract;
-        currentMoney.innerHTML = "$ " + money.toFixed(2);
+        dollarAmount(currentMoney, guessSubtract);
 
         // add guess to guessbox
         if (guessCount < guessArr.length) {
@@ -137,7 +143,7 @@ function enterLetter() {
             guessArr[guessCount].firstElementChild.classList.add("guess-guess");
             guessArr[guessCount].lastElementChild.innerHTML = guessSubtract;
             guessArr[guessCount].lastElementChild.classList.add("guess-guess");
-            guessCount++;
+            guessAmount();
         }
     }
 
@@ -162,6 +168,7 @@ hintBtn.addEventListener("click", function() {
         guessArr[guessCount].firstElementChild.classList.add("hint-guess");
         guessArr[guessCount].lastElementChild.innerHTML = "-$150";
         guessArr[guessCount].lastElementChild.classList.add("hint-guess");
+        // update guess total
         guessAmount();
 
         // subtrack money
