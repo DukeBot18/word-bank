@@ -1,7 +1,7 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount };
 
-function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr) {
+function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, currentMoney) {
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
@@ -10,6 +10,7 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr) {
     generatePuzzle(arr, divContainer, categoryDiv, category, guessArr);
     addHint(hint, hintElement);
     guessAmount("clear");
+    dollarAmount(currentMoney, 0, "clear");
     return;
 }
 
@@ -79,7 +80,7 @@ function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
     }
 }
 
-// guesses addition and clear
+// guesses handler
 let guessCount = 0
 function guessAmount(clearGuesses=undefined) {
     if (clearGuesses != undefined) {
@@ -87,5 +88,18 @@ function guessAmount(clearGuesses=undefined) {
     }
     else {
         guessCount++;
+    }
+}
+
+// money handler
+let money = 1000;
+function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
+    if (clearMoney != undefined) {
+        money = 1000;
+        currentMoney.innerHTML = "$ " + money;
+    }
+    else {
+        money -= dollars;
+        currentMoney.innerHTML = "$ " + money;
     }
 }

@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount } from "./functions.js";
 
 // || GENERATED CONTENT FROM DAILY PHRASE || \\
 
@@ -9,18 +9,14 @@ let insertPhrase = document.querySelector(".phrase-container");
 let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
 let guessArr = [...document.querySelectorAll(".guess-box")];
+let currentMoney = document.querySelector("#bankroll");
+currentMoney.innerHTML = "$ " + money;
 
 // Reset puzzle once per day
 let dayInMilliseconds = 10000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 
-// || BANKROLL AND GUESSES || \\
-
-// Initial bankroll
-let money = 1000;
-let currentMoney = document.querySelector("#bankroll");
-currentMoney.innerHTML = "$ " + money;
 // || ENTERING USER INPUT || \\
 
 let enterBtn = document.querySelector(".enter");
@@ -168,9 +164,8 @@ hintBtn.addEventListener("click", function() {
         guessArr[guessCount].lastElementChild.classList.add("hint-guess");
         guessAmount();
 
-        // subtrack money 
-        money -= 150;
-        currentMoney.innerHTML = "$ " + money;
+        // subtrack money
+        dollarAmount(currentMoney, 150) 
     }
 })
 
