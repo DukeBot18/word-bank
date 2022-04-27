@@ -1,23 +1,25 @@
 // Helper functions
-export { resetPuzzle };
+export { resetPuzzle, guessCount, guessAmount };
 
-function resetPuzzle(obj, divContainer, categoryDiv, hintElement) {
-    // Generate randome phrase from object
+function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr) {
+    // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
     let category = puzzle["category"];
     let hint = puzzle["hint"];
-    generatePuzzle(arr, divContainer, categoryDiv, category);
+    generatePuzzle(arr, divContainer, categoryDiv, category, guessArr);
     addHint(hint, hintElement);
+    guessAmount("clear");
     return;
 }
 
+// if new puzzle, clear previous
 let start = 0;
 let puzzleCount = 0;
 
-function generatePuzzle(wordArr, divContainer, categoryDiv, category) {
+function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr) {
     if (start != puzzleCount) {
-        clearPreviousPuzzle(divContainer, categoryDiv);
+        clearPreviousPuzzle(divContainer, categoryDiv, guessArr);
         start = puzzleCount;
     }
 
@@ -68,7 +70,22 @@ function addHint(hint, hintElement) {
 }
 
 // clear generated puzzle | hint | category
-function clearPreviousPuzzle(divContainer, categoryDiv) {
+function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
     divContainer.innerHTML = "";
     categoryDiv.innerHTML = "";
+    for (let elem of guessArr) {
+        elem.firstElementChild.innerHTML = "";
+        elem.lastElementChild.innerHTML = "";
+    }
+}
+
+// guesses addition and clear
+let guessCount = 0
+function guessAmount(clearGuesses=undefined) {
+    if (clearGuesses != undefined) {
+        guessCount = 0;
+    }
+    else {
+        guessCount++;
+    }
 }

@@ -1,17 +1,18 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount } from "./functions.js";
 
 // || GENERATED CONTENT FROM DAILY PHRASE || \\
 
-// elements to generate content for
+// content elements
 let insertPhrase = document.querySelector(".phrase-container");
 let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
+let guessArr = [...document.querySelectorAll(".guess-box")];
 
 // Reset puzzle once per day
-let dayInMilliseconds = 100000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement);
+let dayInMilliseconds = 10000;
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr);
 
 
 // || BANKROLL AND GUESSES || \\
@@ -20,14 +21,6 @@ setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertP
 let money = 1000;
 let currentMoney = document.querySelector("#bankroll");
 currentMoney.innerHTML = "$ " + money;
-
-// Initial guesses
-let guessCount = 0;
-
-// Guess Boxes
-let guessArr = [...document.querySelectorAll(".guess-box")];
-
-
 // || ENTERING USER INPUT || \\
 
 let enterBtn = document.querySelector(".enter");
@@ -159,7 +152,13 @@ function enterLetter() {
 
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() {
+
     if (guessCount < guessArr.length) {
+        // exit if hint provided
+        if (hintElement.classList.contains("visible")){
+            return;
+        }
+
         // make visible
         hintElement.classList.add("visible");
         // add hint to guessbox
@@ -167,7 +166,7 @@ hintBtn.addEventListener("click", function() {
         guessArr[guessCount].firstElementChild.classList.add("hint-guess");
         guessArr[guessCount].lastElementChild.innerHTML = "-$150";
         guessArr[guessCount].lastElementChild.classList.add("hint-guess");
-        guessCount++;
+        guessAmount();
 
         // subtrack money 
         money -= 150;
