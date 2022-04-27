@@ -18,13 +18,31 @@ let currentMoney = document.querySelector("#bankroll");
 // add starting bankroll
 currentMoney.innerHTML = "$ " + money;
 
+// setup initial puzzle
+resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
+
 // Reset puzzle once per day
 let dayInMilliseconds = 10000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
+categoryDiv, hintElement, guessArr, currentMoney);
 
 
+/*
+    ================
+    GLOBAL VARIABLES
+    ================
+*/
 
-// || ENTERING USER INPUT || \\
+// get letter amount
+let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
+console.log(phraseLettersArr);
+
+
+/*
+    ===================
+    ENTERING USER INPUT
+    ===================
+*/
 
 let enterBtn = document.querySelector(".enter");
 enterBtn.addEventListener("click", enterLetter);
@@ -202,9 +220,6 @@ deleteBtn.addEventListener("click", function() {
     
 
 // || ADDING LETTERS TO HIDDEN BOXES || \\
-
-// get amount of letters
-let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
 
 function letterGuessDelete(...args) {
 
