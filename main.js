@@ -1,4 +1,4 @@
-// Import phrase data
+// Phrase data and generation function
 import { phraseObject } from "./phrases.js";
 import { resetPuzzle } from "./functions.js";
 
@@ -10,15 +10,15 @@ let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
 
 // Reset puzzle once per day
-let dayInMilliseconds = 10000;
+let dayInMilliseconds = 100000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement);
+
 
 // || BANKROLL AND GUESSES || \\
 
 // Initial bankroll
 let money = 1000;
 let currentMoney = document.querySelector("#bankroll");
-
 currentMoney.innerHTML = "$ " + money;
 
 // Initial guesses
