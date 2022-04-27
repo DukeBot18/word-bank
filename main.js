@@ -4,14 +4,14 @@ import { resetPuzzle } from "./functions.js";
 
 // || GENERATED CONTENT FROM DAILY PHRASE || \\
 
-// element to insert phrase
+// elements to generate content for
 let insertPhrase = document.querySelector(".phrase-container");
-// add category 
 let categoryDiv = document.querySelector(".category");
+let hintElement = document.querySelector(".hint");
 
 // Reset puzzle once per day
 let dayInMilliseconds = 10000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement);
 
 // || BANKROLL AND GUESSES || \\
 
@@ -157,31 +157,21 @@ function enterLetter() {
 
 // || HINT BUTTON || \\
 
-let hint = phrase["hint"];
-
 let hintBtn = document.querySelector(".hint-btn");
-
-// only allow one hint
-let hintCount = 0;
-
 hintBtn.addEventListener("click", function() {
     if (guessCount < guessArr.length) {
-        if (hintCount == 0) {
-            let element = document.querySelector("#hint");
-            element.innerHTML = `<span>HINT: </span>${hint}`;
-    
-            // add hint to guessbox
-            guessArr[guessCount].firstElementChild.innerHTML = "+";
-            guessArr[guessCount].firstElementChild.classList.add("hint-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = "-$150";
-            guessArr[guessCount].lastElementChild.classList.add("hint-guess");
-            guessCount++;
-            hintCount++;
-    
-            // subtrack money 
-            money -= 150;
-            currentMoney.innerHTML = "$ " + money;
-        }
+        // make visible
+        hintElement.classList.add("visible");
+        // add hint to guessbox
+        guessArr[guessCount].firstElementChild.innerHTML = "+";
+        guessArr[guessCount].firstElementChild.classList.add("hint-guess");
+        guessArr[guessCount].lastElementChild.innerHTML = "-$150";
+        guessArr[guessCount].lastElementChild.classList.add("hint-guess");
+        guessCount++;
+
+        // subtrack money 
+        money -= 150;
+        currentMoney.innerHTML = "$ " + money;
     }
 })
 

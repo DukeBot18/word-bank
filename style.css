@@ -359,14 +359,21 @@ h1 {
 }
 
 /* || HINT || */
-#hint {
+.hint {
     color: var(--mainWhite);
     font-size: 1.2rem;
     margin-bottom: 10px;
+    position: absolute;
+    visibility: hidden;
 }
 
-#hint span {
+.hint span {
     color: var(--accentColor-2);
+}
+
+.visible {
+    position: relative;
+    visibility: visible;
 }
 
 .hint-guess {

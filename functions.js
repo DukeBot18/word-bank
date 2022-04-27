@@ -1,12 +1,14 @@
 // Helper functions
 export { resetPuzzle };
 
-function resetPuzzle(obj, divContainer, categoryDiv) {
+function resetPuzzle(obj, divContainer, categoryDiv, hintElement) {
     // Generate randome phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
     let category = puzzle["category"];
+    let hint = puzzle["hint"];
     generatePuzzle(arr, divContainer, categoryDiv, category);
+    addHint(hint, hintElement);
     return;
 }
 
@@ -50,6 +52,22 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category) {
     puzzleCount++;
 }
 
+let hintCount = 0;
+let hintStart = 0;
+
+function addHint(hint, hintElement) {
+    // TODO: check if out of guesses
+    hintElement.innerHTML = `<span>HINT: </span>${hint}`;
+    if (hintCount != hintStart) {
+        if(hintElement.classList.contains("visible")) {
+            hintElement.classList.remove("visible");
+        }
+        hintStart = hintCount;
+    }
+    hintCount++;
+}
+
+// clear generated puzzle | hint | category
 function clearPreviousPuzzle(divContainer, categoryDiv) {
     divContainer.innerHTML = "";
     categoryDiv.innerHTML = "";
