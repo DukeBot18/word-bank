@@ -15,6 +15,8 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, curr
     let hint = puzzle["hint"];
     generatePuzzle(arr, divContainer, categoryDiv, category, guessArr);
     addHint(hint, hintElement);
+
+    // reset guesses and bankroll
     guessAmount("clear");
     dollarAmount(currentMoney, 0, "clear");
     return;

@@ -175,24 +175,6 @@ function enterLetter() {
 
 }
 
-// || HINT BUTTON || \\
-let hintBtn = document.querySelector(".hint-btn");
-hintBtn.addEventListener("click", function() {
-    if (guessCount < guessArr.length) {
-        // exit if hint provided
-        if (hintElement.classList.contains("visible")){
-            return;
-        }
-        // make visible
-        hintElement.classList.add("visible");
-        // add purchase
-        purchases(guessArr, "+", 150, "hint-guess");
-        // update guess and money
-        guessAmount();
-        dollarAmount(currentMoney, 150) 
-    }
-})
-
 // || ADDING LETTERS TO HIDDEN BOXES || \\
 function letterGuessDelete(...args) {
 
@@ -335,3 +317,26 @@ function letterGuessDelete(...args) {
         }
     }
 }
+
+
+/*
+    ===========
+    HINT BUTTON
+    ===========
+*/
+let hintBtn = document.querySelector(".hint-btn");
+hintBtn.addEventListener("click", function() {
+    if (guessCount < guessArr.length) {
+        // exit if hint provided
+        if (hintElement.classList.contains("visible")){
+            return;
+        }
+        // make visible
+        hintElement.classList.add("visible");
+        // add purchase
+        purchases(guessArr, "+", 150, "hint-guess");
+        // update guess and money
+        guessAmount();
+        dollarAmount(currentMoney, 150) 
+    }
+})
