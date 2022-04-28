@@ -44,7 +44,7 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr) 
         let tempElem = document.getElementById(`word-phrase-${i}`);
         for (let j = 0; j < wordArr[i].length; j++) {
             
-            // check for and make apostrophe's visibile
+            // make apostrophe's visibile
             let apostropheRegex = /'/;
             if (apostropheRegex.test(wordArr[i][j])) {
                 tempElem.innerHTML += `<div class="letter-box"><span class="answer">${wordArr[i][j]}</span></div>`;
@@ -69,7 +69,6 @@ let hintCount = 0;
 let hintStart = 0;
 
 function addHint(hint, hintElement) {
-    // TODO: check if out of guesses
     hintElement.innerHTML = `<span>HINT: </span>${hint}`;
     if (hintCount != hintStart) {
         if(hintElement.classList.contains("visible")) {
@@ -80,7 +79,6 @@ function addHint(hint, hintElement) {
     hintCount++;
 }
 
-// clear generated puzzle | hint | category
 function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
     divContainer.innerHTML = "";
     categoryDiv.innerHTML = "";
@@ -91,8 +89,8 @@ function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
     return;
 }
 
-// guesses handler
 let guessCount = 0
+
 function guessAmount(clearGuesses=undefined) {
     if (clearGuesses != undefined) {
         guessCount = 0;
@@ -102,8 +100,8 @@ function guessAmount(clearGuesses=undefined) {
     }
 }
 
-// money handler
 let money = 1000;
+
 function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
     if (clearMoney != undefined) {
         money = 1000;
@@ -115,15 +113,12 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
     }
 }
 
-// check puzzle for correct letter
 function correctLetter(letter=undefined) {
     if(letter != undefined) {
         return dailyPuzzle.includes(letter);
     }
 }
 
-
-// add purchases
 function purchases(arr, letter, value, classToAdd) {
     arr[guessCount].firstElementChild.innerHTML = letter;
     arr[guessCount].firstElementChild.classList.add(classToAdd);
@@ -131,12 +126,10 @@ function purchases(arr, letter, value, classToAdd) {
     arr[guessCount].lastElementChild.classList.add(classToAdd);
 }
 
-// || ALERT FUNCTION || \\
 function removeAlert(alert) {
     alert.innerHTML = "";
 }
 
-// || CHECK FOR HIGHLIGHT || \\
 function checkHighlight(arr) {
     for (let i = 0; i < arr.length; i++) {
         if (arr[i].classList.contains("highlight")) {
