@@ -6,14 +6,14 @@ export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLette
 let dailyPuzzle;
 
 
-function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, currentMoney) {
+function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr) {
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
     dailyPuzzle = puzzle["phrase"];
     let category = puzzle["category"];
     let hint = puzzle["hint"];
-    generatePuzzle(arr, divContainer, categoryDiv, category, guessArr);
+    generatePuzzle(arr, divContainer, categoryDiv, category, guessArr, userGuessBtn, lettersArr);
     addHint(hint, hintElement);
 
     // reset guesses and bankroll
@@ -29,9 +29,9 @@ let puzzleCount = 0;
 // phrase array
 let phraseLettersArr;
 
-function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr) {
+function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr, userGuessBtn, lettersArr) {
     if (start != puzzleCount) {
-        clearPreviousPuzzle(divContainer, categoryDiv, guessArr);
+        clearPreviousPuzzle(divContainer, categoryDiv, guessArr, userGuessBtn, lettersArr);
         start = puzzleCount;
     }
 
@@ -81,12 +81,31 @@ function addHint(hint, hintElement) {
     hintCount++;
 }
 
-function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
+function clearPreviousPuzzle(divContainer, categoryDiv, guessArr, userGuessBtn, lettersArr) {
+    //reset puzzle containers
     divContainer.innerHTML = "";
     categoryDiv.innerHTML = "";
     for (let elem of guessArr) {
         elem.firstElementChild.innerHTML = "";
         elem.lastElementChild.innerHTML = "";
+    }
+
+    // reset guess mode and previous used letters
+    for (let letter of lettersArr) {
+        if (letter.classList.contains("correct")) {
+            letter.classList.remove("correct");
+        }
+        if (letter.classList.contains("incorrect")) {
+            letter.classList.remove("incorrect");
+        }
+        if (letter.classList.contains("highlight")) {
+            letter.classList.remove("highlight");
+        }
+    }
+
+    if (userGuessBtn.classList.contains("guess-mode")) {
+        userGuessBtn.classList.remove("guess-mode");
+        userGuessBtn.classList.remove("guess-highlight");
     }
     return;
 }

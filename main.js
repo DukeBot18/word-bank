@@ -8,12 +8,14 @@ import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLette
     ===================================
 */
 
-// content elements
+// content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
 let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
 let guessArr = [...document.querySelectorAll(".guess-box")];
 let currentMoney = document.querySelector("#bankroll");
+let userGuessBtn = document.querySelector(".make-guess-btn");
+const lettersArr = [...document.querySelectorAll(".letter")];
 
 // add starting bankroll
 currentMoney.innerHTML = "$ " + money;
@@ -22,9 +24,9 @@ currentMoney.innerHTML = "$ " + money;
 resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 // Reset puzzle once per day
-let dayInMilliseconds = 100000;
+let dayInMilliseconds = 10000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
-categoryDiv, hintElement, guessArr, currentMoney);
+categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr);
 
 
 /*
@@ -36,7 +38,6 @@ categoryDiv, hintElement, guessArr, currentMoney);
 // click enter btn
 let enterBtn = document.querySelector(".enter");
 enterBtn.addEventListener("click", enterLetter);
-
 
 // various key events
 document.addEventListener("keydown", function (event) {
@@ -54,15 +55,10 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-// || ROUTES TO ADDING OR DELETING LETTERS || \\
-// using guess input
-let userGuessBtn = document.querySelector(".make-guess-btn");
+// guess mode toggle
 userGuessBtn.addEventListener("click", function() {
     letterGuessDelete("guess");
 });
-
-// using letter input
-const lettersArr = [...document.querySelectorAll(".letter")];
 
 for (let element of lettersArr) {
     element.addEventListener("click", function() {
@@ -70,7 +66,7 @@ for (let element of lettersArr) {
     });
 }
 
-// deleting letters
+// deleting letters in guess mode
 let deleteBtn = document.querySelector(".delete-btn");
 deleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
