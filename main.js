@@ -156,6 +156,9 @@ function enterLetter() {
                 }
                 // remove the guessed letters
                 phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
+                if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                }
             }
         }
 
