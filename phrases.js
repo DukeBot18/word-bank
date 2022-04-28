@@ -18,7 +18,7 @@ const phraseObject = {
     },
     four: {
         hint: "Janitor",
-        phrase: "good will hunting",
+        phrase: "good willt hunting",
         category: "Movie"
     },
 }

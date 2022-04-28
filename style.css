@@ -3,11 +3,10 @@
 :root {
     /* Light mode colors */
     --mainWhite: #FFFAFA;
-    --lightkeyBGColor: #C5C9CF;
     --keyTextColor: #FFFAFA; 
 
     /* Dark mode colors */
-    --keyGuessColor: #CDD9E5;
+    --lightkeyBGColor: #C5C9CF;
     --keyBackground: #818384;
     --htmlBackground: #242526;
     --accentColor-1: #DCBDFB;
@@ -90,7 +89,6 @@ html {
 
 .word-phrases {
     display: flex;
-    align-items: flex-end;
 }
 
 .letter-box,
@@ -98,12 +96,17 @@ html {
     border: 1px solid var(--lightkeyBGColor);
     min-height: 50px;
     min-width: 38px;
+    flex-basis: 10px;
     width: 100%;
     margin: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+}
+
+.letter-box:first-child {
+    border-bottom: 3px solid var(--accentColor-3);
 }
 
 .added-guess-input {
@@ -221,7 +224,30 @@ html {
     .guess-boxes-container {
         margin: 0 8px;
         column-gap: 3px;
-    }  
+    }
+
+    .phrase-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .word-phrases {
+        flex-wrap: wrap;
+        max-width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin: 5px 0px;
+    }
+
+    .letter-box {
+        flex-basis: 20px;
+    }
+
+    .blank {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 460px) {
