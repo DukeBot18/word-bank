@@ -162,6 +162,14 @@ function enterLetter() {
             }
         }
 
+        // add back guess-highlight to first available
+        for (let first of phraseLettersArr) {
+            if (first.firstElementChild.classList.contains("non-visible")) {
+                first.classList.add("guess-mode-current-guess-box");
+                break;
+            }
+        }
+
         // subtrack money from total for guess
         let guessSubtract = Math.round(Math.ceil((money * 0.15) * 100) / 100);
         dollarAmount(currentMoney, guessSubtract);
@@ -320,9 +328,9 @@ function letterGuessDelete(...args) {
 
 
 /*
-    ===========
-    HINT BUTTON
-    ===========
+    =========================
+    HINT AND SETTINGS BUTTONS
+    =========================
 */
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() {
@@ -340,3 +348,34 @@ hintBtn.addEventListener("click", function() {
         dollarAmount(currentMoney, 150) 
     }
 })
+
+// toggle dark and light mode
+let toggle = document.querySelector(".theme-btn");
+
+let storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+if (storedTheme) {
+    document.documentElement.setAttribute('data-theme', storedTheme)
+    if (storedTheme === "light") {
+        document.querySelector(".moon").style.display = "none";
+        document.querySelector(".sun").style.display = "inline-block";
+    }
+}
+
+toggle.onclick = function() {
+    let currentTheme = document.documentElement.getAttribute("data-theme");
+    let targetTheme = "light";
+
+    if (currentTheme === "light") {
+        targetTheme = "dark";
+        document.querySelector(".moon").style.display = "inline-block";
+        document.querySelector(".sun").style.display = "none";
+    }
+    else {
+        document.querySelector(".moon").style.display = "none";
+        document.querySelector(".sun").style.display = "inline-block";
+    }
+
+    document.documentElement.setAttribute('data-theme', targetTheme)
+    localStorage.setItem('theme', targetTheme);
+};
+
