@@ -88,25 +88,19 @@ function clearPreviousPuzzle(divContainer, categoryDiv, guessArr, userGuessBtn, 
     for (let elem of guessArr) {
         elem.firstElementChild.innerHTML = "";
         elem.lastElementChild.innerHTML = "";
+
+        // remove any added classes
+        elem.firstElementChild.classList.remove("hint-guess", "incorrect-guess", "correct-guess", "guess-guess");
+        elem.lastElementChild.classList.remove("hint-guess", "incorrect-guess", "correct-guess", "guess-guess");
     }
 
     // reset guess mode and previous used letters
     for (let letter of lettersArr) {
-        if (letter.classList.contains("correct")) {
-            letter.classList.remove("correct");
-        }
-        if (letter.classList.contains("incorrect")) {
-            letter.classList.remove("incorrect");
-        }
-        if (letter.classList.contains("highlight")) {
-            letter.classList.remove("highlight");
-        }
+        letter.classList.remove("correct", "incorrect", "highlight");
     }
+    
+    userGuessBtn.classList.remove("guess-mode", "guess-highlight");
 
-    if (userGuessBtn.classList.contains("guess-mode")) {
-        userGuessBtn.classList.remove("guess-mode");
-        userGuessBtn.classList.remove("guess-highlight");
-    }
     return;
 }
 
