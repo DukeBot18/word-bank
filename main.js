@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, checkHighlight } from "./functions.js";
 
 /*
     ===================================
@@ -22,33 +22,23 @@ currentMoney.innerHTML = "$ " + money;
 resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 // Reset puzzle once per day
-let dayInMilliseconds = 10000;
+let dayInMilliseconds = 100000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
 categoryDiv, hintElement, guessArr, currentMoney);
 
 
 /*
-    ================
-    GLOBAL VARIABLES
-    ================
+    =================
+    USER INPUT ROUTES
+    =================
 */
 
-// get letter amount
-let phraseLettersArr = [...document.querySelectorAll(".letter-box")];
-console.log(phraseLettersArr);
-
-
-/*
-    ===================
-    ENTERING USER INPUT
-    ===================
-*/
-
+// click enter btn
 let enterBtn = document.querySelector(".enter");
 enterBtn.addEventListener("click", enterLetter);
 
 
-// KEY EVENTS FOR USER INPUT
+// various key events
 document.addEventListener("keydown", function (event) {
     if (event.key == "Enter") {
         enterLetter();
@@ -64,8 +54,36 @@ document.addEventListener("keydown", function (event) {
     }
 });
 
-function enterLetter() {
+// || ROUTES TO ADDING OR DELETING LETTERS || \\
+// using guess input
+let userGuessBtn = document.querySelector(".make-guess-btn");
+userGuessBtn.addEventListener("click", function() {
+    letterGuessDelete("guess");
+});
 
+// using letter input
+const lettersArr = [...document.querySelectorAll(".letter")];
+
+for (let element of lettersArr) {
+    element.addEventListener("click", function() {
+        letterGuessDelete("letter", element);
+    });
+}
+
+// deleting letters
+let deleteBtn = document.querySelector(".delete-btn");
+deleteBtn.addEventListener("click", function() {
+    letterGuessDelete("delete");
+});
+
+
+/*
+    =============================
+    ENTERING USER INPUT INTO GAME
+    =============================
+*/
+    
+function enterLetter() {
     // || NON GUESS MODE || \\
     if (!userGuessBtn.classList.contains("guess-mode")) {
         // get highlighted letter
@@ -80,19 +98,13 @@ function enterLetter() {
         // see if guess was correct
         let result = correctLetter(tempArr[0]);
 
-        // add guess to guess box
+        // add purchase
         if (guessCount < guessArr.length) {
             if(result) {
-                guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
-                guessArr[guessCount].firstElementChild.classList.add("correct-guess");
-                guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
-                guessArr[guessCount].lastElementChild.classList.add("correct-guess");
+                purchases(guessArr, tempArr[0], tempArr[1], "correct-guess");
             }
             else {
-                guessArr[guessCount].firstElementChild.innerHTML = tempArr[0];
-                guessArr[guessCount].firstElementChild.classList.add("incorrect-guess");
-                guessArr[guessCount].lastElementChild.innerHTML = `-$${tempArr[1]}`;
-                guessArr[guessCount].lastElementChild.classList.add("incorrect-guess");
+                purchases(guessArr, tempArr[0], tempArr[1], "incorrect-guess");
             }
             guessAmount();
         }
@@ -132,7 +144,7 @@ function enterLetter() {
                 if(!phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                     let alert = document.querySelector(".alert-div");
                     alert.innerHTML = "Please enter input for all boxes before entering";
-                    setTimeout(removeElement, 2500);
+                    setTimeout(removeAlert, 2500, alert);
                     return;
                 }
             }  
@@ -151,76 +163,37 @@ function enterLetter() {
         }
 
         // subtrack money from total for guess
-        let guessSubtract = Math.ceil((money * 0.15) * 100) / 100;
+        let guessSubtract = Math.round(Math.ceil((money * 0.15) * 100) / 100);
         dollarAmount(currentMoney, guessSubtract);
 
-        // add guess to guessbox
+        // add purchase
         if (guessCount < guessArr.length) {
-
-            guessArr[guessCount].firstElementChild.innerHTML = "?";
-            guessArr[guessCount].firstElementChild.classList.add("guess-guess");
-            guessArr[guessCount].lastElementChild.innerHTML = guessSubtract;
-            guessArr[guessCount].lastElementChild.classList.add("guess-guess");
+            purchases(guessArr, "?", guessSubtract, "guess-guess");
             guessAmount();
         }
     }
 
 }
 
-
 // || HINT BUTTON || \\
-
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() {
-
     if (guessCount < guessArr.length) {
         // exit if hint provided
         if (hintElement.classList.contains("visible")){
             return;
         }
-
         // make visible
         hintElement.classList.add("visible");
-        // add hint to guessbox
-        guessArr[guessCount].firstElementChild.innerHTML = "+";
-        guessArr[guessCount].firstElementChild.classList.add("hint-guess");
-        guessArr[guessCount].lastElementChild.innerHTML = "-$150";
-        guessArr[guessCount].lastElementChild.classList.add("hint-guess");
-        // update guess total
+        // add purchase
+        purchases(guessArr, "+", 150, "hint-guess");
+        // update guess and money
         guessAmount();
-
-        // subtrack money
         dollarAmount(currentMoney, 150) 
     }
 })
 
-
-// || ROUTES TO ADDING OR DELETING LETTERS || \\
-
-// using guess input
-let userGuessBtn = document.querySelector(".make-guess-btn");
-userGuessBtn.addEventListener("click", function() {
-    letterGuessDelete("guess");
-});
-
-// using letter input
-const lettersArr = [...document.querySelectorAll(".letter")];
-
-for (let element of lettersArr) {
-    element.addEventListener("click", function() {
-        letterGuessDelete("letter", element);
-    });
-}
-
-// deleting letters
-let deleteBtn = document.querySelector(".delete-btn");
-deleteBtn.addEventListener("click", function() {
-    letterGuessDelete("delete");
-});
-    
-
 // || ADDING LETTERS TO HIDDEN BOXES || \\
-
 function letterGuessDelete(...args) {
 
     // GUESS MODE ACTIVE
@@ -346,7 +319,7 @@ function letterGuessDelete(...args) {
                         if (lettersArr[i].classList.contains("incorrect") || lettersArr[i].classList.contains("correct")) {
                             return;
                         }
-                        checkHighlight();
+                        checkHighlight(lettersArr);
                         lettersArr[i].classList.add("highlight");
                     }
                 }
@@ -356,26 +329,9 @@ function letterGuessDelete(...args) {
                 {
                     return;
                 }
-                checkHighlight();
+                checkHighlight(lettersArr);
                 args[1].classList.add("highlight");
             }
-        }
-    }
-}
-
-
-// || ALERT FUNCTION || \\
-function removeElement() {
-    let alertDiv = document.querySelector(".alert-div");
-    alertDiv.innerHTML = "";
-}
-
-
-// || CHECK FOR HIGHLIGHT || \\
-function checkHighlight() {
-    for (let i = 0; i < lettersArr.length; i++) {
-        if (lettersArr[i].classList.contains("highlight")) {
-            lettersArr[i].classList.remove("highlight");
         }
     }
 }

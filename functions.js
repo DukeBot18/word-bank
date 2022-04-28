@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, checkHighlight };
 
 
 // puzzle
@@ -20,9 +20,12 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, curr
     return;
 }
 
-// if new puzzle, clear previous
+// counters for seeing when puzzle changes
 let start = 0;
 let puzzleCount = 0;
+
+// phrase array
+let phraseLettersArr;
 
 function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr) {
     if (start != puzzleCount) {
@@ -57,6 +60,7 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr) 
             tempElem.innerHTML += `<div class="blank-box blank"><span class="blank"></span></div>`;
         }
     }
+    phraseLettersArr = [...document.querySelectorAll(".letter-box")];
     // add to total puzzle count
     puzzleCount++;
 }
@@ -84,6 +88,7 @@ function clearPreviousPuzzle(divContainer, categoryDiv, guessArr) {
         elem.firstElementChild.innerHTML = "";
         elem.lastElementChild.innerHTML = "";
     }
+    return;
 }
 
 // guesses handler
@@ -114,5 +119,28 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
 function correctLetter(letter=undefined) {
     if(letter != undefined) {
         return dailyPuzzle.includes(letter);
+    }
+}
+
+
+// add purchases
+function purchases(arr, letter, value, classToAdd) {
+    arr[guessCount].firstElementChild.innerHTML = letter;
+    arr[guessCount].firstElementChild.classList.add(classToAdd);
+    arr[guessCount].lastElementChild.innerHTML = `-$${value}`;
+    arr[guessCount].lastElementChild.classList.add(classToAdd);
+}
+
+// || ALERT FUNCTION || \\
+function removeAlert(alert) {
+    alert.innerHTML = "";
+}
+
+// || CHECK FOR HIGHLIGHT || \\
+function checkHighlight(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i].classList.contains("highlight")) {
+            arr[i].classList.remove("highlight");
+        }
     }
 }
