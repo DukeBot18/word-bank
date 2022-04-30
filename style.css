@@ -11,6 +11,7 @@
     --accentColor-3: #F47067;
     --accentColor-4: #F69D50;
     --accentColor-5: #8DDB8C;
+    --overlayBackground: 36, 37, 38;
 }
 
 html[data-theme="dark"] {
@@ -23,6 +24,7 @@ html[data-theme="dark"] {
     --accentColor-3: #F47067;
     --accentColor-4: #F69D50;
     --accentColor-5: #8DDB8C;
+    --overlayBackground: 36, 37, 38;
 }
 
 html[data-theme="light"] {
@@ -35,6 +37,7 @@ html[data-theme="light"] {
     --accentColor-3: #CC0033;
     --accentColor-4: #B35900;
     --accentColor-5: #1ABD04;
+    --overlayBackground: 246, 247, 248;
 }
 
 
@@ -602,10 +605,6 @@ hr {
     background-color: var(--mainBorder);
 }
 
-.game-play {
-    display: block;
-}
-
 .game-play-format {
     display: flex;
     flex-direction: row-reverse;
@@ -627,4 +626,90 @@ hr {
     color: var(--accentColor-3);
     text-align: center;
     font-size: .7rem;
+}
+
+/* Game statistics popup */
+.overlay-game-win {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    background-color: rgba(var(--overlayBackground), 0.7);
+    display: none;
+}
+.game-stats-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    max-width: 25vw;
+    height: 30vh;
+    z-index: 1000;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 5px var(--mainBorder);
+    background-color: var(--htmlBackground);
+    color: var(--mainFontColor);
+    opacity: 1.0;
+}
+
+.money-streak {
+    color: var(--accentColor-5)
+}
+
+.stats-header {
+    border: none;
+    padding-top: 3vh;
+}
+
+.close-stats {
+    position: absolute;
+    top: 0;
+    right: 0;
+    user-select: none;
+    cursor: pointer;
+}
+
+.streak-total {
+    text-align: center;
+    margin: 5vh;
+    font-size: 3.0rem;
+    text-transform: uppercase;
+}
+
+.game-play {
+    display: block;
+}
+
+@media only screen and (max-width: 1000px) {
+    .game-stats-overlay {
+        min-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .game-stats-overlay {
+        min-width: 90%;
+    }
+}
+
+@media only screen and (max-width: 805px) {
+    .overlay-content {
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .format-on-media {
+        line-height: normal;
+    }
+
+    .line-format-media {
+        margin-bottom: 40px;
+    }
+    
 }

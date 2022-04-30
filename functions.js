@@ -400,6 +400,7 @@ function enterLetter() {
 
         if(puzzleSolved()) {
             winGameEnd();
+            gameEndPopup();
         }
     }
     // || GUESS MODE ACTIVE || \\
@@ -453,6 +454,7 @@ function enterLetter() {
 
         if(puzzleSolved()) {
             winGameEnd();
+            gameEndPopup();
         }
     }
 
@@ -466,13 +468,20 @@ function puzzleSolved() {
 
 function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
-    console.log(storedCash);
+
+    document.querySelector(".overlay-game-win").classList.toggle("game-play");
+
     if (storedCash != 0) {
         let newCashBalance = storedCash + money;
-        console.log(newCashBalance);
         localStorage.setItem("streak-cash", newCashBalance);
         storedCash = newCashBalance;
+        document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
         return;
     }
-    localStorage.setItem("streak-cash", money);
+    localStorage.setItem("streak-cash", money); 
+
+}
+
+function gameEndPopup() {
+
 }

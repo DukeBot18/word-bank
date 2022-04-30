@@ -128,3 +128,10 @@ let closeHowToPlay = document.querySelector(".close-settings");
 closeHowToPlay.onclick = function() {
     document.querySelector(".overlay").classList.toggle("game-play");
 }
+
+// toggle game-stats popup
+let toggleGameStats = document.querySelector(".close-stats");
+
+toggleGameStats.onclick = function() {
+    document.querySelector(".overlay-game-win").classList.toggle("game-play");
+}
