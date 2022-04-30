@@ -350,7 +350,7 @@ hintBtn.addEventListener("click", function() {
 })
 
 // toggle dark and light mode
-let toggle = document.querySelector(".theme-btn");
+let toggleTheme = document.querySelector(".theme-btn");
 
 let storedTheme = localStorage.getItem('theme') || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
 if (storedTheme) {
@@ -361,7 +361,7 @@ if (storedTheme) {
     }
 }
 
-toggle.onclick = function() {
+toggleTheme.onclick = function() {
     let currentTheme = document.documentElement.getAttribute("data-theme");
     let targetTheme = "light";
 
@@ -379,3 +379,15 @@ toggle.onclick = function() {
     localStorage.setItem('theme', targetTheme);
 };
 
+// toggle how to play
+let toggleHowToPlay = document.querySelector(".how-to-play-btn");
+
+toggleHowToPlay.onclick = function() {
+    document.querySelector(".overlay").classList.toggle("game-play");
+}
+
+let closeHowToPlay = document.querySelector(".close-settings");
+
+closeHowToPlay.onclick = function() {
+    document.querySelector(".overlay").classList.toggle("game-play");
+}

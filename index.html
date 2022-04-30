@@ -27,19 +27,108 @@
                                     <svg class="sun" style="display:none" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -1.5 24 24" width="24" fill="currentColor"><path d="M10 15.565a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm0-15a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 0 1-2 0v-2a1 1 0 0 1 1-1zm-9-7h2a1 1 0 1 1 0 2H1a1 1 0 0 1 0-2zm16 0h2a1 1 0 0 1 0 2h-2a1 1 0 0 1 0-2zm.071-6.071a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 0 1 1.414 0zM5.757 14.808a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414a1 1 0 0 1 1.414 0zM4.343 3.494l1.414 1.414a1 1 0 0 1-1.414 1.414L2.93 4.908a1 1 0 0 1 1.414-1.414zm11.314 11.314l1.414 1.414a1 1 0 0 1-1.414 1.414l-1.414-1.414a1 1 0 1 1 1.414-1.414z"></path></svg>
                                     <svg class="moon" xmlns="http://www.w3.org/2000/svg" viewBox="-4 -2 24 24" width="24" fill="currentColor"><path d="M12.253.335A10.086 10.086 0 0 0 8.768 8c0 4.632 3.068 8.528 7.232 9.665A9.555 9.555 0 0 1 9.742 20C4.362 20 0 15.523 0 10S4.362 0 9.742 0c.868 0 1.71.117 2.511.335z"></path></svg>
                                 </button>
-                                <button class="settings-btn hint-btn">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -1.5 24 24" width="24" fill="currentColor"><path d="M11 14.565H8v-8a1 1 0 1 0-2 0v8H3V13.31a7 7 0 1 1 8 0v1.255zm0 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h8z"></path></svg>
+                                <button class="settings-btn how-to-play-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24" width="24" fill="currentColor"><path d="M10 20C4.477 20 0 15.523 0 10S4.477 0 10 0s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm0-10a1 1 0 0 1 1 1v5a1 1 0 0 1-2 0V9a1 1 0 0 1 1-1zm0-1a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"></path></svg>
                                 </button>
                             </div>
                         </div>
                         <div>
                             <p class="hint"></p>
                         </div>
+                        <!-- settings overlay -->
+                        <div class="overlay">
+                            <div class="overlay-content">
+
+                                <header class="header-content">
+                                    <div>
+                                        <h1 class="overlay-header">How To Play</h1>
+                                    </div>
+                                    <div class="close-settings">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 24 24" width="24" fill="currentColor"><path d="M7.314 5.9l3.535-3.536A1 1 0 1 0 9.435.95L5.899 4.485 2.364.95A1 1 0 1 0 .95 2.364l3.535 3.535L.95 9.435a1 1 0 1 0 1.414 1.414l3.535-3.535 3.536 3.535a1 1 0 1 0 1.414-1.414L7.314 5.899z"></path></svg>
+                                    </div>
+                                </header>
+
+                                <div class="overlay-content-container">
+                                    <div>
+                                        <p class="instruction-headers"><strong>Game Overview</strong></p>
+                                        <ul class="game-instructions">
+                                            <li>Guess the Phrase of the day!</li>
+                                            <li>You have $1000 to start.</li>
+                                            <li>Purchase Letters.</li>
+                                            <li>Purchase a Hint.</li>
+                                            <li>Make a guess!</li>
+                                            <li>Dont run out of Money...</li>
+                                            <li>You only get 10 Purchases!</li>
+                                            <li>Go!</li>
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <p class="instruction-headers"><strong>Purchases</strong></p>
+                                        <ul class="game-instructions">
+                                            <li>Letters - Cost displayed on each letter</li>
+                                            <li>Hint - $150</li>
+                                            <li>Guess - 15% of current Bankroll</li>
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div>
+                                        <p class="instruction-headers"><strong>Game Play</strong></p>
+                                        <ul class="game-instructions">
+                                            <li class="test">
+                                                <div class="example-instructions">
+                                                    <div class="lineup">
+                                                        <p>Confirm</p>
+                                                        <div class="letter example-letter highlight-example no-hover">a</div>
+                                                    </div>
+                                                    <div class="lineup">
+                                                        <p>Correct</p>
+                                                        <div class="letter example-letter correct-example no-hover">a</div>
+                                                    </div>
+                                                    <div class="lineup">
+                                                        <p>Incorrect</p>
+                                                        <div class="letter example-letter incorrect-example no-hover">a</div>
+                                                    </div>                                                                                                        
+                                                </div>
+                                                <p class="normal-line-height">To purchase a letter you will have to click <strong class="capitalize">"enter"</strong> to confirm your choice. Letters will turn blue when selected and either red or green after confirmation if the choice is correct.</p>
+                                            </li>
+                                            <li class="hint-btn-instruction">
+                                                <p>You will see a hint button up top, click this to reveal a hint.</p>
+                                                <div class="settings-btn hint-example-btn no-hover">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -1.5 24 24" width="30" fill="currentColor"><path d="M11 14.565H8v-8a1 1 0 1 0-2 0v8H3V13.31a7 7 0 1 1 8 0v1.255zm0 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h8z"></path></svg>
+                                                </div>
+                                            </li>
+                                            <li class="test">
+                                                <div class="example-instructions">
+                                                    <div>
+                                                        <p>Active</p>
+                                                        <div class="letter guess-highlight-example no-hover">Guess</div>
+                                                    </div>
+                                                    <div>
+                                                        <p>Inactive</p>
+                                                        <div class="letter guess-highlight-example no-color no-hover">Guess</div>
+                                                    </div> 
+                                                </div>                                               
+                                                <p class="normal-line-height">To make a guess, select the <strong class="capitalize">"guess"</strong> button, fill out puzzle, and press enter. To exit, click again. The button will turn orange when guess mode is active.</p>
+                                            </li>
+                                        </ul>
+                                    </div>                                                                       
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
                     <!-- SECOND -->
                     <div>
-                        <div class="category"></div>
+                        <div class="category-hint">
+                            <div class="category"></div>
+                            <div>
+                                <button class="settings-btn hint-btn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -1.5 24 24" width="24" fill="currentColor"><path d="M11 14.565H8v-8a1 1 0 1 0-2 0v8H3V13.31a7 7 0 1 1 8 0v1.255zm0 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h8z"></path></svg>
+                                </button>
+                            </div>
+                        </div>                      
                         <div class="phrase-container"></div>
                         <div><span class="alert-div"></span></div>
                     </div>
