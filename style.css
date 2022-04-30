@@ -538,7 +538,7 @@ h1 {
 .example-instructions {
     display: flex;
     justify-content: flex-start;
-    column-gap: 2vh;
+    column-gap: 2vw;
     text-align: center;
 }
 
@@ -606,8 +606,7 @@ hr {
     display: block;
 }
 
-
-.test {
+.game-play-format {
     display: flex;
     flex-direction: row-reverse;
     justify-content: flex-end;
