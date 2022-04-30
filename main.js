@@ -1,21 +1,12 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, checkHighlight } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr } from "./functions.js";
 
 /*
     ===================================
     GENERATED CONTENT FROM DAILY PHRASE 
     ===================================
 */
-
-// content reset elements
-let insertPhrase = document.querySelector(".phrase-container");
-let categoryDiv = document.querySelector(".category");
-let hintElement = document.querySelector(".hint");
-let guessArr = [...document.querySelectorAll(".guess-box")];
-let currentMoney = document.querySelector("#bankroll");
-let userGuessBtn = document.querySelector(".make-guess-btn");
-const lettersArr = [...document.querySelectorAll(".letter")];
 
 // add starting bankroll
 currentMoney.innerHTML = "$ " + money;
@@ -24,7 +15,7 @@ currentMoney.innerHTML = "$ " + money;
 resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 // Reset puzzle once per day
-let dayInMilliseconds = 80000;
+let dayInMilliseconds = 8000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
 categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr);
 
@@ -182,153 +173,6 @@ function enterLetter() {
     }
 
 }
-
-// || ADDING LETTERS TO HIDDEN BOXES || \\
-function letterGuessDelete(...args) {
-
-    // GUESS MODE ACTIVE
-    if (userGuessBtn.classList.contains("guess-mode")) {
-
-        // if delete button clicked
-        if (args[0] == "delete") {
-            for (let i = phraseLettersArr.length - 1; i > 0; i--) {
-
-                if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-
-                    // if last element, keep guess mode highlight
-                    for(let j = i; j < phraseLettersArr.length; j++) {
-                        if(phraseLettersArr[j+1] == undefined && phraseLettersArr[j].lastElementChild.classList.contains("added-guess-input")|| phraseLettersArr[j+1] != undefined && phraseLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
-                            phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
-                            return;
-                        }
-                        if(phraseLettersArr[j+1] == undefined && !phraseLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
-                            phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
-                            break;
-                        }
-                        else {
-                            phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
-                            break;
-                        }
-                    }
-
-                    let counter = 1;
-                    while (phraseLettersArr[i-counter] != undefined) {
-                        if (phraseLettersArr[i-counter].firstElementChild.classList.contains("non-visible")) {
-                            phraseLettersArr[i-counter].classList.add("guess-mode-current-guess-box");
-                            phraseLettersArr[i-counter].removeChild(phraseLettersArr[i-counter].lastElementChild);
-                            return
-                        }
-                        else {
-                            counter++;
-                        }
-                    } 
-                }
-            }
-        }
-
-        // exit guess mode
-        if (args[0] == "guess") {
-            userGuessBtn.classList.remove("guess-mode");
-            userGuessBtn.classList.remove("guess-highlight");
-            document.querySelector("#potential-purchase").innerHTML = "";
-
-            // remove current guesses
-            for(let i = 0; i < phraseLettersArr.length; i++) {
-                if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                    phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
-                }
-                // remove highlighted box
-                if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-                    phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
-                }
-                
-            }
-
-            return;
-        }
-        else if (args[0] == "letter") {
-            for(let i = 0; i < phraseLettersArr.length; i++) {
-                if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-
-                    // if keyboard input
-                    if (args[1] == "keyboard") {
-                        phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${args[2]}</i>`;
-                    }
-                     // mouse click addition
-                    else {
-                        let tempArr = args[1].textContent.split("$");
-                        phraseLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
-                    }
-                    // remove highlight from box unless last viable box
-                    let tempCount = 1
-                    while(phraseLettersArr[i+tempCount] != undefined) {
-                        if (phraseLettersArr[i+tempCount].firstElementChild.classList.contains("non-visible")) {
-                            phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
-                            phraseLettersArr[i+tempCount].classList.add("guess-mode-current-guess-box");
-                            break;
-                        }
-                        else {
-                            tempCount++;
-                        }
-                    }
-                    
-                    return;
-                }
-            }
-        }
-    }
-
-    // GUESS MODE INACTIVE
-    else {
-        // if guess btn pressed turn guess mode on
-        if (args[0] == "guess") {
-            // remove any highlighted letters
-            for (let i = 0; i < lettersArr.length; i++) {
-                if (lettersArr[i].classList.contains("highlight")) {
-                    lettersArr[i].classList.remove("highlight");
-                }
-            }
-            userGuessBtn.classList.add("guess-mode");
-            userGuessBtn.classList.add("guess-highlight");
-
-            document.querySelector("#potential-purchase").innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
-
-            // add phrase box highlight
-            for(let i = 0; i < phraseLettersArr.length; i++) {
-                if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-
-                    phraseLettersArr[i].classList.add("guess-mode-current-guess-box")
-                    return;
-                }
-            }          
-
-            return;
-        }
-        // else regular guess with letter
-        else {
-            if (args[1] == "keyboard") {
-                for(let i = 0; i <lettersArr.length; i++) {
-                    if (lettersArr[i].textContent[0] == args[2].toLowerCase()) {
-                        if (lettersArr[i].classList.contains("incorrect") || lettersArr[i].classList.contains("correct")) {
-                            return;
-                        }
-                        checkHighlight(lettersArr);
-                        lettersArr[i].classList.add("highlight");
-                    }
-                }
-            }
-            else {
-                if (args[1].classList.contains("incorrect") || args[1].classList.contains("correct"))
-                {
-                    return;
-                }
-                checkHighlight(lettersArr);
-                args[1].classList.add("highlight");
-            }
-        }
-    }
-}
-
 
 /*
     =========================
