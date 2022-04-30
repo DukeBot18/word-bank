@@ -427,6 +427,12 @@ h1 {
     color: var(--accentColor-2);
 }
 
+.category-hint {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* || MAKING GUESSES || */
 .guess-guess {
     text-transform: capitalize;
@@ -613,13 +619,14 @@ hr {
     line-height: normal;
 }
 
-
 .capitalize {
     text-transform: uppercase;
 }
 
-.category-hint {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+/* Potential purchase */
+#potential-purchase {
+    color: var(--accentColor-3);
+    text-align: center;
+    font-size: .7rem;
 }

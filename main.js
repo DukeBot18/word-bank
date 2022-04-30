@@ -230,6 +230,7 @@ function letterGuessDelete(...args) {
         if (args[0] == "guess") {
             userGuessBtn.classList.remove("guess-mode");
             userGuessBtn.classList.remove("guess-highlight");
+            document.querySelector("#potential-purchase").innerHTML = "";
 
             // remove current guesses
             for(let i = 0; i < phraseLettersArr.length; i++) {
@@ -289,6 +290,8 @@ function letterGuessDelete(...args) {
             }
             userGuessBtn.classList.add("guess-mode");
             userGuessBtn.classList.add("guess-highlight");
+
+            document.querySelector("#potential-purchase").innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
 
             // add phrase box highlight
             for(let i = 0; i < phraseLettersArr.length; i++) {
