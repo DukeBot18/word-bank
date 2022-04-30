@@ -397,6 +397,10 @@ function enterLetter() {
             letter.classList.remove("highlight");
             letter.classList.add("incorrect");
         }
+
+        if(puzzleSolved()) {
+            winGameEnd();
+        }
     }
     // || GUESS MODE ACTIVE || \\
     else {
@@ -439,11 +443,36 @@ function enterLetter() {
         let guessSubtract = Math.round(Math.ceil((money * 0.15) * 100) / 100);
         dollarAmount(currentMoney, guessSubtract);
 
+        potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
+
         // add purchase
         if (guessCount < guessArr.length) {
             purchases(guessArr, "?", guessSubtract, "guess-guess");
             guessAmount();
         }
+
+        if(puzzleSolved()) {
+            winGameEnd();
+        }
     }
 
+}
+
+function puzzleSolved() {
+    return phraseLettersArr.every(element => {
+        return !element.firstElementChild.classList.contains("non-visible")
+    });
+}
+
+function winGameEnd(){
+    let storedCash = parseInt(localStorage.getItem("streak-cash"));
+    console.log(storedCash);
+    if (storedCash != 0) {
+        let newCashBalance = storedCash + money;
+        console.log(newCashBalance);
+        localStorage.setItem("streak-cash", newCashBalance);
+        storedCash = newCashBalance;
+        return;
+    }
+    localStorage.setItem("streak-cash", money);
 }
