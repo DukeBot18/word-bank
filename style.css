@@ -235,7 +235,7 @@ html {
     width: 100%;
     margin: 0 auto 8px;
     touch-action: manipulation;
-    column-gap: 5px;
+    column-gap: 4px;
 }
 
 
@@ -246,7 +246,7 @@ html {
     align-items: center;
     cursor: pointer;
     height: 80px;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     border-radius: 4px;
     text-transform: capitalize;
     transition: opacity .2s;
