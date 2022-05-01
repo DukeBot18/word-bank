@@ -15,7 +15,7 @@ currentMoney.innerHTML = "$ " + money;
 resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
 
 // Reset puzzle once per day
-let dayInMilliseconds = 80000;
+let dayInMilliseconds = 800000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
 categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr);
 

@@ -183,7 +183,7 @@ html {
 .expand-info {
     width: 100%;
     text-align: center;
-    margin-top: 3vh;
+    margin-top: 1vh;
 }
 
 .bottom-info {
@@ -432,8 +432,8 @@ h1 {
     position: absolute;
     top: 0;
     left: 0;
-    bottom: 0;
     right: 0;
+    height: 100vh;
     z-index: 100;
     background-color: var(--htmlBackground);
     display: none;
