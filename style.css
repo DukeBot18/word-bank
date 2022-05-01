@@ -734,7 +734,7 @@ hr {
 @media only screen and (max-width: 460px) {
     /* mobile phones */
     sup {
-        font-size: 8px;
+        font-size: 5px;
         font-weight: 900;
     }
 
@@ -748,9 +748,6 @@ hr {
 
 @media only screen and (max-width: 360px) {
     /* Galaxy phones */
-    sup {
-        font-size:5px;
-    }
 
     .delete-btn svg {
         width: 15px;
