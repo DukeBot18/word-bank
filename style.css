@@ -734,23 +734,8 @@ hr {
 @media only screen and (max-width: 460px) {
     /* mobile phones */
     sup {
-        font-size: 5px;
+        font-size: 6px;
         font-weight: 900;
-    }
-
-    .letter,
-    .make-guess-btn,
-    .enter,
-    .delete-btn {
-        height: 50px;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    /* Galaxy phones */
-
-    .delete-btn svg {
-        width: 15px;
     }
 
     .make-guess-btn,
@@ -759,6 +744,16 @@ hr {
         font-size: 10px;
     }
 
+    .delete-btn svg {
+        width: 15px;
+    }
+
+    .letter,
+    .make-guess-btn,
+    .enter,
+    .delete-btn {
+        height: 50px;
+    }
 }
 
 /* transitions */
