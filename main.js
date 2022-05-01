@@ -121,12 +121,21 @@ let toggleHowToPlay = document.querySelector(".how-to-play-btn");
 
 toggleHowToPlay.onclick = function() {
     document.querySelector(".overlay").classList.toggle("game-play");
+    setTimeout(function() {
+        document.querySelector(".overlay").classList.toggle("fade");
+    }, 20);
+    setTimeout(function() {
+        document.querySelector(".overlay-content").classList.toggle("translate");
+    }, 10);
 }
 
 let closeHowToPlay = document.querySelector(".close-settings");
 
 closeHowToPlay.onclick = function() {
+    document.querySelector(".overlay").classList.toggle("fade");
     document.querySelector(".overlay").classList.toggle("game-play");
+    document.querySelector(".overlay-content").classList.toggle("translate");
+
 }
 
 // toggle game-stats popup
