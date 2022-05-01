@@ -675,6 +675,7 @@ hr {
     background-color: var(--htmlBackground);
     color: var(--mainFontColor);
     opacity: 1.0;
+    overflow-y: auto;
 }
 
 .money-streak {
@@ -696,13 +697,24 @@ hr {
 
 .streak-total {
     text-align: center;
-    margin: 5vh;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
     font-size: 3.0rem;
     text-transform: uppercase;
 }
 
 .game-play {
     display: block;
+}
+
+.highest-streak {
+    text-align: center;
+}
+
+.highest-streak-header {
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
 }
 
 @media only screen and (max-width: 1000px) {

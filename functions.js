@@ -28,6 +28,7 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, curr
     // reset guesses and bankroll
     guessAmount("clear");
     dollarAmount(currentMoney, 0, "clear");
+    enableButtons();
     return;
 }
 
@@ -185,8 +186,6 @@ function letterGuessDelete(...args) {
 
                     // if last element, keep guess mode highlight
                     for(let j = i; j < phraseLettersArr.length; j++) {
-                        console.log("i is: ", i);
-                        console.log("j is: ", j);
                         if(phraseLettersArr[j+1] == undefined && phraseLettersArr[j].lastElementChild.classList.contains("added-guess-input")|| phraseLettersArr[j+1] != undefined && phraseLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
                             phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
                             return;
@@ -206,7 +205,6 @@ function letterGuessDelete(...args) {
                     for(let j = 0; j < i; j++) {
                         tempArr.push(phraseLettersArr[j]);
                     }
-                    console.log(tempArr);
                     
                     let availableBox = tempArr.some((element) => element.firstElementChild.classList.contains("non-visible"));
 
@@ -400,7 +398,7 @@ function enterLetter() {
 
         if(puzzleSolved()) {
             winGameEnd();
-            gameEndPopup();
+            disableActionButtons();
         }
     }
     // || GUESS MODE ACTIVE || \\
@@ -454,7 +452,7 @@ function enterLetter() {
 
         if(puzzleSolved()) {
             winGameEnd();
-            gameEndPopup();
+            disableActionButtons();
         }
     }
 
@@ -476,18 +474,51 @@ function winGameEnd(){
     setTimeout(function() {
         document.querySelector(".game-stats-overlay").classList.toggle("translate");
     }, 10);
+    if(storedCash) {
+        if (storedCash != 0) {
+            let newCashBalance = storedCash + money;
+            localStorage.setItem("streak-cash", newCashBalance);
+            storedCash = newCashBalance;
+            document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
 
-    if (storedCash != 0) {
-        let newCashBalance = storedCash + money;
-        localStorage.setItem("streak-cash", newCashBalance);
-        storedCash = newCashBalance;
-        document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
-        return;
+            // highest streak
+            let highestCashBalance = parseInt(localStorage.getItem("highest-streak"));
+            if(newCashBalance > highestCashBalance) {
+                highestCashBalance = newCashBalance;
+                localStorage.setItem("highest-streak", highestCashBalance);
+                document.querySelector(".highest-streak").innerHTML = highestCashBalance;
+            }
+            return;
+        }
+        return
     }
-    localStorage.setItem("streak-cash", money); 
 
+    // first win
+    localStorage.setItem("streak-cash", money);
+    document.querySelector(".streak-total").innerHTML = money + "!";
+    localStorage.setItem("highest-streak", money); 
+    document.querySelector(".highest-streak").innerHTML = money;
 }
 
-function gameEndPopup() {
 
+function disableActionButtons() {
+    document.querySelectorAll(".letter").forEach(element => {
+        element.setAttribute("disabled", "");
+    });
+    document.querySelector(".make-guess-btn").setAttribute("disabled", "");
+    document.querySelector(".enter").setAttribute("disabled", "");
+    document.querySelector(".delete-btn").setAttribute("disabled", "");
+    document.querySelector(".hint-btn").setAttribute("disabled", "");
+    return;
+}
+
+function enableButtons() {
+    document.querySelectorAll(".letter").forEach(element => {
+        element.removeAttribute("disabled");
+    });
+    document.querySelector(".make-guess-btn").removeAttribute("disabled");
+    document.querySelector(".enter").removeAttribute("disabled");
+    document.querySelector(".delete-btn").removeAttribute("disabled");
+    document.querySelector(".hint-btn").removeAttribute("disabled");
+    return;
 }
