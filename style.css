@@ -416,6 +416,19 @@ h1 {
     visibility: hidden;
 }
 
+.hint-btn {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-weight: 900;
+    border-radius: none;
+    padding-right: 10px;
+}
+
+.hint-btn:hover {
+    opacity: 0.5;
+}
+
 .hint span {
     color: var(--accentColor-2);
 }
@@ -579,10 +592,16 @@ h1 {
 }
 
 .hint-example-btn {
-    max-width: 30px;
+    max-width: 45px;
     max-height: 30px;
     width: 100%;
     color: black;
+    padding-right: 1px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-weight: 900;
+    border-radius: none;
 }
 
 .guess-highlight-example {
