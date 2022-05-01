@@ -737,6 +737,13 @@ hr {
         font-size: 8px;
         font-weight: 900;
     }
+
+    .letter,
+    .make-guess-btn,
+    .enter,
+    .delete-btn {
+        height: 50px;
+    }
 }
 
 @media only screen and (max-width: 360px) {
@@ -744,6 +751,17 @@ hr {
     sup {
         font-size: 7px;
     }
+
+    .delete-btn svg {
+        width: 20px;
+    }
+
+    .make-guess-btn,
+    .letter,
+    .enter {
+        font-size: 10px;
+    }
+
 }
 
 /* transitions */
