@@ -470,6 +470,12 @@ function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
 
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
+    setTimeout(function() {
+        document.querySelector(".overlay-game-win").classList.toggle("fade");
+    }, 20);
+    setTimeout(function() {
+        document.querySelector(".game-stats-overlay").classList.toggle("translate");
+    }, 10);
 
     if (storedCash != 0) {
         let newCashBalance = storedCash + money;

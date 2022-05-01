@@ -143,4 +143,6 @@ let toggleGameStats = document.querySelector(".close-stats");
 
 toggleGameStats.onclick = function() {
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
+    document.querySelector(".overlay-game-win").classList.toggle("fade");
+    document.querySelector(".game-stats-overlay").classList.toggle("translate");
 }
