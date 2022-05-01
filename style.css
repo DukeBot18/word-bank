@@ -230,64 +230,6 @@ html {
     color: var(--accentColor-5);
 }
 
-/* Letter bank */
-@media only screen and (max-width: 550px) {
-    /* smaller than ipad */
-    .letter-container {
-        margin: 0 8px;
-    }
- 
-    .letter,
-    .make-guess-btn {
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .guess-boxes-container {
-        margin: 0 8px;
-        column-gap: 3px;
-    }
-
-    .phrase-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .word-phrases {
-        flex-wrap: wrap;
-        max-width: 100%;
-        align-items: center;
-        justify-content: center;
-        margin: 5px 0px;
-    }
-
-    .letter-box {
-        flex-basis: 20px;
-    }
-
-    .blank {
-        display: none;
-    }
-}
-
-@media only screen and (max-width: 460px) {
-    /* mobile phones */
-    sup {
-        font-size: 8px;
-        font-weight: 900;
-    }
-}
-
-@media only screen and (max-width: 360px) {
-    /* Galaxy phones */
-    sup {
-        font-size: 7px;
-    }
-}
-
 .letters-div {
     display: flex;
     width: 100%;
@@ -723,16 +665,16 @@ hr {
     }
 }
 
-@media only screen and (max-width: 680px) {
-    .game-stats-overlay {
-        min-width: 90%;
-    }
-}
-
 @media only screen and (max-width: 805px) {
     .overlay-content {
         padding-left: 2vw;
         padding-right: 2vw;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .game-stats-overlay {
+        min-width: 90%;
     }
 }
 
@@ -745,6 +687,63 @@ hr {
         margin-bottom: 40px;
     }
     
+}
+
+@media only screen and (max-width: 550px) {
+    /* smaller than ipad */
+    .letter-container {
+        margin: 0 8px;
+    }
+ 
+    .letter,
+    .make-guess-btn {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .guess-boxes-container {
+        margin: 0 8px;
+        column-gap: 3px;
+    }
+
+    .phrase-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .word-phrases {
+        flex-wrap: wrap;
+        max-width: 100%;
+        align-items: center;
+        justify-content: center;
+        margin: 5px 0px;
+    }
+
+    .letter-box {
+        flex-basis: 20px;
+    }
+
+    .blank {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    /* mobile phones */
+    sup {
+        font-size: 8px;
+        font-weight: 900;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+    /* Galaxy phones */
+    sup {
+        font-size: 7px;
+    }
 }
 
 /* transitions */
