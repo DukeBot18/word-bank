@@ -8,12 +8,12 @@ const phraseObject = {
     },
     two: {
         hint: "1000 kisses",
-        phrase: "Luther Vandross",
+        phrase: "luther vandross",
         category: "Person"
     },
     three: {
         hint: "Hannibal Lecter",
-        phrase: "The Silence Of The Lambs",
+        phrase: "the silence of the lambs",
         category: "Movie"
     },
     four: {
@@ -23,27 +23,27 @@ const phraseObject = {
     },
     five: {
         hint: "Atticus",
-        phrase: "To Kill A Mockingbird",
+        phrase: "to kill a mockingbird",
         category: "Book"
     },
     six: {
         hint: "4 degrees",
-        phrase: "Leaning Tower of Pisa",
+        phrase: "leaning tower of pisa",
         category: "Landmark"
     },
     seven: {
         hint: "Betrayal",
-        phrase: "The Last Supper",
+        phrase: "the sast supper",
         category: "Art"
     },
     eight: {
         hint: "Guanciale",
-        phrase: "Spaghetti Alla Carbonara",
+        phrase: "spaghetti alla carbonara",
         category: "Food"
     },
     nine: {
         hint: "NBA Finals",
-        phrase: "Larry O'Brien Championship Trophy",
+        phrase: "larry o'brien championship trophy",
         category: "Sports"
     },
 
