@@ -158,6 +158,7 @@ function purchases(arr, letter, value, classToAdd) {
 
 function removeAlert(alert) {
     alert.innerHTML = "";
+    alert.classList.remove("add-alert");
 }
 
 function checkHighlight(arr) {
@@ -408,6 +409,7 @@ function enterLetter() {
             if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible")) {
                 if(!phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                     let alert = document.querySelector(".alert-div");
+                    alert.classList.add("add-alert");
                     alert.innerHTML = "Please enter input for all boxes before entering";
                     setTimeout(removeAlert, 3000, alert);
                     return;

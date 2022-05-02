@@ -365,6 +365,7 @@ h1 {
     font-weight: 900;
     border-radius: none;
     padding-right: 10px;
+    padding-left: 0;
 }
 
 .hint-btn:hover {
@@ -408,10 +409,14 @@ h1 {
 
 /* || ALERTS || */ 
 .alert-div {
-    display: table;
+    display: none;
     margin: 10px auto;
     font-size: 1.2rem;
     color: var(--accentColor-3);
+}
+
+.add-alert {
+    display: table;
 }
 
 /* || CORRECT LETTER ANIMATION || */
@@ -755,7 +760,8 @@ hr {
     }
 
     .phrase-container {
-        margin-top: 1vh;
+        margin-top: 0;
+        margin-bottom: 1vh;
     }
 
     .expand-info {
