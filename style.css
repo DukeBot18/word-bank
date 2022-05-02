@@ -667,13 +667,6 @@ hr {
     .game-stats-overlay {
         min-width: 50%;
     }
-
-    .letter,
-    .make-guess-btn,
-    .enter,
-    .delete-btn {
-        touch-action: manipulation;
-    }
 }
 
 @media only screen and (max-width: 805px) {
