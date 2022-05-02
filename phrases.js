@@ -33,7 +33,7 @@ const phraseObject = {
     },
     seven: {
         hint: "Betrayal",
-        phrase: "the sast supper",
+        phrase: "the last supper",
         category: "Art"
     },
     eight: {
