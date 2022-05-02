@@ -77,18 +77,12 @@ html {
 /* || FIRST container || */
 .top-container {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
     border-bottom: 1px solid var(--mainBorder);
 }
 
 .top-container h1{
     line-height: 3.0rem;
-}
-
-.settings-container {
-    margin-bottom: 8px;
 }
 
 .header-title {
@@ -335,6 +329,7 @@ sup {
     border-radius: 2px;
     margin: 10px;
 }
+
 .settings-btn:hover {
     cursor: pointer;
 }
@@ -351,10 +346,14 @@ h1 {
 }
 
 /* || HINT || */
+.hint-container {
+    display: none;
+    text-align: center;
+}
+
 .hint {
     color: var(--mainFontColor);
     font-size: 1.2rem;
-    margin-bottom: 10px;
     position: absolute;
     visibility: hidden;
 }

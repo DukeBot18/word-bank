@@ -77,6 +77,7 @@ hintBtn.addEventListener("click", function() {
             return;
         }
         // make visible
+        document.querySelector(".hint-container").classList.add("game-play");
         hintElement.classList.add("visible");
         // add purchase
         purchases(guessArr, "+", 150, "hint-guess");
