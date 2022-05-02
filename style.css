@@ -244,7 +244,7 @@ html {
     border: 1px solid transparent;
     border-radius: 4px;
     text-transform: capitalize;
-    transition: opacity .2s;
+    transition: opacity .1s;
     background-color: var(--keyAndBorderBGColor);
     user-select: none;
     height: 80px;
@@ -260,7 +260,7 @@ html {
     border: 2px solid transparent;
     background-color: var(--keyAndBorderBGColor);
     text-transform: capitalize;
-    transition: opacity .2s;
+    transition: opacity .1s;
     flex: 1.75 1.75;
     display: flex;
     justify-content: center;
