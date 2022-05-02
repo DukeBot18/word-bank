@@ -409,7 +409,7 @@ function enterLetter() {
                 if(!phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                     let alert = document.querySelector(".alert-div");
                     alert.innerHTML = "Please enter input for all boxes before entering";
-                    setTimeout(removeAlert, 2500, alert);
+                    setTimeout(removeAlert, 3000, alert);
                     return;
                 }
             }  

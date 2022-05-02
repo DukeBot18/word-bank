@@ -411,7 +411,6 @@ h1 {
     display: table;
     margin: 10px auto;
     font-size: 1.2rem;
-    padding: 5px;
     color: var(--accentColor-3);
 }
 
@@ -753,6 +752,31 @@ hr {
     .enter,
     .delete-btn {
         height: 50px;
+    }
+
+    .phrase-container {
+        margin-top: 1vh;
+    }
+
+    .expand-info {
+        margin-top: 0;
+    }
+
+    .bottom-info {
+        margin-bottom: 1vh;
+    }
+
+    .guess-box {
+        min-height: 55px;
+    }
+
+    .letter-box {
+        min-height: 30px;
+        margin: 3px;
+    }
+
+    .letter-box:first-child {
+        border-bottom: 2px solid var(--accentColor-3);
     }
 }
 
