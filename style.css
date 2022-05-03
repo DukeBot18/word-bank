@@ -736,7 +736,7 @@ hr {
         max-width: 100%;
         align-items: center;
         justify-content: center;
-        margin: 5px 0px;
+        margin: 4px 0px;
     }
 
     .letter-box {
@@ -750,6 +750,22 @@ hr {
 
 @media only screen and (max-width: 460px) {
     /* mobile phones */
+    .hint-btn svg {
+        width: 20px;
+    }
+    
+    .category {
+        font-size: 2rem;
+    }
+
+    #bankroll {
+        font-size: 1.5rem;
+    }
+
+    header {
+        font-size: 1.4rem;
+    }
+
     .main-container {
         margin-top: 0;
     }
