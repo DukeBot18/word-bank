@@ -82,8 +82,6 @@ let hintStart = 0;
 
 function addHint(hint, hintElement) {
     hintElement.innerHTML = `<span>HINT: </span>${hint}`;
-    document.querySelector(".hint-container").classList.add(".game-play");
-    console.log(document.querySelector(".hint-container"));
     if (hintCount != hintStart) {
         if(hintElement.classList.contains("visible")) {
             hintElement.classList.remove("visible");
