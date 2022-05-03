@@ -2,6 +2,7 @@
 
 :root {
     /* Dark Default  Theme*/
+    --letterColor: #242526;
     --mainFontColor: #FFFAFA;
     --keyAndBorderBGColor: #C5C9CF;
     --mainBorder: #818384;
@@ -15,6 +16,7 @@
 }
 
 html[data-theme="dark"] {
+    --letterColor: #242526;
     --mainFontColor: #FFFAFA;
     --keyAndBorderBGColor: #C5C9CF;
     --mainBorder: #818384;
@@ -28,6 +30,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="light"] {
+    --letterColor: #242526;
     --mainFontColor: #242526;
     --keyAndBorderBGColor: #9C9FA3;
     --mainBorder: #494949;
@@ -226,6 +229,7 @@ html {
     height: 80px;
     font-weight: 600;
     position: relative;
+    color: var(--letterColor) !important;
 }
 
 
@@ -244,6 +248,8 @@ html {
     align-items: center;
     font-weight: 600;
     cursor: pointer;
+    color: #242526;
+    color: var(--letterColor) !important;
 }
 
 .delete-btn {
@@ -348,11 +354,6 @@ h1 {
 .visible {
     position: relative;
     visibility: visible;
-}
-
-.hint-guess {
-    text-transform: capitalize;
-    color: var(--accentColor-2);
 }
 
 .category-hint {
