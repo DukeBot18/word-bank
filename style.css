@@ -288,9 +288,10 @@ sup {
 
 /* || BUTTON STYLES || */
 .settings-btn {
-    background-color: var(--keyAndBorderBGColor);
-    border: none;
-    border-radius: 2px;
+    background-color: var(--htmlBackground);
+    border: 1px solid var(--mainFontColor);
+    border-radius: 10px;
+    color: var(--mainFontColor);
     margin: 10px;
 }
 
@@ -329,8 +330,10 @@ h1 {
     align-items: center;
     font-weight: 900;
     border-radius: none;
-    padding-right: 10px;
+    padding-right: 5px;
     padding-left: 0;
+    color: var(--accentColor-2);
+    border-color: var(--accentColor-2);
 }
 
 .hint-btn:hover {
