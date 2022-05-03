@@ -50,6 +50,7 @@ html[data-theme="light"] {
 
 html {
     background-color: var(--htmlBackground);
+    touch-action: manipulation;
 }
 
 .page-wrapper {
