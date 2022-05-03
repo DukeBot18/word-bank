@@ -128,7 +128,9 @@ function guessAmount(clearGuesses=undefined) {
         guessCount++;
     }
     if (guessCount == 9) {
-        letterGuessDelete("guess");
+        console.log("WTF");
+        setTimeout(function() {
+            letterGuessDelete("guess")}, 180);
     }
 }
 
