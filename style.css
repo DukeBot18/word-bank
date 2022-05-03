@@ -303,13 +303,13 @@ html {
 }
 
 .correct {
-    background-color: var(--accentColor-5);
     opacity: .4;
+    background-color: var(--accentColor-5);
 }
 
 .incorrect {
-    background-color: var(--accentColor-3);
     opacity: .4;
+    background-color: var(--accentColor-3);
 }
 
 .incorrect-guess {
@@ -692,6 +692,11 @@ hr {
     .hint-btn:hover {
         opacity: 1.0;
     }    
+
+    .incorrect:hover,
+    .correct:hover {
+    opacity: .4;
+    }
 }
 
 @media only screen and (max-width: 680px) {
