@@ -709,13 +709,14 @@ hr {
 
 @media only screen and (max-width: 460px) {
     /* mobile phones */
+
     .phrase-container {
         min-height: 32vh;
-        row-gap: 8px;
+        row-gap: 7px;
     }
 
     .hint-btn svg {
-        width: 20px;
+        width: 16px;
     }
     
     .category-hint{
@@ -723,11 +724,11 @@ hr {
     }
 
     .category {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     #bankroll {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     header {
@@ -753,10 +754,20 @@ hr {
         font-size: 10px;
     }
 
+    .delete-btn {
+        position: relative;
+    }
+
     .delete-btn svg {
-        width: 13px;
+        width: 20px;
         padding: 0;
         margin: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
     }
 
     .letter,
@@ -768,7 +779,7 @@ hr {
 
     .letter-box {
         min-height: 50px;
-        margin: 3px;
+        margin: 2px;
     }
 
     .letter-box:first-child {
