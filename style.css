@@ -711,6 +711,7 @@ hr {
     /* mobile phones */
     .phrase-container {
         min-height: 32vh;
+        row-gap: 8px;
     }
 
     .hint-btn svg {
@@ -753,7 +754,9 @@ hr {
     }
 
     .delete-btn svg {
-        width: 20px;
+        width: 13px;
+        padding: 0;
+        margin: 0;
     }
 
     .letter,
