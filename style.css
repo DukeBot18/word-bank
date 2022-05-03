@@ -254,7 +254,6 @@ html {
     border: 1px solid transparent;
     border-radius: 4px;
     text-transform: capitalize;
-    transition: opacity .1s;
     background-color: var(--keyAndBorderBGColor);
     user-select: none;
     height: 80px;
@@ -270,12 +269,12 @@ html {
     border: 2px solid transparent;
     background-color: var(--keyAndBorderBGColor);
     text-transform: capitalize;
-    transition: opacity .1s;
     flex: 1.75 1.75;
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .delete-btn {
@@ -284,13 +283,6 @@ html {
 
 .spacer-third {
     flex: 0.33 1;
-}
-
-.letter:hover,
-.enter:hover,
-.delete-btn:hover,
-.make-guess-btn:hover {
-    opacity: .8;
 }
 
 /*  letter highlighting */
@@ -318,11 +310,6 @@ html {
 
 .correct-guess {
     color:  var(--accentColor-5);
-}
-
-.incorrect:hover,
-.correct:hover {
-    opacity: 0.4 !important;
 }
 
 /* letter dollar values */
@@ -379,7 +366,7 @@ h1 {
 }
 
 .hint-btn:hover {
-    opacity: 0.5;
+    opacity: 0.7;
 }
 
 .hint span {
@@ -683,23 +670,6 @@ hr {
     .overlay-content {
         padding-left: 2vw;
         padding-right: 2vw;
-    }
-
-    .letter {
-        transition: none;
-    }
-
-    .letter:hover,
-    .enter:hover,
-    .delete-btn:hover,
-    .make-guess-btn:hover,
-    .hint-btn:hover {
-        opacity: 1.0;
-    }    
-
-    .incorrect:hover,
-    .correct:hover {
-        opacity: 0.4 !important;
     }
 }
 
