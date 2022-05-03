@@ -685,6 +685,10 @@ hr {
         padding-right: 2vw;
     }
 
+    .letter {
+        transition: none;
+    }
+
     .letter:hover,
     .enter:hover,
     .delete-btn:hover,
