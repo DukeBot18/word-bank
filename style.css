@@ -695,7 +695,7 @@ hr {
 
     .incorrect:hover,
     .correct:hover {
-    opacity: .4;
+        opacity: 0.4;
     }
 }
 
