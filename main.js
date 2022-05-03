@@ -71,7 +71,7 @@ deleteBtn.addEventListener("click", function() {
 */
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() {
-    if (guessCount < guessArr.length) {
+    if (guessCount < guessArr.length && guessCount != guessArr.length - 1) {
         // exit if hint provided
         if (hintElement.classList.contains("visible")){
             return;
