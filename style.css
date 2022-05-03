@@ -754,6 +754,10 @@ hr {
         width: 20px;
     }
     
+    .category-hint{
+        align-items: flex-start;
+    }
+
     .category {
         font-size: 2rem;
     }
