@@ -303,12 +303,12 @@ html {
 }
 
 .correct {
-    opacity: .4;
+    opacity: 0.4 !important;
     background-color: var(--accentColor-5);
 }
 
 .incorrect {
-    opacity: .4;
+    opacity: 0.4 !important;
     background-color: var(--accentColor-3);
 }
 
