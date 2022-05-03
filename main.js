@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr, enterLetter } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter } from "./functions.js";
 
 /*
     ===================================
@@ -12,12 +12,11 @@ import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLette
 currentMoney.innerHTML = "$ " + money;
 
 // setup initial puzzle
-resetPuzzle( Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, guessArr, currentMoney);
+resetPuzzle(Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, currentMoney);
 
 // Reset puzzle once per day
 let dayInMilliseconds = 800000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase,
-categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr);
 
 
 /*
@@ -70,21 +69,19 @@ deleteBtn.addEventListener("click", function() {
     =========================
 */
 let hintBtn = document.querySelector(".hint-btn");
-hintBtn.addEventListener("click", function() {
-    if (guessCount < guessArr.length && guessCount != guessArr.length - 1) {
-        // exit if hint provided
-        if (hintElement.classList.contains("visible")){
-            return;
-        }
-        // make visible
-        document.querySelector(".hint-container").classList.add("game-play");
-        hintElement.classList.add("visible");
-        // add purchase
-        purchases(guessArr, "+", 150, "hint-guess");
-        // update guess and money
-        guessAmount();
-        dollarAmount(currentMoney, 150) 
+hintBtn.addEventListener("click", function() { 
+    // exit if hint provided
+    if (hintElement.classList.contains("visible")){
+        return;
     }
+    // make visible
+    document.querySelector(".hint-container").classList.add("game-play");
+    hintElement.classList.add("visible");
+
+    // update guess and money
+    guessAmount();
+    dollarAmount(currentMoney, 150) 
+    
 })
 
 // toggle dark and light mode

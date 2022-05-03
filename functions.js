@@ -1,11 +1,11 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, purchases, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, guessArr,  currentMoney, userGuessBtn, lettersArr, enterLetter };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter };
 
 // content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
 let categoryDiv = document.querySelector(".category");
 let hintElement = document.querySelector(".hint");
-let guessArr = [...document.querySelectorAll(".guess-box")];
+
 let currentMoney = document.querySelector("#bankroll");
 let userGuessBtn = document.querySelector(".make-guess-btn");
 const lettersArr = [...document.querySelectorAll(".letter")];
@@ -15,14 +15,14 @@ let potentialPurchase = document.querySelector("#potential-purchase");
 let dailyPuzzle;
 
 
-function resetPuzzle(obj, divContainer, categoryDiv, hintElement, guessArr, currentMoney, userGuessBtn, lettersArr) {
+function resetPuzzle(obj, divContainer, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr) {
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
     dailyPuzzle = puzzle["phrase"];
     let category = puzzle["category"];
     let hint = puzzle["hint"];
-    generatePuzzle(arr, divContainer, categoryDiv, category, guessArr, userGuessBtn, lettersArr);
+    generatePuzzle(arr, divContainer, categoryDiv, category, userGuessBtn, lettersArr);
     addHint(hint, hintElement);
 
     // reset guesses and bankroll
@@ -39,9 +39,9 @@ let puzzleCount = 0;
 // phrase array
 let phraseLettersArr;
 
-function generatePuzzle(wordArr, divContainer, categoryDiv, category, guessArr, userGuessBtn, lettersArr) {
+function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessBtn, lettersArr) {
     if (start != puzzleCount) {
-        clearPreviousPuzzle(divContainer, categoryDiv, guessArr, userGuessBtn, lettersArr);
+        clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr);
         start = puzzleCount;
     }
 
@@ -91,28 +91,22 @@ function addHint(hint, hintElement) {
     hintCount++;
 }
 
-function clearPreviousPuzzle(divContainer, categoryDiv, guessArr, userGuessBtn, lettersArr) {
+function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr) {
     //reset puzzle containers
     divContainer.innerHTML = "";
     categoryDiv.innerHTML = "";
-    for (let elem of guessArr) {
-        elem.firstElementChild.innerHTML = "";
-        elem.lastElementChild.innerHTML = "";
-
-        // remove any added classes
-        elem.firstElementChild.classList.remove("hint-guess", "incorrect-guess", "correct-guess", "guess-guess");
-        elem.lastElementChild.classList.remove("hint-guess", "incorrect-guess", "correct-guess", "guess-guess");
-    }
 
     // reset guess mode and previous used letters
     for (let letter of lettersArr) {
         letter.classList.remove("correct", "incorrect", "highlight");
     }
-    
+    // reset guess mode
     userGuessBtn.classList.remove("guess-mode", "guess-highlight");
 
+    // reset potential purchas
     potentialPurchase.innerHTML= "";
 
+    // reset hint
     document.querySelector(".hint-container").classList.remove(".game-play");
 
     return;
@@ -126,11 +120,6 @@ function guessAmount(clearGuesses=undefined) {
     }
     else {
         guessCount++;
-    }
-    if (guessCount == 9) {
-        console.log("WTF");
-        setTimeout(function() {
-            letterGuessDelete("guess")}, 180);
     }
 }
 
@@ -151,13 +140,6 @@ function correctLetter(letter=undefined) {
     if(letter != undefined) {
         return dailyPuzzle.includes(letter);
     }
-}
-
-function purchases(arr, letter, value, classToAdd) {
-    arr[guessCount].firstElementChild.innerHTML = letter;
-    arr[guessCount].firstElementChild.classList.add(classToAdd);
-    arr[guessCount].lastElementChild.innerHTML = `-$${value}`;
-    arr[guessCount].lastElementChild.classList.add(classToAdd);
 }
 
 function removeAlert(alert) {
@@ -235,10 +217,6 @@ function letterGuessDelete(...args) {
 
         // exit guess mode
         if (args[0] == "guess") {
-            //must make guess on last purchase
-            if(guessCount == 9) {
-                return;
-            }
 
             userGuessBtn.classList.remove("guess-mode");
             userGuessBtn.classList.remove("guess-highlight");
@@ -363,16 +341,8 @@ function enterLetter() {
         // see if guess was correct
         let result = correctLetter(tempArr[0]);
 
-        // add purchase
-        if (guessCount < guessArr.length) {
-            if(result) {
-                purchases(guessArr, tempArr[0], tempArr[1], "correct-guess");
-            }
-            else {
-                purchases(guessArr, tempArr[0], tempArr[1], "incorrect-guess");
-            }
-            guessAmount();
-        }
+        //
+        guessAmount();
 
         // subtrack letter cost from current money
         dollarAmount(currentMoney, tempArr[1]);
@@ -450,11 +420,7 @@ function enterLetter() {
 
         potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
 
-        // add purchase
-        if (guessCount < guessArr.length) {
-            purchases(guessArr, "?", guessSubtract, "guess-guess");
-            guessAmount();
-        }
+        guessAmount();
 
         if(puzzleSolved()) {
             winGameEnd();

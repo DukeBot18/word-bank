@@ -112,8 +112,7 @@ html {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 3vh;
-    margin-bottom: 3vh;
+    min-height: 25vh;
 }
 
 .word-phrases {
@@ -179,50 +178,14 @@ html {
 
 .info-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 10px;
 }
 
-.expand-info {
-    width: 100%;
-    text-align: center;
-    margin-top: 1vh;
-}
 
 .bottom-info {
-    margin-bottom: 3vh;
+    margin: 1vh 0;
     position: relative;
-}
-
-/* Guesses */
-.guess-boxes-container {
-    display: flex;
-    column-gap: 10px;
-    justify-content: center;
-}
-
-.guess-box {
-    flex: 1 1;
-    border: 2px solid var(--keyAndBorderBGColor);
-    margin-top: 10px;
-    min-height: 70px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 500;
-    font-size: 2.2rem;
-    padding: 0;
-}
-
-.deduction {
-    font-size: x-small;
-}
-
-.guess-outcome {
-    text-transform: capitalize;
 }
 
 /* Bankroll */
@@ -237,6 +200,7 @@ html {
     font-size: 1.8rem;
     font-weight: 700;
     color: var(--accentColor-5);
+    margin-bottom: 2vh;
 }
 
 .letters-div {
@@ -350,11 +314,12 @@ h1 {
 .hint-container {
     display: none;
     text-align: center;
+    max-height: 3vh;
 }
 
 .hint {
     color: var(--mainFontColor);
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     position: absolute;
     visibility: hidden;
 }
@@ -703,26 +668,6 @@ hr {
     .line-format-media {
         margin-bottom: 40px;
     }
-    
-}
-
-@media only screen and (max-width: 550px) {
-    /* smaller than ipad */
-    .letter-container {
-        margin: 0 8px;
-    }
- 
-    .letter,
-    .make-guess-btn {
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .guess-boxes-container {
-        margin: 0 8px;
-        column-gap: 3px;
-    }
 
     .phrase-container {
         display: flex;
@@ -739,17 +684,36 @@ hr {
         margin: 4px 0px;
     }
 
-    .letter-box {
-        flex-basis: 20px;
-    }
-
     .blank {
         display: none;
+    }
+    
+}
+
+@media only screen and (max-width: 560px) {
+    /* smaller than ipad */
+    .letter-container {
+        margin: 0 8px;
+    }
+ 
+    .letter,
+    .make-guess-btn {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .letter-box {
+        flex-basis: 20px;
     }
 }
 
 @media only screen and (max-width: 460px) {
     /* mobile phones */
+    .phrase-container {
+        min-height: 32vh;
+    }
+
     .hint-btn svg {
         width: 20px;
     }
@@ -775,7 +739,7 @@ hr {
     }
 
     sup {
-        font-size: 6px;
+        font-size: 7px;
         font-weight: 900;
     }
 
@@ -790,40 +754,18 @@ hr {
     }
 
     .delete-btn svg {
-        width: 15px;
+        width: 20px;
     }
 
     .letter,
     .make-guess-btn,
     .enter,
     .delete-btn {
-        height: 50px;
-    }
-
-    .phrase-container {
-        margin-top: 0;
-        margin-bottom: 1vh;
-    }
-
-    .expand-info {
-        margin-top: 0;
-    }
-
-    .info-container {
-        row-gap: 5px;
-    }
-
-    .bottom-info {
-        margin-bottom: 5px;
-    }
-
-    .guess-box {
-        margin-top: 5px;
-        min-height: 55px;
+        height: 60px;
     }
 
     .letter-box {
-        min-height: 30px;
+        min-height: 50px;
         margin: 3px;
     }
 
