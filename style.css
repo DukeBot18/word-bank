@@ -193,6 +193,7 @@ html {
 
 .bottom-info {
     margin-bottom: 3vh;
+    position: relative;
 }
 
 /* Guesses */
@@ -225,6 +226,10 @@ html {
 }
 
 /* Bankroll */
+.position-bankroll {
+    position: relative;
+}
+
 #bankroll {
     display: flex;
     justify-content: center;
@@ -589,6 +594,9 @@ hr {
     color: var(--accentColor-3);
     text-align: center;
     font-size: .7rem;
+    position: absolute;
+    top: 60%;
+    right: -25px;
 }
 
 /* Game statistics popup */
@@ -742,6 +750,10 @@ hr {
 
 @media only screen and (max-width: 460px) {
     /* mobile phones */
+    .main-container {
+        margin-top: 0;
+    }
+
     sup {
         font-size: 6px;
         font-weight: 900;
@@ -783,7 +795,6 @@ hr {
 
     .bottom-info {
         margin-bottom: 5px;
-
     }
 
     .guess-box {
