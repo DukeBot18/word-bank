@@ -322,7 +322,7 @@ html {
 
 .incorrect:hover,
 .correct:hover {
-    opacity: .4;
+    opacity: 0.4 !important;
 }
 
 /* letter dollar values */
@@ -695,7 +695,7 @@ hr {
 
     .incorrect:hover,
     .correct:hover {
-        opacity: 0.4;
+        opacity: 0.4 !important;
     }
 }
 
