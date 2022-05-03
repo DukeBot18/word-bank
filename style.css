@@ -225,7 +225,9 @@ html {
     user-select: none;
     height: 80px;
     font-weight: 600;
+    position: relative;
 }
+
 
 .enter,
 .make-guess-btn,
@@ -292,6 +294,7 @@ sup {
     border: 1px solid var(--mainFontColor);
     border-radius: 10px;
     color: var(--mainFontColor);
+    padding-top: 3px;
     margin: 10px;
 }
 
@@ -329,9 +332,7 @@ h1 {
     flex-direction: row-reverse;
     align-items: center;
     font-weight: 900;
-    border-radius: none;
-    padding-right: 5px;
-    padding-left: 0;
+    padding: 3px 5px 3px 0;
     color: var(--accentColor-2);
     border-color: var(--accentColor-2);
 }
@@ -496,7 +497,7 @@ h1 {
 }
 
 .example-letter {
-    max-width: 48px;
+    max-width: 35px;
     width: 100%;
     min-height: 48px;
     height: 100%;
@@ -508,17 +509,18 @@ h1 {
 }
 
 .hint-example-btn {
-    max-width: 45px;
+    max-width: 50px;
     max-height: 30px;
     width: 100%;
-    color: black;
-    padding-right: 1px;
+    color: var(--accentColor-2);
+    border-color: var(--accentColor-2);
+    padding: 3px 5px 3px 0;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
     font-weight: 900;
-    border-radius: none;
 }
+
 
 .guess-highlight-example {
     background-color: var(--accentColor-4);
@@ -724,6 +726,7 @@ hr {
     
     .category-hint{
         align-items: flex-start;
+        align-items: center;
     }
 
     .category {
@@ -743,12 +746,19 @@ hr {
     }
 
     sup {
-        font-size: 7px;
+        font-size: 8px;
         font-weight: 900;
+        position: absolute;
+        top: 5px;
+        bottom: 0;
+        left: 0;
+        right: 0;
     }
 
     .percentage {
+        position: relative;
         font-size: 8px;
+        top: -8px;
     }
 
     .make-guess-btn,
