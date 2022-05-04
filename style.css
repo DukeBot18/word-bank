@@ -142,10 +142,6 @@ html {
     position: relative;
 }
 
-.letter-box:first-child {
-    border-bottom: 3px solid var(--accentColor-3);
-}
-
 .added-guess-input {
     font-style: normal;
     position: absolute;
@@ -749,6 +745,24 @@ hr {
         min-height: 40px;
         font-size: 1.9rem;
     }
+
+    .length-9 {
+        min-width: 32px;
+        min-height: 44px;
+        font-size: 2.0rem;
+    }
+
+    .length-8 {
+        min-width: 35px;
+        min-height: 47px;
+        font-size: 2.1rem;
+    }
+
+    .length-lower-than-8 {
+        min-width: 38px;
+        min-height: 50px;
+        font-size: 2.2rem;
+    }
 }
 
 @media only screen and (max-width: 460px) {
@@ -814,13 +828,6 @@ hr {
         height: 60px;
     }
 
-    /* .letter-box {
-        flex-basis: 10px;
-    } */
-
-    .letter-box:first-child {
-        border-bottom: 2px solid var(--accentColor-3);
-    }
 }
 
 /*===============

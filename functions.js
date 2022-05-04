@@ -37,6 +37,7 @@ let puzzleCount = 0;
 
 // phrase array
 let phraseLettersArr;
+let longestWord = 0;
 
 function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessBtn, lettersArr) {
     if (start != puzzleCount) {
@@ -48,6 +49,13 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
     categoryDiv.innerHTML = category;
 
     for (let i = 0; i < wordArr.length; i++) {
+
+        console.log(wordArr[i].length);
+        if (wordArr[i].length > longestWord) {
+            longestWord = wordArr[i].length;
+        }
+
+        console.log("this is the longest: ", longestWord);
         // add div container
         divContainer.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
 
@@ -71,6 +79,30 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
             tempElem.innerHTML += `<div class="blank-box blank"><span class="blank"></span></div>`;
         }
     }
+
+    // switch phrase box width and height for longest word length
+    if (longestWord <= 9) {
+        console.log("hello");
+        switch(longestWord) {
+            case 9:
+                document.querySelectorAll(".letter-box").forEach(element => {
+                    element.classList.add("length-9");
+                });
+                break;
+            case 8:
+                document.querySelectorAll(".letter-box").forEach(element => {
+                    element.classList.add("length-8");
+                });
+                break;
+            default:
+                document.querySelectorAll(".letter-box").forEach(element => {
+                    element.classList.add("length-lower-than-8");
+                });
+                break;
+        }
+    }    
+
+    
     phraseLettersArr = [...document.querySelectorAll(".letter-box")];
     // add to total puzzle count
     puzzleCount++;
