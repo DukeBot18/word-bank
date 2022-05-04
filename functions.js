@@ -400,7 +400,6 @@ function enterLetter() {
         potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
 
         guessAmount();
-        console.log(guessCount);
 
         if(puzzleSolved()) {
             winGameEnd();
@@ -418,7 +417,6 @@ function puzzleSolved() {
 
 function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
-    console.log(storedCash);
 
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
     setTimeout(function() {
@@ -430,6 +428,7 @@ function winGameEnd(){
     if(localStorage.getItem("streak-cash") !== null) {
         let newCashBalance = storedCash + money;
         localStorage.setItem("streak-cash", newCashBalance);
+        document.querySelector(".money-added").innerHTML += money;
         document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
 
         // highest streak

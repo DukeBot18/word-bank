@@ -599,6 +599,14 @@ hr {
     overflow-y: auto;
 }
 
+.streak-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vh;
+}
+
 .money-streak {
     color: var(--accentColor-5)
 }
@@ -617,11 +625,12 @@ hr {
 }
 
 .streak-total {
-    text-align: center;
-    margin-top: 4vh;
-    margin-bottom: 3vh;
     font-size: 2.4rem;
     text-transform: uppercase;
+}
+
+.font-color {
+    color: var(--mainFontColor);
 }
 
 .game-play {
@@ -635,7 +644,7 @@ hr {
 .highest-streak-header {
     text-align: center;
     margin-bottom: 5px;
-    margin-top: 20px;
+    margin-top: 2vh;
 }
 
 /*=================
