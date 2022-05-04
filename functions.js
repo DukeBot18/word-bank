@@ -415,6 +415,7 @@ function puzzleSolved() {
 
 function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
+    console.log(storedCash);
 
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
     setTimeout(function() {
@@ -423,22 +424,22 @@ function winGameEnd(){
     setTimeout(function() {
         document.querySelector(".game-stats-overlay").classList.toggle("translate");
     }, 10);
-    if(storedCash) {
-        if (storedCash != 0) {
-            let newCashBalance = storedCash + money;
-            localStorage.setItem("streak-cash", newCashBalance);
-            storedCash = newCashBalance;
-            document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
+    if(localStorage.getItem("streak-cash") !== null) {
+        let newCashBalance = storedCash + money;
+        localStorage.setItem("streak-cash", newCashBalance);
+        document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
 
-            // highest streak
-            let highestCashBalance = parseInt(localStorage.getItem("highest-streak"));
-            if(newCashBalance > highestCashBalance) {
-                highestCashBalance = newCashBalance;
-                localStorage.setItem("highest-streak", highestCashBalance);
-                document.querySelector(".highest-streak").innerHTML = highestCashBalance;
-            }
-            return;
+        // highest streak
+        let highestCashBalance = parseInt(localStorage.getItem("highest-streak"));
+        if(newCashBalance > highestCashBalance) {
+            highestCashBalance = newCashBalance;
+            localStorage.setItem("highest-streak", highestCashBalance);
+            document.querySelector(".highest-streak").innerHTML = highestCashBalance;
         }
+        else {
+            document.querySelector(".highest-streak").innerHTML = highestCashBalance;
+        }
+
         return
     }
 
