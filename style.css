@@ -707,6 +707,11 @@ hr {
     .order-first {
         order: 0;
     }
+
+    .letter-box {
+        margin: 2px;
+        max-height: 50px;
+    }
 }
 
 @media only screen and (max-width: 650px) {
@@ -742,18 +747,26 @@ hr {
     }
 }
 
+@media only screen and (max-width: 520px) {
+    .letter-box {
+        min-width: 28px;
+        min-height: 40px;
+        font-size: 1.9rem;
+    }
+}
+
 @media only screen and (max-width: 460px) {
     /* mobile phones */
     .phrase-container {
         min-height: 32vh;
-        row-gap: 7px;
+        row-gap: 6px;
     }
 
     .hint-btn svg {
         width: 16px;
     }
     
-    .category-hint{
+    .category-hint {
         align-items: flex-start;
         align-items: center;
     }
@@ -763,11 +776,7 @@ hr {
     }
 
     #bankroll {
-        font-size: 1.3rem;
-    }
-
-    header {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
     }
 
     .main-container {
@@ -809,10 +818,9 @@ hr {
         height: 60px;
     }
 
-    .letter-box {
-        min-height: 50px;
-        margin: 2px;
-    }
+    /* .letter-box {
+        flex-basis: 10px;
+    } */
 
     .letter-box:first-child {
         border-bottom: 2px solid var(--accentColor-3);
