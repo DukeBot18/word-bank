@@ -2,11 +2,9 @@
 import { phraseObject } from "./phrases.js";
 import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter } from "./functions.js";
 
-/*
-    ===================================
-    GENERATED CONTENT FROM DAILY PHRASE 
-    ===================================
-*/
+/*=================================
+GENERATED CONTENT FROM DAILY PHRASE 
+=================================*/
 
 // add starting bankroll
 currentMoney.innerHTML = "$ " + money;
@@ -19,11 +17,9 @@ let dayInMilliseconds = 800000;
 setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr);
 
 
-/*
-    =================
-    USER INPUT ROUTES
-    =================
-*/
+/*===============
+USER INPUT ROUTES
+===============*/
 
 // click enter btn
 let enterBtn = document.querySelector(".enter");
@@ -51,6 +47,7 @@ userGuessBtn.addEventListener("click", function() {
     letterGuessDelete("guess");
 });
 
+// adding letters with click
 for (let element of lettersArr) {
     element.addEventListener("click", function() {
         letterGuessDelete("letter", element);
@@ -63,11 +60,10 @@ deleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
 });
 
-/*
-    =========================
-    HINT AND SETTINGS BUTTONS
-    =========================
-*/
+/*===========================
+HINT SETTINGS BUTTONS & STATS
+===========================*/
+
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() { 
     // exit if hint provided

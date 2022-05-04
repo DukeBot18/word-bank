@@ -44,11 +44,9 @@ html[data-theme="light"] {
 }
 
 
-/* 
-    ======================
-    || MAIN DOC FORMATS ||
-    ======================
-*/
+/*====================
+|| MAIN DOC FORMATS ||
+====================*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -82,11 +80,9 @@ html {
 }
 
 
-/* 
-    =======================
-    || HEADAER CONTAINER ||
-    =======================
-*/
+/*=====================
+|| HEADAER CONTAINER ||
+=====================*/
 .top-container {
     display: grid;
     grid-template-rows: auto auto;
@@ -110,11 +106,9 @@ html {
     color: var(--accentColor-5);
 }
 
-/* 
-    ======================
-    || PUZZLE CONTAINER || 
-    ======================
-*/
+/*====================
+|| PUZZLE CONTAINER || 
+====================*/
 .category {
     font-size: 2.2rem;
     color: var(--mainFontColor);
@@ -185,11 +179,9 @@ html {
     border: none;
 }
 
-/* 
-    =========================
-    || BANKROLL & ALPHABET ||
-    =========================
- */
+/*=======================
+|| BANKROLL & ALPHABET ||
+=======================*/
 .play-container {
     display: flex;
     flex-direction: column;
@@ -300,11 +292,9 @@ sup {
     top: -.5rem;
 }
 
-/* 
-    ===================
-    || BUTTON STYLES ||
-    ===================
-*/
+/*=================
+|| BUTTON STYLES ||
+=================*/
 .settings-btn {
     background-color: var(--htmlBackground);
     border: 1px solid var(--mainFontColor);
@@ -318,11 +308,9 @@ sup {
     cursor: pointer;
 }
 
-/* 
-    =================
-    || FONT & TEXT ||
-    =================
-*/
+/*===============
+|| FONT & TEXT ||
+===============*/
 header {
     font-size: 1.5rem;
     color: var(--mainFontColor);
@@ -333,11 +321,9 @@ h1 {
     font-size: 2.75rem;
 }
 
-/* 
-    ==========
-    || HINT ||
-    ==========
-*/
+/*========
+|| HINT ||
+========*/
 .hint-container {
     display: none;
     text-align: center;
@@ -380,11 +366,9 @@ h1 {
     align-items: center;
 }
 
-/* 
-    ====================
-    || MAKING GUESSES ||
-    ====================
-*/
+/*==================
+|| MAKING GUESSES ||
+==================*/
 
 .guessbox-highlight {
     border: 2px solid var(--accentColor-4);
@@ -395,11 +379,9 @@ h1 {
     box-shadow: 0 0 3px 3px var(--accentColor-4);
 }
 
-/* 
-    ============
-    || ALERTS ||
-    ============
-*/ 
+/*==========
+|| ALERTS ||
+==========*/ 
 .alert-div {
     display: none;
     margin: 10px auto;
@@ -411,11 +393,9 @@ h1 {
     display: table;
 }
 
-/* 
-    ==============================
-    || CORRECT LETTER ANIMATION ||
-    ==============================
-*/
+/*============================
+|| CORRECT LETTER ANIMATION ||
+============================*/
 .correct-letter-fade {
     animation: fade .8s;
     animation-iteration-count: 1;
@@ -426,12 +406,9 @@ h1 {
     to {background-color: var(--htmlBackground);}
 }
 
-
-/* 
-    ======================
-    || HOW TO PLAY INFO ||
-    ======================
-*/
+/*====================
+|| HOW TO PLAY INFO ||
+====================*/
 .overlay {
     position: absolute;
     top: 0;
@@ -574,11 +551,9 @@ hr {
     margin-bottom: 40px;
 }
 
-/* 
-    ========================
-    || POTENTIAL PURCHASE || 
-    ========================
-*/
+/*======================
+|| POTENTIAL PURCHASE || 
+======================*/
 #potential-purchase {
     color: var(--accentColor-3);
     text-align: center;
@@ -588,17 +563,16 @@ hr {
     right: -25px;
 }
 
-/* 
-    ======================
-    || GAME STATS POPUP ||
-    ======================
-*/
+/*====================
+|| GAME STATS POPUP ||
+====================*/
 .overlay-game-win {
     position: absolute;
     top: 0;
     bottom: 0;
     right: 0;
     left: 0;
+    height: 100vh;
     z-index: 100;
     background-color: rgba(var(--overlayBackground), 0.7);
     display: none;
@@ -660,11 +634,9 @@ hr {
     margin-top: 20px;
 }
 
-/* 
-    ===================
-    || MEDIA QUERIES ||
-    ===================
-*/
+/*=================
+|| MEDIA QUERIES ||
+=================*/
 @media only screen and (max-width: 1000px) {
     .game-stats-overlay {
         min-width: 50%;
@@ -813,16 +785,14 @@ hr {
     }
 }
 
-/* 
-    =================
-    || TRANSITIONS ||
-    =================
-*/
+/*===============
+|| TRANSITIONS ||
+===============*/
 .fade {
     opacity: 1.0;
 }
 
 .translate {
     transform: translate(0, -30px);
-    transition: transform .2s ease-out;
+    transition: transform .3s ease-out;
 }
