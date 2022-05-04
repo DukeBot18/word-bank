@@ -25,8 +25,8 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, currentMoney, 
     addHint(hint, hintElement);
 
     // reset guesses and bankroll
-    guessAmount("clear");
-    dollarAmount(currentMoney, 0, "clear");
+    guessAmount("reset");
+    dollarAmount(currentMoney, 0, "reset");
     enableButtons();
     return;
 }
@@ -111,14 +111,16 @@ function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr
     return;
 }
 
-let guessCount = 0
+let guessCount = 2
+document.querySelector(".guesses-left").innerHTML = guessCount;
 
-function guessAmount(clearGuesses=undefined) {
-    if (clearGuesses != undefined) {
-        guessCount = 0;
+function guessAmount(resetGuesses=undefined) {
+    if (resetGuesses != undefined) {
+        guessCount = 2;
     }
     else {
-        guessCount++;
+        guessCount--;
+        document.querySelector(".guesses-left").innerHTML = guessCount;
     }
 }
 
@@ -398,6 +400,7 @@ function enterLetter() {
         potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
 
         guessAmount();
+        console.log(guessCount);
 
         if(puzzleSolved()) {
             winGameEnd();
@@ -439,7 +442,6 @@ function winGameEnd(){
         else {
             document.querySelector(".highest-streak").innerHTML = highestCashBalance;
         }
-
         return
     }
 
