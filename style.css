@@ -487,6 +487,26 @@ h1 {
     text-align: center;
 }
 
+.hint-btn-instruction {
+    display: flex;
+    align-items: center;
+}
+
+
+.hint-example-btn {
+    max-width: 45px;
+    max-height: 30px;
+    width: 100%;
+    color: var(--accentColor-2);
+    border-color: var(--accentColor-2);
+    padding: 0 3px 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    font-weight: 900;
+    border-radius: none;
+}
+
 .lineup {
     display: flex;
     flex-direction: column;
@@ -535,6 +555,10 @@ hr {
     background-color: var(--mainBorder);
 }
 
+.bottom-break {
+    margin-top: 5px;
+}
+
 .game-play-format {
     display: flex;
     flex-direction: row-reverse;
@@ -552,7 +576,7 @@ hr {
 }
 
 .line-format {
-    margin-bottom: 40px;
+    margin-bottom: 15px;
 }
 
 /*======================
