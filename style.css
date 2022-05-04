@@ -351,10 +351,6 @@ h1 {
     border-color: var(--accentColor-2);
 }
 
-.hint-btn:hover {
-    opacity: 0.7;
-}
-
 .hint-focus {
     box-shadow: 0 0 5px 1px var(--accentColor-2);
 }
@@ -758,12 +754,12 @@ hr {
 @media only screen and (max-width: 460px) {
     /* mobile phones */
     .phrase-container {
-        min-height: 32vh;
+        min-height: 26vh;
         row-gap: 6px;
     }
 
     .hint-btn svg {
-        width: 16px;
+        width: 20px;
     }
     
     .category-hint {
@@ -772,7 +768,7 @@ hr {
     }
 
     .category {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
 
     #bankroll {
