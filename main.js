@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -27,6 +27,11 @@ enterBtn.addEventListener("click", enterLetter);
 
 // various key events
 document.addEventListener("keydown", function (event) {
+    // remove hint possiblity
+    if(!hintElement.classList.contains("visible")) {
+        hintBtn.classList.remove("hint-focus");
+        potentialPurchase.innerHTML = "";
+    }
     event.preventDefault();
     if (event.key == "Enter") {
         enterLetter();
@@ -44,12 +49,22 @@ document.addEventListener("keydown", function (event) {
 
 // guess mode toggle
 userGuessBtn.addEventListener("click", function() {
+    // remove hint possiblity
+    if(!hintElement.classList.contains("visible")) {
+        hintBtn.classList.remove("hint-focus");
+        potentialPurchase.innerHTML = "";
+    }    
     letterGuessDelete("guess");
 });
 
 // adding letters with click
 for (let element of lettersArr) {
     element.addEventListener("click", function() {
+        // remove hint possiblity
+        if(!hintElement.classList.contains("visible")) {
+            hintBtn.classList.remove("hint-focus");
+            potentialPurchase.innerHTML = "";
+        }        
         letterGuessDelete("letter", element);
     });
 }
@@ -70,14 +85,30 @@ hintBtn.addEventListener("click", function() {
     if (hintElement.classList.contains("visible")){
         return;
     }
+    if(userGuessBtn.classList.contains("guess-mode")){
+        // remove current guesses
+        userGuessBtn.classList.remove("guess-mode");
+        userGuessBtn.classList.remove("guess-highlight");
+        for(let i = 0; i < phraseLettersArr.length; i++) {
+            if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
+            }
+            // remove highlighted box
+            if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
+            }            
+        }        
+    }
+    // remove highlights from other entry possibilities
+    checkHighlight(lettersArr);
+    hintBtn.classList.toggle("hint-focus");
+    if (hintBtn.classList.contains("hint-focus")) {
+        potentialPurchase.innerHTML = "-150";
+    }
+    else {
+        potentialPurchase.innerHTML = "";
+    }
     // make visible
-    document.querySelector(".hint-container").classList.add("game-play");
-    hintElement.classList.add("visible");
-
-    // update guess and money
-    guessAmount();
-    dollarAmount(currentMoney, 150) 
-    
 })
 
 // toggle dark and light mode

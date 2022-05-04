@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase };
 
 // content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
@@ -310,11 +310,23 @@ function letterGuessDelete(...args) {
     }
 }
 
+let hintTotal = 0;
 
 /*===========================
 ENTERING USER INPUT INTO GAME
 ===========================*/  
 function enterLetter() {
+    // HINT ROUTE \\
+    if(document.querySelector(".hint-btn").classList.contains("hint-focus") && hintTotal != 1) {
+        document.querySelector(".hint-container").classList.add("game-play");
+        hintElement.classList.add("visible");
+
+        potentialPurchase.innerHTML = "";
+
+        dollarAmount(currentMoney, 150);
+        hintTotal++;
+        return;
+    }
     // GUESS MODE INACTIVE \\
     if (!userGuessBtn.classList.contains("guess-mode")) {
         // get highlighted letter
