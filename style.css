@@ -772,6 +772,10 @@ hr {
         row-gap: 6px;
     }
 
+    .length-spacer {
+        row-gap: 0px;
+    }
+
     .hint-btn svg {
         width: 20px;
     }

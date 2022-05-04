@@ -100,7 +100,11 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
                 });
                 break;
         }
-    }    
+    }
+
+    if (longestWord <= 7 && wordArr.length >= 5) {
+        insertPhrase.classList.add("length-spacer");
+    }
 
     
     phraseLettersArr = [...document.querySelectorAll(".letter-box")];
