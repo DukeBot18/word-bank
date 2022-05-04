@@ -5,12 +5,10 @@
         <title>WordBank</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-        <!-- Link in Styles -->
-        <link href="/word-bank/style.css" rel="stylesheet">
-        <link href="/word-bank/images/wordBank.png" rel="icon">
-        <!-- scripts -->
-        <script type="module" defer src="/word-bank/main.js"></script>
-        <script type="module" defer src="/word-bank/functions.js"></script>
+        <link href="/style.css" rel="stylesheet">
+        <link href="/images/wordBank.png" rel="icon">
+        <script type="module" defer src="/main.js"></script>
+        <script type="module" defer src="/functions.js"></script>
     </head>
 
     <body> 
@@ -72,8 +70,7 @@
                                             <li>Purchase Letters.</li>
                                             <li>Purchase a Hint.</li>
                                             <li>Make a guess!</li>
-                                            <li>Dont run out of Money...</li>
-                                            <li>You only get 10 Purchases!</li>
+                                            <li>Dont run out of Money or Guesses...</li>
                                             <li>Go!</li>
                                         </ul>
                                     </div>
@@ -90,10 +87,10 @@
                                     <div>
                                         <p class="instruction-headers"><strong>Game Play</strong></p>
                                         <ul class="game-instructions">
-                                            <li class="game-play-format line-format-media">
+                                            <li class="game-play-format line-format">
                                                 <div class="example-instructions">
                                                     <div class="lineup">
-                                                        <p>Confirm</p>
+                                                        <p>Selected</p>
                                                         <div class="letter example-letter highlight-example no-hover">a</div>
                                                     </div>
                                                     <div class="lineup">
@@ -105,27 +102,20 @@
                                                         <div class="letter example-letter incorrect-example no-hover">a</div>
                                                     </div>                                                                                                        
                                                 </div>
-                                                <p class="normal-line-height">To purchase a letter you will have to click <strong class="capitalize">"enter"</strong> to confirm your choice. Letters will turn blue when selected and either red or green after confirmation if the choice is correct.</p>
-                                            </li>
-                                            <li class="hint-btn-instruction line-format-media">
-                                                <p class="format-on-media">You will see a hint button up top, click this to reveal a hint.</p>
-                                                <div class="settings-btn hint-example-btn no-hover">
-                                                    <p>hint</p>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -1.5 24 24" width="30" fill="currentColor"><path d="M11 14.565H8v-8a1 1 0 1 0-2 0v8H3V13.31a7 7 0 1 1 8 0v1.255zm0 2v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2h8z"></path></svg>
-                                                </div>
+                                                <p class="normal-line-height">The selected letter will turn blue. To confirm choice click <strong class="capitalize">"enter"</strong>. Letters will turn either red or green.</p>
                                             </li>
                                             <li class="game-play-format">
                                                 <div class="example-instructions">
                                                     <div>
                                                         <p>Active</p>
-                                                        <div class="letter guess-highlight-example no-hover">Guess</div>
+                                                        <div class="letter guess-highlight-example no-hover">Guess?</div>
                                                     </div>
                                                     <div>
                                                         <p>Inactive</p>
-                                                        <div class="letter guess-highlight-example no-color no-hover">Guess</div>
+                                                        <div class="letter guess-highlight-example no-color no-hover">Guess?</div>
                                                     </div> 
                                                 </div>                                               
-                                                <p class="normal-line-height">To make a guess, select the <strong class="capitalize">"guess"</strong> button, fill out puzzle, and press enter. To exit, click again. The button will turn orange when guess mode is active.</p>
+                                                <p class="normal-line-height">To enter or exit guess mode, select the <strong class="capitalize">"guess"</strong> button. To confirm guess, fill out puzzle, and press enter.</p>
                                             </li>
                                         </ul>
                                     </div>                                                                       
@@ -158,7 +148,7 @@
                         <div class="play-container">
                             <div class="info-container"> 
                                 <!-- Bankroll -->
-                                <div class="info-inner bottom-info">
+                                <div class="bottom-info">
                                     <section class="position-bankroll">
                                         <header><u>Bankroll</u></header>
                                         <p id="bankroll"></p>
@@ -201,7 +191,7 @@
                                     </div>
 
                                     <div class="letters-div">
-                                        <button class="make-guess-btn">Guess?<sup class="percentage">%</sup></button>
+                                        <button class="make-guess-btn">Guess?<sup>%</sup></button>
                                         <button class="letter">z<sup>$40</sup></button>
                                         <button class="letter">x<sup>$40</sup></button>
                                         <button class="letter">c<sup>$80</sup></button>

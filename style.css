@@ -44,7 +44,11 @@ html[data-theme="light"] {
 }
 
 
-/* || MAIN DOC FORMATS || */
+/* 
+    ======================
+    || MAIN DOC FORMATS ||
+    ======================
+*/
 * {
     box-sizing: border-box;
     margin: 0;
@@ -78,7 +82,11 @@ html {
 }
 
 
-/* || FIRST container || */
+/* 
+    =======================
+    || HEADAER CONTAINER ||
+    =======================
+*/
 .top-container {
     display: grid;
     grid-template-rows: auto auto;
@@ -102,7 +110,11 @@ html {
     color: var(--accentColor-5);
 }
 
-/* || SECOND container || */
+/* 
+    ======================
+    || PUZZLE CONTAINER || 
+    ======================
+*/
 .category {
     font-size: 2.2rem;
     color: var(--mainFontColor);
@@ -173,7 +185,11 @@ html {
     border: none;
 }
 
-/* || THIRD container || */
+/* 
+    =========================
+    || BANKROLL & ALPHABET ||
+    =========================
+ */
 .play-container {
     display: flex;
     flex-direction: column;
@@ -185,13 +201,11 @@ html {
     align-items: center;
 }
 
-
 .bottom-info {
     margin: 1vh 0;
     position: relative;
 }
 
-/* Bankroll */
 .position-bankroll {
     position: relative;
 }
@@ -205,7 +219,7 @@ html {
     color: var(--accentColor-5);
     margin-bottom: 2vh;
 }
-
+/* keyboard letters */
 .letters-div {
     display: flex;
     width: 100%;
@@ -232,7 +246,6 @@ html {
     color: var(--letterColor) !important;
 }
 
-
 .enter,
 .make-guess-btn,
 .delete-btn {
@@ -250,6 +263,7 @@ html {
     cursor: pointer;
     color: #242526;
     color: var(--letterColor) !important;
+    position: relative;
 }
 
 .delete-btn {
@@ -279,14 +293,6 @@ html {
     background-color: var(--accentColor-3);
 }
 
-.incorrect-guess {
-    color: var(--accentColor-3);
-}
-
-.correct-guess {
-    color:  var(--accentColor-5);
-}
-
 /* letter dollar values */
 sup {
     vertical-align: top;
@@ -294,7 +300,11 @@ sup {
     top: -.5rem;
 }
 
-/* || BUTTON STYLES || */
+/* 
+    ===================
+    || BUTTON STYLES ||
+    ===================
+*/
 .settings-btn {
     background-color: var(--htmlBackground);
     border: 1px solid var(--mainFontColor);
@@ -308,7 +318,11 @@ sup {
     cursor: pointer;
 }
 
-/* || FONT & TEXT || */
+/* 
+    =================
+    || FONT & TEXT ||
+    =================
+*/
 header {
     font-size: 1.5rem;
     color: var(--mainFontColor);
@@ -319,7 +333,11 @@ h1 {
     font-size: 2.75rem;
 }
 
-/* || HINT || */
+/* 
+    ==========
+    || HINT ||
+    ==========
+*/
 .hint-container {
     display: none;
     text-align: center;
@@ -362,11 +380,11 @@ h1 {
     align-items: center;
 }
 
-/* || MAKING GUESSES || */
-.guess-guess {
-    text-transform: capitalize;
-    color: var(--accentColor-4);
-}
+/* 
+    ====================
+    || MAKING GUESSES ||
+    ====================
+*/
 
 .guessbox-highlight {
     border: 2px solid var(--accentColor-4);
@@ -377,7 +395,11 @@ h1 {
     box-shadow: 0 0 3px 3px var(--accentColor-4);
 }
 
-/* || ALERTS || */ 
+/* 
+    ============
+    || ALERTS ||
+    ============
+*/ 
 .alert-div {
     display: none;
     margin: 10px auto;
@@ -389,7 +411,11 @@ h1 {
     display: table;
 }
 
-/* || CORRECT LETTER ANIMATION || */
+/* 
+    ==============================
+    || CORRECT LETTER ANIMATION ||
+    ==============================
+*/
 .correct-letter-fade {
     animation: fade .8s;
     animation-iteration-count: 1;
@@ -401,7 +427,11 @@ h1 {
 }
 
 
-/* || HOW TO PLAY BUTTON || */
+/* 
+    ======================
+    || HOW TO PLAY INFO ||
+    ======================
+*/
 .overlay {
     position: absolute;
     top: 0;
@@ -458,7 +488,7 @@ h1 {
 
 .instruction-headers {
     font-size: 1.2rem;
-    margin-bottom: 2vh;
+    margin-bottom: 1vh;
     margin-top: 1vh;
 }
 
@@ -466,7 +496,7 @@ h1 {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    line-height: 1.9rem;
+    line-height: 1.7rem;
 }
 
 .example-instructions {
@@ -504,29 +534,10 @@ h1 {
     height: 100%;
 }
 
-.hint-btn-instruction {
-    display: flex;
-    align-items: center;
-}
-
-.hint-example-btn {
-    max-width: 50px;
-    max-height: 30px;
-    width: 100%;
-    color: var(--accentColor-2);
-    border-color: var(--accentColor-2);
-    padding: 3px 5px 3px 0;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    font-weight: 900;
-}
-
-
 .guess-highlight-example {
     background-color: var(--accentColor-4);
-    min-width: 100px;
-    max-height: 70px;
+    min-width: 90px;
+    max-height: 60px;
 }
 
 .no-color {
@@ -559,7 +570,15 @@ hr {
     text-transform: uppercase;
 }
 
-/* Potential purchase */
+.line-format {
+    margin-bottom: 40px;
+}
+
+/* 
+    ========================
+    || POTENTIAL PURCHASE || 
+    ========================
+*/
 #potential-purchase {
     color: var(--accentColor-3);
     text-align: center;
@@ -569,7 +588,11 @@ hr {
     right: -25px;
 }
 
-/* Game statistics popup */
+/* 
+    ======================
+    || GAME STATS POPUP ||
+    ======================
+*/
 .overlay-game-win {
     position: absolute;
     top: 0;
@@ -637,6 +660,11 @@ hr {
     margin-top: 20px;
 }
 
+/* 
+    ===================
+    || MEDIA QUERIES ||
+    ===================
+*/
 @media only screen and (max-width: 1000px) {
     .game-stats-overlay {
         min-width: 50%;
@@ -671,10 +699,6 @@ hr {
 @media only screen and (max-width: 650px) {
     .format-on-media {
         line-height: normal;
-    }
-
-    .line-format-media {
-        margin-bottom: 40px;
     }
 
     .phrase-container {
@@ -714,7 +738,6 @@ hr {
 
 @media only screen and (max-width: 460px) {
     /* mobile phones */
-
     .phrase-container {
         min-height: 32vh;
         row-gap: 7px;
@@ -755,20 +778,10 @@ hr {
         right: 0;
     }
 
-    .percentage {
-        position: relative;
-        font-size: 8px;
-        top: -8px;
-    }
-
     .make-guess-btn,
     .letter,
     .enter {
         font-size: 10px;
-    }
-
-    .delete-btn {
-        position: relative;
     }
 
     .delete-btn svg {
@@ -800,7 +813,11 @@ hr {
     }
 }
 
-/* transitions */
+/* 
+    =================
+    || TRANSITIONS ||
+    =================
+*/
 .fade {
     opacity: 1.0;
 }
