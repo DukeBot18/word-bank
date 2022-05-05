@@ -147,6 +147,9 @@ function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr
     // reset hint
     document.querySelector(".hint-container").classList.remove(".game-play");
 
+    // add back margin to category div
+    document.querySelector(".category-hint").classList.remove("remove-margin-bottom");
+
     return;
 }
 
@@ -412,6 +415,8 @@ function enterLetter() {
 
         document.querySelector(".hint-container").classList.add("game-play");
         hintElement.classList.add("visible");
+        document.querySelector(".category-hint").classList.add("remove-margin-bottom");
+
 
         potentialPurchase.innerHTML = "";
         dollarAmount(currentMoney, 150);
