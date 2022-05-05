@@ -49,13 +49,10 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
     categoryDiv.innerHTML = category;
 
     for (let i = 0; i < wordArr.length; i++) {
-
-        console.log(wordArr[i].length);
         if (wordArr[i].length > longestWord) {
             longestWord = wordArr[i].length;
         }
 
-        console.log("this is the longest: ", longestWord);
         // add div container
         divContainer.innerHTML += `<div class="word-phrases" id="word-phrase-${i}"></div>`;
 
