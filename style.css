@@ -112,7 +112,6 @@ html {
 .category {
     font-size: 2.2rem;
     color: var(--mainFontColor);
-    text-align: center;
 }
 
 .phrase-container {
@@ -306,6 +305,11 @@ sup {
     margin: 10px;
 }
 
+.hint-btn {
+    margin: 0;
+    padding-top: 0;
+}
+
 .settings-btn:hover {
     cursor: pointer;
 }
@@ -366,6 +370,12 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.category-consistency {
+    flex-basis: 33%;
+    display: flex;
+    justify-content: center;
 }
 
 /*===========================

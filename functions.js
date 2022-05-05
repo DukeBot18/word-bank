@@ -570,27 +570,27 @@ function winGameEnd(){
     if(localStorage.getItem("streak-cash") !== null) {
         let newCashBalance = storedCash + money;
         localStorage.setItem("streak-cash", newCashBalance);
-        document.querySelector(".money-added").innerHTML += money;
-        document.querySelector(".streak-total").innerHTML = newCashBalance + "!";
+        document.querySelector(".money-added").innerHTML += `$${money}`;
+        document.querySelector(".streak-total").innerHTML = `$${newCashBalance}!`;
 
         // highest streak
         let highestCashBalance = parseInt(localStorage.getItem("highest-streak"));
         if(newCashBalance > highestCashBalance) {
             highestCashBalance = newCashBalance;
             localStorage.setItem("highest-streak", highestCashBalance);
-            document.querySelector(".highest-streak").innerHTML = highestCashBalance;
+            document.querySelector(".highest-streak").innerHTML = `$${highestCashBalance}`;
         }
         else {
-            document.querySelector(".highest-streak").innerHTML = highestCashBalance;
+            document.querySelector(".highest-streak").innerHTML = `$${highestCashBalance}`;
         }
         return
     }
 
     // first win
     localStorage.setItem("streak-cash", money);
-    document.querySelector(".streak-total").innerHTML = money + "!";
+    document.querySelector(".streak-total").innerHTML = `$${money}!`;
     localStorage.setItem("highest-streak", money); 
-    document.querySelector(".highest-streak").innerHTML = money;
+    document.querySelector(".highest-streak").innerHTML = `$${money}`;
 }
 
 
