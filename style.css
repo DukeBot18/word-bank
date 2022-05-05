@@ -385,13 +385,16 @@ h1 {
 .remaining-guesses-btn {
     border: 1px solid var(--accentColor-5);
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     background-color: var(--htmlBackground);
     color: var(--accentColor-5);
     cursor: pointer;
     font-size:20px;
     font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .guess-focus-default {
@@ -633,7 +636,7 @@ hr {
     text-align: center;
     font-size: .7rem;
     position: absolute;
-    top: 48%;
+    top: 50%;
     right: -25px;
 }
 
