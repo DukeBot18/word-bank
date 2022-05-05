@@ -36,7 +36,7 @@ html[data-theme="light"] {
     --mainBorder: #494949;
     --htmlBackground: #F6F7F8;
     --accentColor-1: #A704BD;
-    --accentColor-2: #005AB3;
+    --accentColor-2: #3A72CF;
     --accentColor-3: #CC0033;
     --accentColor-4: #B35900;
     --accentColor-5: #1ABD04;
@@ -570,7 +570,7 @@ h1 {
 .example-letter {
     max-width: 35px;
     width: 100%;
-    min-height: 48px;
+    min-height: 45px;
     height: 100%;
 }
 
