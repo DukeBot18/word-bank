@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap');
 
 :root {
     /* Dark Default  Theme*/
@@ -51,6 +51,7 @@ html[data-theme="light"] {
     box-sizing: border-box;
     margin: 0;
     padding: 9;
+    font-family: 'Open Sans', sans-serif;
 }
 
 html {
@@ -232,7 +233,7 @@ html {
     background-color: var(--keyAndBorderBGColor);
     user-select: none;
     height: 80px;
-    font-weight: 600;
+    font-weight: 700;
     position: relative;
     color: var(--letterColor) !important;
 }
@@ -251,7 +252,7 @@ html {
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     color: var(--letterColor) !important;
     position: relative;
@@ -352,7 +353,7 @@ h1 {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    font-weight: 900;
+    font-weight: 800;
     padding: 3px 5px 3px 0;
     color: var(--accentColor-2);
     border-color: var(--accentColor-2);
@@ -581,7 +582,7 @@ h1 {
     width: 100%;
     color: var(--accentColor-2);
     border-color: var(--accentColor-2);
-    font-weight: 900;
+    font-weight: 800;
     border-radius: none;
     margin: 0;
     display: inline-block
@@ -890,7 +891,7 @@ hr {
 
     sup {
         font-size: 8px;
-        font-weight: 900;
+        font-weight: 700;
         position: absolute;
         top: 5px;
         bottom: 0;
@@ -899,7 +900,7 @@ hr {
     }
     
     .example-letter {
-        min-height: 45px;
+        min-height: 43px;
     }
 
     .example-letter-money {
