@@ -37,6 +37,7 @@ document.addEventListener("keydown", function (event) {
         addGuessBtn.classList.remove("guess-focus-default");
         addGuessBtn.classList.remove("guess-focus-one");
         addGuessBtn.classList.remove("guess-focus-zero");
+        potentialPurchase.innerHTML = "";
     }
 
     event.preventDefault();
@@ -66,6 +67,7 @@ userGuessBtn.addEventListener("click", function() {
         addGuessBtn.classList.remove("guess-focus-default");
         addGuessBtn.classList.remove("guess-focus-one");
         addGuessBtn.classList.remove("guess-focus-zero");
+        potentialPurchase.innerHTML = "";
     }   
     letterGuessDelete("guess");
 });
@@ -83,6 +85,7 @@ for (let element of lettersArr) {
             addGuessBtn.classList.remove("guess-focus-default");
             addGuessBtn.classList.remove("guess-focus-one");
             addGuessBtn.classList.remove("guess-focus-zero");
+            potentialPurchase.innerHTML = "";
         }               
         letterGuessDelete("letter", element);
     });
@@ -114,6 +117,13 @@ addGuessBtn.addEventListener("click", function() {
     }
     // remove highlights from other entry possibilities
     checkHighlight(lettersArr);
+
+    // remove hint possiblity
+    if(!hintElement.classList.contains("visible")) {
+        hintBtn.classList.remove("hint-focus");
+        potentialPurchase.innerHTML = "";
+    }
+
     if (guessCount >= 2) {
         addGuessBtn.classList.toggle("guess-focus-default"); 
     }
@@ -122,16 +132,20 @@ addGuessBtn.addEventListener("click", function() {
     }
     else if (guessCount === 0) {
         addGuessBtn.classList.toggle("guess-focus-zero");
-    }    
+    }
+
+    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+        potentialPurchase.innerHTML = "-150";
+    }
+    else {
+        potentialPurchase.innerHTML = "";
+    }
 
 });
-
-
 
 /*===========================
 HINT SETTINGS BUTTONS & STATS
 ===========================*/
-
 let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() { 
     // exit if hint provided
@@ -152,6 +166,13 @@ hintBtn.addEventListener("click", function() {
             }            
         }        
     }
+    // remove add guess possibility
+    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+        addGuessBtn.classList.remove("guess-focus-default");
+        addGuessBtn.classList.remove("guess-focus-one");
+        addGuessBtn.classList.remove("guess-focus-zero");
+        potentialPurchase.innerHTML = "";
+    }    
     // remove highlights from other entry possibilities
     checkHighlight(lettersArr);
     hintBtn.classList.toggle("hint-focus");
