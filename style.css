@@ -293,6 +293,11 @@ sup {
     top: -.5rem;
 }
 
+.example-letter-money {
+    position: absolute;
+    font-size: x-small;
+}
+
 /*=================
 || BUTTON STYLES ||
 =================*/
@@ -613,8 +618,9 @@ h1 {
 .example-letter {
     max-width: 35px;
     width: 100%;
-    min-height: 45px;
+    min-height: 52px;
     height: 100%;
+    position: relative;
 }
 
 .guess-highlight-example {
@@ -890,6 +896,15 @@ hr {
         bottom: 0;
         left: 0;
         right: 0;
+    }
+    
+    .example-letter {
+        min-height: 45px;
+    }
+
+    .example-letter-money {
+        top: -7px;
+        font-size: 8px;
     }
 
     .make-guess-btn,
