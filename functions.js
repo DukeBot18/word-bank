@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn };
 
 // content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
@@ -12,6 +12,10 @@ let potentialPurchase = document.querySelector("#potential-purchase");
 
 // buttons
 let addGuessBtn = document.querySelector(".remaining-guesses-btn");
+let alert = document.querySelector(".alert-div");
+let hintBtn = document.querySelector(".hint-btn");
+let deleteBtn = document.querySelector(".delete-btn");
+let enterBtn = document.querySelector(".enter");
 
 // puzzle
 let dailyPuzzle;
@@ -201,6 +205,13 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
     }
 }
 
+function checkBankroll(dollars) {
+    if(money >= dollars) {
+        return true;
+    }
+    return false;
+}
+
 function correctLetter(letter=undefined) {
     if(letter != undefined) {
         return dailyPuzzle.includes(letter);
@@ -337,6 +348,13 @@ function letterGuessDelete(...args) {
             userGuessBtn.classList.add("guess-mode");
             userGuessBtn.classList.add("guess-highlight");
 
+            // alert user of possible letter purchase
+            if(guessCount > 0 && (money <= 140 && money >= 40)) {
+                alert.classList.add("add-alert");
+                alert.innerHTML = "There are still letters for purchase!";
+                setTimeout(removeAlert, 3000, alert); 
+            }
+
             // add phrase box highlight
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
@@ -368,6 +386,12 @@ function letterGuessDelete(...args) {
                 checkHighlight(lettersArr);
                 args[1].classList.add("highlight");
             }
+            // get highlighted letter
+            let letter = document.querySelector(".highlight");
+            
+            // get value of letter and cost
+            let tempArr = letter.textContent.split("$");
+            checkPotentialLetterPurchase(tempArr[1]);
         }
     }
 }
@@ -379,7 +403,13 @@ ENTERING USER INPUT INTO GAME
 ===========================*/  
 function enterLetter() {
     // HINT ROUTE \\
-    if(document.querySelector(".hint-btn").classList.contains("hint-focus") && hintTotal != 1) {
+    if(hintBtn.classList.contains("hint-focus") && hintTotal != 1) {
+        if(!checkBankroll(150)) {
+            hintBtn.classList.remove("hint-focus");
+            potentialPurchase.innerHTML = "";
+            return;
+        }
+
         document.querySelector(".hint-container").classList.add("game-play");
         hintElement.classList.add("visible");
 
@@ -398,6 +428,10 @@ function enterLetter() {
         addGuessBtn.classList.remove("guess-focus-one");
         addGuessBtn.classList.remove("guess-focus-zero");
 
+        if(!checkBankroll(150)) {
+            return;
+        }
+
         dollarAmount(currentMoney, 150);
         guessAddCount();
         return;
@@ -413,6 +447,10 @@ function enterLetter() {
         
         // get value of letter and cost
         let tempArr = letter.textContent.split("$");
+
+        if(!checkBankroll(tempArr[1])) {
+            return;
+        }
         
         // see if guess was correct
         let result = correctLetter(tempArr[0]);
@@ -449,9 +487,16 @@ function enterLetter() {
     }
     // GUESS MODE ACTIVE \\
     else {
+
+        if(guessCount == 0 && money >= 150) {
+            alert.classList.add("add-alert");
+            alert.innerHTML = "Purchase another guess before its too late!";
+            setTimeout(removeAlert, 3000, alert);
+            return;     
+        }
+
         // check to make sure all phrase boxes filled
         if (!phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).every(element => element.lastElementChild.classList.contains("added-guess-input"))) {
-            let alert = document.querySelector(".alert-div");
             alert.classList.add("add-alert");
             alert.innerHTML = "Please enter input for all boxes before entering";
             setTimeout(removeAlert, 3000, alert);
@@ -538,10 +583,10 @@ function disableActionButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.setAttribute("disabled", "");
     });
-    document.querySelector(".make-guess-btn").setAttribute("disabled", "");
-    document.querySelector(".enter").setAttribute("disabled", "");
-    document.querySelector(".delete-btn").setAttribute("disabled", "");
-    document.querySelector(".hint-btn").setAttribute("disabled", "");
+    userGuessBtn.setAttribute("disabled", "");
+    enterBtn.setAttribute("disabled", "");
+    deleteBtn.setAttribute("disabled", "");
+    hintBtn.setAttribute("disabled", "");
     return;
 }
 
@@ -549,10 +594,25 @@ function enableButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.removeAttribute("disabled");
     });
-    document.querySelector(".make-guess-btn").removeAttribute("disabled");
-    document.querySelector(".enter").removeAttribute("disabled");
-    document.querySelector(".delete-btn").removeAttribute("disabled");
-    document.querySelector(".hint-btn").removeAttribute("disabled");
+    userGuessBtn.removeAttribute("disabled");
+    enterBtn.removeAttribute("disabled");
+    deleteBtn.removeAttribute("disabled");
+    hintBtn.removeAttribute("disabled");
     return;
+}
+
+function checkPotentialLetterPurchase(letterCost) {
+        // check if guesses left and money will not allow for further purchase of guess
+        if(guessCount == 0) {
+            if(money < 150) {
+                return;
+            }
+            else if(money - letterCost < 150) {
+                alert.classList.add("add-alert");
+                alert.innerHTML = "Wait! Purchasing this letter without any guesses could lose game...";
+                setTimeout(removeAlert, 3000, alert);
+                return;
+            } 
+        }
 }
 

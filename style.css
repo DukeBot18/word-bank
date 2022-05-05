@@ -425,13 +425,16 @@ h1 {
 ==========*/ 
 .alert-div {
     display: none;
-    margin: 10px auto;
+    margin: 3px auto;
     font-size: 1.2rem;
     color: var(--accentColor-3);
+    text-align: center;
 }
 
 .add-alert {
-    display: table;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*============================

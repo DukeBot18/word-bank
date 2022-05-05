@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -22,7 +22,6 @@ USER INPUT ROUTES
 ===============*/
 
 // click enter btn
-let enterBtn = document.querySelector(".enter");
 enterBtn.addEventListener("click", enterLetter);
 
 // various key events
@@ -92,7 +91,6 @@ for (let element of lettersArr) {
 }
 
 // deleting letters in guess mode
-let deleteBtn = document.querySelector(".delete-btn");
 deleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
 });
@@ -146,7 +144,6 @@ addGuessBtn.addEventListener("click", function() {
 /*===========================
 HINT SETTINGS BUTTONS & STATS
 ===========================*/
-let hintBtn = document.querySelector(".hint-btn");
 hintBtn.addEventListener("click", function() { 
     // exit if hint provided
     if (hintElement.classList.contains("visible")){
