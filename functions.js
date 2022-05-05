@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn, checkPotentialPurchase };
 
 // content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
@@ -391,7 +391,7 @@ function letterGuessDelete(...args) {
             
             // get value of letter and cost
             let tempArr = letter.textContent.split("$");
-            checkPotentialLetterPurchase(tempArr[1]);
+            checkPotentialPurchase(tempArr[1]);
         }
     }
 }
@@ -614,15 +614,15 @@ function enableButtons() {
     return;
 }
 
-function checkPotentialLetterPurchase(letterCost) {
+function checkPotentialPurchase(Cost) {
         // check if guesses left and money will not allow for further purchase of guess
         if(guessCount == 0) {
             if(money < 150) {
                 return;
             }
-            else if(money - letterCost < 150) {
+            else if(money - Cost < 150) {
                 alert.classList.add("add-alert");
-                alert.innerHTML = "Wait! Purchasing this letter without any guesses could lose game...";
+                alert.innerHTML = "Wait! This purchase without any guesses left could lose you the game...";
                 setTimeout(removeAlert, 3000, alert);
                 return;
             } 

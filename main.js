@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn, checkPotentialPurchase } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -173,6 +173,7 @@ hintBtn.addEventListener("click", function() {
     // remove highlights from other entry possibilities
     checkHighlight(lettersArr);
     hintBtn.classList.toggle("hint-focus");
+    checkPotentialPurchase(150);
     if (hintBtn.classList.contains("hint-focus")) {
         potentialPurchase.innerHTML = "-150";
     }
