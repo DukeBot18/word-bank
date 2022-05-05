@@ -385,8 +385,8 @@ h1 {
 .remaining-guesses-btn {
     border: 1px solid var(--accentColor-5);
     border-radius: 50%;
-    width: 24px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     background-color: var(--htmlBackground);
     color: var(--accentColor-5);
     cursor: pointer;
@@ -796,6 +796,11 @@ hr {
         min-width: 38px;
         min-height: 50px;
         font-size: 2.2rem;
+    }
+
+    .remaining-guesses-btn {
+        width: 24px;
+        height: 24px;
     }
 }
 
