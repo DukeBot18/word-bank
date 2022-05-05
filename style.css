@@ -427,10 +427,9 @@ h1 {
     color: var(--accentColor-5);
     font-size:20px;
     font-weight: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
+    padding-top: 2px;
+    display: inline-block;
+    text-align: center;
 }
 
 .guess-focus-default {
@@ -577,13 +576,17 @@ h1 {
     width: 100%;
     color: var(--accentColor-2);
     border-color: var(--accentColor-2);
-    padding: 0 3px 0 0;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
     font-weight: 900;
     border-radius: none;
     margin: 0;
+    display: inline-block
+}
+
+.hint-example-btn-inner {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center; 
+    padding: 0 3px 3px 0;
 }
 
 .lineup {
@@ -849,6 +852,7 @@ hr {
     .remaining-guesses-example-btn {
         width: 26px;
         height: 26px;
+        padding-top: 0;
     }
 }
 
