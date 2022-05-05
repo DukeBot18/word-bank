@@ -337,8 +337,6 @@ function letterGuessDelete(...args) {
             userGuessBtn.classList.add("guess-mode");
             userGuessBtn.classList.add("guess-highlight");
 
-            potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
-
             // add phrase box highlight
             for(let i = 0; i < phraseLettersArr.length; i++) {
                 if (phraseLettersArr[i].firstElementChild.classList.contains("non-visible") && !phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
@@ -400,6 +398,7 @@ function enterLetter() {
         addGuessBtn.classList.remove("guess-focus-one");
         addGuessBtn.classList.remove("guess-focus-zero");
 
+        dollarAmount(currentMoney, 150);
         guessAddCount();
         return;
     }
@@ -480,13 +479,7 @@ function enterLetter() {
                 first.classList.add("guess-mode-current-guess-box");
                 break;
             }
-        }
-
-        // subtrack money from total for guess
-        let guessSubtract = Math.round(Math.ceil((money * 0.15) * 100) / 100);
-        dollarAmount(currentMoney, guessSubtract);
-
-        potentialPurchase.innerHTML = "-" + Math.round(Math.ceil((money * 0.15) * 100) / 100); 
+        } 
 
         guessAmount();
 
