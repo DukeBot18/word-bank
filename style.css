@@ -433,7 +433,6 @@ h1 {
     color: var(--accentColor-5);
     font-size:20px;
     font-weight: 500;
-    padding-top: 2px;
     display: inline-block;
     text-align: center;
 }
@@ -557,6 +556,7 @@ h1 {
     margin: 0;
     padding: 0;
     line-height: 1.7rem;
+    font-size: 0.9rem;;
 }
 
 .example-instructions {
@@ -564,6 +564,7 @@ h1 {
     justify-content: flex-start;
     column-gap: 2vw;
     text-align: center;
+    font-size: 0.8rem;
 }
 
 .half-container {
@@ -582,7 +583,7 @@ h1 {
     width: 100%;
     color: var(--accentColor-2);
     border-color: var(--accentColor-2);
-    font-weight: 800;
+    font-weight: 400;
     border-radius: none;
     margin: 0;
     display: inline-block
@@ -633,7 +634,7 @@ h1 {
     justify-content: center;
     align-items: center;
     position: relative;
-    font-size: 13px;
+    font-size: 0.7rem;
 }
 
 .number {
@@ -859,7 +860,6 @@ hr {
     .remaining-guesses-example-btn {
         width: 26px;
         height: 26px;
-        padding-top: 0;
     }
 }
 
