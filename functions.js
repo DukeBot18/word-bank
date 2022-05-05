@@ -207,7 +207,6 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
 
 function checkBankroll(dollars) {
     if(money >= dollars) {
-        console.log(money, dollars)
         return true;
     }
     return false;
@@ -648,7 +647,7 @@ function checkGameLoss() {
         else {
             alert.classList.add("add-alert");
             alert.innerHTML = "There is still hope! Choose letters wisely...";
-            setTimeout(removeAlert, 3000, alert);
+            setTimeout(removeAlert, 5000, alert);
             return;
         }
     }
