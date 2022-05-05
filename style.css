@@ -425,7 +425,8 @@ h1 {
 ==========*/ 
 .alert-div {
     display: none;
-    margin: 3px auto;
+    margin: 0 auto;
+    padding: 0;
     font-size: 1.2rem;
     color: var(--accentColor-3);
     text-align: center;
