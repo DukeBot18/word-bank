@@ -418,6 +418,21 @@ h1 {
     padding: 0;
 }
 
+.remaining-guesses-example-btn {
+    border: 1px solid var(--accentColor-5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--htmlBackground);
+    color: var(--accentColor-5);
+    font-size:20px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
 .guess-focus-default {
     box-shadow: 0 0 5px 1px var(--accentColor-5);
 }
@@ -546,6 +561,10 @@ h1 {
     text-align: center;
 }
 
+.half-container {
+    flex-basis: 50%;
+}
+
 .hint-btn-instruction {
     display: flex;
     align-items: center;
@@ -564,6 +583,7 @@ h1 {
     align-items: center;
     font-weight: 900;
     border-radius: none;
+    margin: 0;
 }
 
 .lineup {
@@ -641,6 +661,7 @@ hr {
     column-gap: 5vw;
     align-items: center;
 }
+
 
 .normal-line-height {
     line-height: normal;
@@ -782,10 +803,6 @@ hr {
 }
 
 @media only screen and (max-width: 650px) {
-    .format-on-media {
-        line-height: normal;
-    }
-
     .word-phrases {
         flex-wrap: wrap;
         max-width: 100%;
@@ -825,6 +842,11 @@ hr {
     }
 
     .remaining-guesses-btn {
+        width: 26px;
+        height: 26px;
+    }
+
+    .remaining-guesses-example-btn {
         width: 26px;
         height: 26px;
     }
