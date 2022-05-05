@@ -146,6 +146,7 @@ function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr
 
 let guessCount = 2
 document.querySelector(".guesses-left").innerHTML = guessCount;
+document.querySelector(".header-remaining-guesses").innerHTML = guessCount;
 
 function guessAmount(resetGuesses=undefined) {
     if (resetGuesses != undefined) {
@@ -154,6 +155,20 @@ function guessAmount(resetGuesses=undefined) {
     else {
         guessCount--;
         document.querySelector(".guesses-left").innerHTML = guessCount;
+        document.querySelector(".header-remaining-guesses").innerHTML = guessCount;
+
+        if(guessCount >= 2) {
+            document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
+            document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+        }
+        else if(guessCount === 1) {
+            document.querySelector(".remaining-guesses-btn").classList.add("one-remaining");
+            document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
+        }
+        else if(guessCount === 0) {
+            document.querySelector(".remaining-guesses-btn").classList.add("zero-remaining");
+            document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+        }
     }
 }
 

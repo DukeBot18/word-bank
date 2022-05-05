@@ -382,6 +382,40 @@ h1 {
     box-shadow: 0 0 3px 3px var(--accentColor-4);
 }
 
+.remaining-guesses-btn {
+    border: 1px solid var(--accentColor-5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    background-color: var(--htmlBackground);
+    color: var(--accentColor-5);
+    cursor: pointer;
+    font-size:20px;
+    font-weight: 500;
+}
+
+.guess-focus-default {
+    box-shadow: 0 0 5px 1px var(--accentColor-5);
+}
+
+.one-remaining {
+    border: 1px solid var(--accentColor-4);
+    color: var(--accentColor-4);
+}
+
+.guess-focus-one {
+    box-shadow: 0 0 5px 1px var(--accentColor-4);
+}
+
+.zero-remaining {
+    border: 1px solid var(--accentColor-3);
+    color: var(--accentColor-3);
+}
+
+.guess-focus-zero {
+    box-shadow: 0 0 5px 1px var(--accentColor-3);
+}
+
 /*==========
 || ALERTS ||
 ==========*/ 
@@ -774,11 +808,6 @@ hr {
 
     .hint-btn svg {
         width: 20px;
-    }
-    
-    .category-hint {
-        align-items: flex-start;
-        align-items: center;
     }
 
     .category {
