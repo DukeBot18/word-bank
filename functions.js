@@ -207,6 +207,7 @@ function dollarAmount(currentMoney, dollars=0, clearMoney=undefined) {
 
 function checkBankroll(dollars) {
     if(money >= dollars) {
+        console.log(money, dollars)
         return true;
     }
     return false;
@@ -535,6 +536,9 @@ function enterLetter() {
             winGameEnd();
             disableActionButtons();
         }
+        else if (guessCount == 0 && money < 150) {
+            checkGameLoss();
+        }
     }
 
 }
@@ -632,13 +636,20 @@ function checkGameLoss() {
             }
         }
         let totalValuelettersUnsovled = Array.from(map.values());
-        console.log(totalValuelettersUnsovled);
+
         let dollarValue = 0;
         for(let i = 0; i < totalValuelettersUnsovled.length; i++) {
             dollarValue += totalValuelettersUnsovled[i];
-            if(dollarValue > money) {
-                gameLose();
-            }
+        }
+
+        if(dollarValue > money) {
+            gameLose();
+        }
+        else {
+            alert.classList.add("add-alert");
+            alert.innerHTML = "There is still hope! Choose letters wisely...";
+            setTimeout(removeAlert, 3000, alert);
+            return;
         }
     }
 }

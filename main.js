@@ -85,7 +85,7 @@ for (let element of lettersArr) {
             addGuessBtn.classList.remove("guess-focus-one");
             addGuessBtn.classList.remove("guess-focus-zero");
             potentialPurchase.innerHTML = "";
-        }               
+        }         
         letterGuessDelete("letter", element);
     });
 }
