@@ -414,8 +414,11 @@ function enterLetter() {
         hintElement.classList.add("visible");
 
         potentialPurchase.innerHTML = "";
-
         dollarAmount(currentMoney, 150);
+        
+        checkGameLoss();
+        console.log("WHY");
+
         hintTotal++;
         return;
     }
@@ -634,8 +637,6 @@ function checkGameLoss() {
         //check values left of letters in puzzle
         let lettersLeft = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.firstElementChild.textContent);
 
-        console.log(lettersLeft);
-
         let map = new Map();
 
         for(let i = 0; i < lettersLeft.length; i++) {
@@ -644,15 +645,11 @@ function checkGameLoss() {
             }
         }
         let totalValuelettersUnsovled = Array.from(map.values());
-        console.log(totalValuelettersUnsovled);
 
         let dollarValue = 0;
         for(let i = 0; i < totalValuelettersUnsovled.length; i++) {
             dollarValue += totalValuelettersUnsovled[i];
         }
-
-        console.log("dollar value is: ", dollarValue);
-        console.log("money is: ", money);
 
         if(dollarValue > money) {
             gameLose();
@@ -667,7 +664,16 @@ function checkGameLoss() {
 }
 
 function gameLose() {
-    console.log("idiot");
+    disableActionButtons();
+    
+    // reveal puzzle
+    let remainingPuzzle = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible"));
+
+    remainingPuzzle.forEach(element => element.firstElementChild.classList.remove("non-visible"));
+
+    remainingPuzzle.forEach(element => element.classList.add("correct-letter-fade"));
+
+    console.log(remainingPuzzle);
 }
 
 const alphabetValues = {
