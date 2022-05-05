@@ -882,3 +882,11 @@ hr {
     transform: translate(0, -30px);
     transition: transform .3s ease-out;
 }
+
+/*=============
+|| GAME OVER ||
+=============*/
+
+.game-loss-color {
+    color: var(--accentColor-3);
+}

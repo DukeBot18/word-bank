@@ -415,9 +415,8 @@ function enterLetter() {
 
         potentialPurchase.innerHTML = "";
         dollarAmount(currentMoney, 150);
-        
+
         checkGameLoss();
-        console.log("WHY");
 
         hintTotal++;
         return;
@@ -669,11 +668,14 @@ function gameLose() {
     // reveal puzzle
     let remainingPuzzle = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible"));
 
-    remainingPuzzle.forEach(element => element.firstElementChild.classList.remove("non-visible"));
+    remainingPuzzle.forEach(element => {
+        element.firstElementChild.classList.remove("non-visible");
+        element.classList.add("correct-letter-fade");
+        element.classList.remove("guess-mode-current-guess-box");
+        element.firstElementChild.classList.add("game-loss-color");
+        
+    });
 
-    remainingPuzzle.forEach(element => element.classList.add("correct-letter-fade"));
-
-    console.log(remainingPuzzle);
 }
 
 const alphabetValues = {
