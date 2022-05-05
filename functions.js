@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase };
+export { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn };
 
 // content reset elements
 let insertPhrase = document.querySelector(".phrase-container");
@@ -9,6 +9,9 @@ let currentMoney = document.querySelector("#bankroll");
 let userGuessBtn = document.querySelector(".make-guess-btn");
 const lettersArr = [...document.querySelectorAll(".letter")];
 let potentialPurchase = document.querySelector("#potential-purchase");
+
+// buttons
+let addGuessBtn = document.querySelector(".remaining-guesses-btn");
 
 // puzzle
 let dailyPuzzle;
@@ -79,7 +82,6 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
 
     // switch phrase box width and height for longest word length
     if (longestWord <= 9) {
-        console.log("hello");
         switch(longestWord) {
             case 9:
                 document.querySelectorAll(".letter-box").forEach(element => {
@@ -171,6 +173,26 @@ function guessAmount(resetGuesses=undefined) {
         }
     }
 }
+
+function guessAddCount() {
+    guessCount++;
+    document.querySelector(".guesses-left").innerHTML = guessCount;
+    document.querySelector(".header-remaining-guesses").innerHTML = guessCount;
+
+    if(guessCount >= 2) {
+        document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
+        document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+    }
+    else if(guessCount === 1) {
+        document.querySelector(".remaining-guesses-btn").classList.add("one-remaining");
+        document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
+    }
+    else if(guessCount === 0) {
+        document.querySelector(".remaining-guesses-btn").classList.add("zero-remaining");
+        document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+    }     
+}
+
 
 let money = 1000;
 
@@ -375,6 +397,19 @@ function enterLetter() {
         hintTotal++;
         return;
     }
+
+    // ADD GUESSES ROUTE \\
+    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+        potentialPurchase.innerHTML = "";
+
+        addGuessBtn.classList.remove("guess-focus-default");
+        addGuessBtn.classList.remove("guess-focus-one");
+        addGuessBtn.classList.remove("guess-focus-zero");
+
+        guessAddCount();
+        return;
+    }
+
     // GUESS MODE INACTIVE \\
     if (!userGuessBtn.classList.contains("guess-mode")) {
         // get highlighted letter
@@ -533,3 +568,4 @@ function enableButtons() {
     document.querySelector(".hint-btn").removeAttribute("disabled");
     return;
 }
+

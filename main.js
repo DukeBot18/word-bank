@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase } from "./functions.js";
+import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -32,6 +32,13 @@ document.addEventListener("keydown", function (event) {
         hintBtn.classList.remove("hint-focus");
         potentialPurchase.innerHTML = "";
     }
+    // remove add guess possibility
+    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+        addGuessBtn.classList.remove("guess-focus-default");
+        addGuessBtn.classList.remove("guess-focus-one");
+        addGuessBtn.classList.remove("guess-focus-zero");
+    }
+
     event.preventDefault();
     if (event.key == "Enter") {
         enterLetter();
@@ -53,7 +60,13 @@ userGuessBtn.addEventListener("click", function() {
     if(!hintElement.classList.contains("visible")) {
         hintBtn.classList.remove("hint-focus");
         potentialPurchase.innerHTML = "";
-    }    
+    }
+    // remove add guess possibility
+    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+        addGuessBtn.classList.remove("guess-focus-default");
+        addGuessBtn.classList.remove("guess-focus-one");
+        addGuessBtn.classList.remove("guess-focus-zero");
+    }   
     letterGuessDelete("guess");
 });
 
@@ -64,7 +77,13 @@ for (let element of lettersArr) {
         if(!hintElement.classList.contains("visible")) {
             hintBtn.classList.remove("hint-focus");
             potentialPurchase.innerHTML = "";
-        }        
+        }
+        // remove add guess possibility
+        if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
+            addGuessBtn.classList.remove("guess-focus-default");
+            addGuessBtn.classList.remove("guess-focus-one");
+            addGuessBtn.classList.remove("guess-focus-zero");
+        }               
         letterGuessDelete("letter", element);
     });
 }
@@ -74,6 +93,40 @@ let deleteBtn = document.querySelector(".delete-btn");
 deleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
 });
+
+/*===========================
+ADDITONAL GUESS FUNCTIONALITY
+===========================*/
+addGuessBtn.addEventListener("click", function() {
+    if(userGuessBtn.classList.contains("guess-mode")){
+        // remove current guesses
+        userGuessBtn.classList.remove("guess-mode");
+        userGuessBtn.classList.remove("guess-highlight");
+        for(let i = 0; i < phraseLettersArr.length; i++) {
+            if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
+            }
+            // remove highlighted box
+            if (phraseLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                phraseLettersArr[i].classList.remove("guess-mode-current-guess-box");
+            }            
+        }        
+    }
+    // remove highlights from other entry possibilities
+    checkHighlight(lettersArr);
+    if (guessCount >= 2) {
+        addGuessBtn.classList.toggle("guess-focus-default"); 
+    }
+    else if (guessCount === 1) {
+        addGuessBtn.classList.toggle("guess-focus-one");
+    }
+    else if (guessCount === 0) {
+        addGuessBtn.classList.toggle("guess-focus-zero");
+    }    
+
+});
+
+
 
 /*===========================
 HINT SETTINGS BUTTONS & STATS
@@ -109,7 +162,7 @@ hintBtn.addEventListener("click", function() {
         potentialPurchase.innerHTML = "";
     }
     // make visible
-})
+});
 
 // toggle dark and light mode
 let toggleTheme = document.querySelector(".theme-btn");
