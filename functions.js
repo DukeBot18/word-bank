@@ -483,9 +483,11 @@ function enterLetter() {
         if(puzzleSolved()) {
             winGameEnd();
             disableActionButtons();
+            return;
         }
         else {
             checkGameLoss();
+            return;
         }
     }
     // GUESS MODE ACTIVE \\
@@ -496,6 +498,11 @@ function enterLetter() {
             alert.innerHTML = "Purchase another guess before its too late!";
             setTimeout(removeAlert, 3000, alert);
             return;     
+        }
+        
+        if(guessCount == 0 && money < 150) {
+            checkGameLoss();
+            return;
         }
 
         // check to make sure all phrase boxes filled
@@ -625,7 +632,9 @@ function checkPotentialLetterPurchase(letterCost) {
 function checkGameLoss() {
     if(!puzzleSolved() && guessCount == 0 && money < 150) {
         //check values left of letters in puzzle
-        let lettersLeft = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.textContent);
+        let lettersLeft = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.firstElementChild.textContent);
+
+        console.log(lettersLeft);
 
         let map = new Map();
 
@@ -635,11 +644,15 @@ function checkGameLoss() {
             }
         }
         let totalValuelettersUnsovled = Array.from(map.values());
+        console.log(totalValuelettersUnsovled);
 
         let dollarValue = 0;
         for(let i = 0; i < totalValuelettersUnsovled.length; i++) {
             dollarValue += totalValuelettersUnsovled[i];
         }
+
+        console.log("dollar value is: ", dollarValue);
+        console.log("money is: ", money);
 
         if(dollarValue > money) {
             gameLose();
