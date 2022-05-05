@@ -656,7 +656,7 @@ function checkGameLoss() {
         else {
             alert.classList.add("add-alert");
             alert.innerHTML = "There is still hope! Choose letters wisely...";
-            setTimeout(removeAlert, 5000, alert);
+            setTimeout(removeAlert, 3500, alert);
             return;
         }
     }
