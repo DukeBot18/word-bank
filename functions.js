@@ -484,10 +484,13 @@ function enterLetter() {
             winGameEnd();
             disableActionButtons();
         }
+        else {
+            checkGameLoss();
+        }
     }
     // GUESS MODE ACTIVE \\
     else {
-
+        // alert user to buy another guess
         if(guessCount == 0 && money >= 150) {
             alert.classList.add("add-alert");
             alert.innerHTML = "Purchase another guess before its too late!";
@@ -616,3 +619,59 @@ function checkPotentialLetterPurchase(letterCost) {
         }
 }
 
+function checkGameLoss() {
+    if(!puzzleSolved() && guessCount == 0 && money < 150) {
+        //check values left of letters in puzzle
+        let lettersLeft = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.textContent);
+
+        let map = new Map();
+
+        for(let i = 0; i < lettersLeft.length; i++) {
+            if(!map.has(lettersLeft[i])) {
+                map.set(lettersLeft[i], alphabetValues[lettersLeft[i]]);
+            }
+        }
+        let totalValuelettersUnsovled = Array.from(map.values());
+        console.log(totalValuelettersUnsovled);
+        let dollarValue = 0;
+        for(let i = 0; i < totalValuelettersUnsovled.length; i++) {
+            dollarValue += totalValuelettersUnsovled[i];
+            if(dollarValue > money) {
+                gameLose();
+            }
+        }
+    }
+}
+
+function gameLose() {
+    console.log("idiot");
+}
+
+const alphabetValues = {
+    "a": 130,
+    "b": 60,
+    "c": 80,
+    "d": 80,
+    "e": 140,
+    "f": 60,
+    "g": 70,
+    "h": 70,
+    "i": 110,
+    "j": 30,
+    "k": 50,
+    "l": 80,
+    "m": 70,
+    "n": 100,
+    "o": 90,
+    "p": 80,
+    "q": 30,
+    "r": 120,
+    "s": 120,
+    "t": 120,
+    "u": 80,
+    "v": 50,
+    "w": 50,
+    "x": 40,
+    "y": 60,
+    "z": 40,
+}
