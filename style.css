@@ -534,9 +534,24 @@ h1 {
 
 .guess-highlight-example {
     background-color: var(--accentColor-4);
-    min-width: 90px;
-    max-height: 60px;
+    min-width: 86px;
+    max-height: 58px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
+
+.number {
+    position: absolute;
+    top: -2px;
+}
+
+.word {
+    margin-top: 4px;
+}
+
 
 .no-color {
     background-color: var(--keyAndBorderBGColor);
