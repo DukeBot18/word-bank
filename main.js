@@ -14,6 +14,7 @@ resetPuzzle(Object.values(phraseObject), insertPhrase, categoryDiv, hintElement,
 
 let today = new Date();
 console.log(today);
+console.log(Date.now());
 
 // Reset puzzle once per day
 let dayInMilliseconds = 800000;

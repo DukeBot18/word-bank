@@ -20,6 +20,9 @@ let enterBtn = document.querySelector(".enter");
 // puzzle
 let dailyPuzzle;
 
+// TODO:
+let currentPuzzleCount = 0;
+
 
 function resetPuzzle(obj, divContainer, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr) {
     // Generate random phrase from object
@@ -607,6 +610,7 @@ function disableActionButtons() {
     enterBtn.setAttribute("disabled", "");
     deleteBtn.setAttribute("disabled", "");
     hintBtn.setAttribute("disabled", "");
+    addGuessBtn.setAttribute("disabled", "");
     return;
 }
 
@@ -618,6 +622,7 @@ function enableButtons() {
     enterBtn.removeAttribute("disabled");
     deleteBtn.removeAttribute("disabled");
     hintBtn.removeAttribute("disabled");
+    addGuessBtn.removeAttribute("disabled", "");
     return;
 }
 
@@ -629,7 +634,9 @@ function checkPotentialPurchase(Cost) {
             }
             else if(money - Cost < 150) {
                 alert.classList.add("add-alert");
-                alert.innerHTML = "Wait! This purchase without any guesses left could lose you the game...";
+                alert.innerHTML = "You sure? This purchase without any guesses left could lose you the game...";
+                enterBtn.setAttribute("disabled", "");
+                setTimeout(() => enterBtn.removeAttribute("disabled"), 2000);                
                 setTimeout(removeAlert, 3000, alert);
                 return;
             } 
@@ -661,6 +668,8 @@ function checkGameLoss() {
         else {
             alert.classList.add("add-alert");
             alert.innerHTML = "There is still hope! Choose letters wisely...";
+            enterBtn.setAttribute("disabled", "");
+            setTimeout(() => enterBtn.removeAttribute("disabled"), 1000);
             setTimeout(removeAlert, 3500, alert);
             return;
         }
