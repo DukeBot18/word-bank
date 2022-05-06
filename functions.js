@@ -699,7 +699,7 @@ function gameLose() {
     // set game-stats items
     localStorage.setItem("streak-cash", 0);
     document.querySelector(".streak-total").innerHTML = "$0";
-    document.querySelector(".game-end-phrase").innerHTML = "That was tough, but you,re tougher! See you tomorrow...";
+    document.querySelector(".game-end-phrase").innerHTML = "That was tough, but you're tougher! See you tomorrow...";
     document.querySelector(".money-added").innerHTML += "$0";
 
     // check for highest streak
