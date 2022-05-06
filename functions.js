@@ -567,6 +567,8 @@ function puzzleSolved() {
 
 function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
+    console.log("hello");
+    console.log(storedCash);
 
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
     setTimeout(function() {
@@ -575,7 +577,7 @@ function winGameEnd(){
     setTimeout(function() {
         document.querySelector(".game-stats-overlay").classList.toggle("translate");
     }, 10);
-    if (storedCash !== null) {
+    if (localStorage.getItem("streak-cash") !== null) {
         let newCashBalance = storedCash + money;
         localStorage.setItem("streak-cash", newCashBalance);
         document.querySelector(".money-added").innerHTML += `$${money}`;
@@ -596,8 +598,9 @@ function winGameEnd(){
         }
         return
     }
-
+    console.log(money);
     // first win
+    document.querySelector(".money-added").innerHTML += `$${money}`;
     localStorage.setItem("streak-cash", money);
     document.querySelector(".streak-total").innerHTML = `$${money}!`;
     localStorage.setItem("highest-streak", money); 
