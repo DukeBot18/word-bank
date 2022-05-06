@@ -491,7 +491,7 @@ function enterLetter() {
         }
 
         if(puzzleSolved()) {
-            winGameEnd();
+            setTimeout(winGameEnd, 300);
             disableActionButtons();
             return;
         }
@@ -549,7 +549,7 @@ function enterLetter() {
         guessAmount();
 
         if(puzzleSolved()) {
-            winGameEnd();
+            setTimeout(winGameEnd, 300);
             disableActionButtons();
         }
         else if (guessCount == 0 && money < 150) {
