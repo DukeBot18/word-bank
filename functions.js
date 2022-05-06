@@ -575,7 +575,7 @@ function winGameEnd(){
     setTimeout(function() {
         document.querySelector(".game-stats-overlay").classList.toggle("translate");
     }, 10);
-    if(localStorage.getItem("streak-cash") !== null) {
+    if (storedCash !== null) {
         let newCashBalance = storedCash + money;
         localStorage.setItem("streak-cash", newCashBalance);
         document.querySelector(".money-added").innerHTML += `$${money}`;
@@ -696,8 +696,30 @@ function gameLose() {
         }, timeAdder);
     }
 
-    setTimeout( () => {
+    // set game-stats items
+    localStorage.setItem("streak-cash", 0);
+    document.querySelector(".streak-total").innerHTML = "$0";
+    document.querySelector(".game-end-phrase").innerHTML = "That was tough, but you,re tougher! See you tomorrow...";
+    document.querySelector(".money-added").innerHTML += "$0";
 
+    // check for highest streak
+    let highestStreak = localStorage.getItem("highest-streak");
+    if(highestStreak !== null) {
+        document.querySelector(".highest-streak").innerHTML = `$${highestStreak}`;
+    } 
+    else {
+        document.querySelector(".highest-streak").innerHTML = "-";
+    }
+
+    setTimeout( () => {
+    // add overlay
+    document.querySelector(".overlay-game-win").classList.toggle("game-play");
+    setTimeout(function() {
+        document.querySelector(".overlay-game-win").classList.toggle("fade");
+    }, 20);
+    setTimeout(function() {
+        document.querySelector(".game-stats-overlay").classList.toggle("translate");
+    }, 10);
     }, remainingPuzzle.length * 500 + 1000);
 
 
