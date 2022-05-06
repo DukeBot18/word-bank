@@ -567,8 +567,6 @@ function puzzleSolved() {
 
 function winGameEnd(){
     let storedCash = parseInt(localStorage.getItem("streak-cash"));
-    console.log("hello");
-    console.log(storedCash);
 
     document.querySelector(".overlay-game-win").classList.toggle("game-play");
     setTimeout(function() {
@@ -598,7 +596,6 @@ function winGameEnd(){
         }
         return
     }
-    console.log(money);
     // first win
     document.querySelector(".money-added").innerHTML += `$${money}`;
     localStorage.setItem("streak-cash", money);
@@ -690,7 +687,6 @@ function gameLose() {
 
     for (let i = 0; i < remainingPuzzle.length; i++) {
         let timeAdder = i * 500;
-        console.log(remainingPuzzle[i]);
         setTimeout(() => {
             remainingPuzzle[i].firstElementChild.classList.remove("non-visible");
             remainingPuzzle[i].classList.add("correct-letter-fade");
