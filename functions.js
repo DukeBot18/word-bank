@@ -581,6 +581,9 @@ function winGameEnd(){
         document.querySelector(".money-added").innerHTML += `$${money}`;
         document.querySelector(".streak-total").innerHTML = `$${newCashBalance}!`;
 
+        // win phrase
+        document.querySelector(".game-end-phrase").innerHTML = "Impressive!";
+
         // highest streak
         let highestCashBalance = parseInt(localStorage.getItem("highest-streak"));
         if(newCashBalance > highestCashBalance) {
@@ -692,6 +695,11 @@ function gameLose() {
             remainingPuzzle[i].firstElementChild.classList.add("game-loss-color");
         }, timeAdder);
     }
+
+    setTimeout( () => {
+
+    }, remainingPuzzle.length * 500 + 1000);
+
 
 }
 
