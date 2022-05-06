@@ -726,7 +726,7 @@ hr {
     right: 0;
     margin: auto;
     max-width: 25vw;
-    height: 30vh;
+    height: 35vh;
     z-index: 1000;
     border-radius: 5px;
     box-shadow: 0 0 15px 5px var(--mainBorder);
@@ -742,6 +742,10 @@ hr {
     justify-content: center;
     align-items: center;
     margin-top: 2vh;
+}
+
+.game-end-phrase {
+    text-align: center;
 }
 
 .money-streak {

@@ -639,8 +639,8 @@ function checkPotentialPurchase(Cost) {
                 alert.classList.add("add-alert");
                 alert.innerHTML = "You sure? This purchase without any guesses left could lose you the game...";
                 enterBtn.setAttribute("disabled", "");
-                setTimeout(() => enterBtn.removeAttribute("disabled"), 2000);                
-                setTimeout(removeAlert, 3000, alert);
+                setTimeout(() => enterBtn.removeAttribute("disabled"), 2500);                
+                setTimeout(removeAlert, 5000, alert);
                 return;
             } 
         }
