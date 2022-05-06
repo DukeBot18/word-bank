@@ -726,7 +726,7 @@ hr {
     right: 0;
     margin: auto;
     max-width: 25vw;
-    height: 35vh;
+    height: 30vh;
     z-index: 1000;
     border-radius: 5px;
     box-shadow: 0 0 15px 5px var(--mainBorder);
@@ -816,6 +816,7 @@ hr {
 
     .game-stats-overlay {
         min-width: 90%;
+        height: 38vh;
     }
 
     .top-container {
