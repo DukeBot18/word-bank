@@ -682,13 +682,16 @@ function gameLose() {
     // reveal puzzle
     let remainingPuzzle = phraseLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible"));
 
-    remainingPuzzle.forEach(element => {
-        element.firstElementChild.classList.remove("non-visible");
-        element.classList.add("correct-letter-fade");
-        element.classList.remove("guess-mode-current-guess-box");
-        element.firstElementChild.classList.add("game-loss-color");
-        
-    });
+    for (let i = 0; i < remainingPuzzle.length; i++) {
+        let timeAdder = i * 500;
+        console.log(remainingPuzzle[i]);
+        setTimeout(() => {
+            remainingPuzzle[i].firstElementChild.classList.remove("non-visible");
+            remainingPuzzle[i].classList.add("correct-letter-fade");
+            remainingPuzzle[i].classList.remove("guess-mode-current-guess-box");
+            remainingPuzzle[i].firstElementChild.classList.add("game-loss-color");
+        }, timeAdder);
+    }
 
 }
 
