@@ -1,6 +1,5 @@
 // Helper functions
-export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn
-    , checkPotentialPurchase };
+export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn, checkPotentialPurchase };
 
 // DOM elements
 let puzzleElement = document.querySelector(".phrase-container");
@@ -12,13 +11,13 @@ let alertElement = document.querySelector(".alert-div");
 
 // Keyboard
 const keyboardLettersArr = [...document.querySelectorAll(".letter")];
-
-// buttons
-let keyboardMakeAGuessBtn = document.querySelector(".make-guess-btn");
-let increaseCurrentGuessesBtn = document.querySelector(".remaining-guesses-btn");
-let revealHintBtn = document.querySelector(".hint-btn");
 let keyboardDeleteBtn = document.querySelector(".delete-btn");
 let keyboardEnterBtn = document.querySelector(".enter");
+let keyboardMakeAGuessBtn = document.querySelector(".make-guess-btn");
+
+// buttons
+let increaseCurrentGuessesBtn = document.querySelector(".remaining-guesses-btn");
+let revealHintBtn = document.querySelector(".hint-btn");
 
 // puzzle
 let currentDayPuzzle;
