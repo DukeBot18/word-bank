@@ -174,7 +174,7 @@ function guessAmount(resetGuesses=undefined) {
         startingGuessCount--;
         showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
 
-        setttingForGuessAmount();
+        changeColorSettingsBasedOnGuessCount();
     }
 }
 
@@ -182,21 +182,21 @@ function guessAddCount() {
     startingGuessCount++;
     showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
 
-    setttingForGuessAmount();   
+    changeColorSettingsBasedOnGuessCount();   
 }
 
-function setttingForGuessAmount() { 
+function changeColorSettingsBasedOnGuessCount() { 
     if(startingGuessCount >= 2) {
-        document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
-        document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+        increaseCurrentGuessesBtn.classList.remove("zero-remaining");
+        increaseCurrentGuessesBtn.classList.remove("one-remaining");
     }
     else if(startingGuessCount === 1) {
-        document.querySelector(".remaining-guesses-btn").classList.add("one-remaining");
-        document.querySelector(".remaining-guesses-btn").classList.remove("zero-remaining");
+        increaseCurrentGuessesBtn.classList.add("one-remaining");
+        increaseCurrentGuessesBtn.classList.remove("zero-remaining");
     }
     else if(startingGuessCount === 0) {
-        document.querySelector(".remaining-guesses-btn").classList.add("zero-remaining");
-        document.querySelector(".remaining-guesses-btn").classList.remove("one-remaining");
+        increaseCurrentGuessesBtn.classList.add("zero-remaining");
+        increaseCurrentGuessesBtn.classList.remove("one-remaining");
     }
     return;
 }
