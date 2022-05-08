@@ -8,7 +8,10 @@ let hintElement = document.querySelector(".hint");
 let bankrollElement = document.querySelector("#bankroll");
 let potentialPurchaseElement = document.querySelector("#potential-purchase");
 let alertElement = document.querySelector(".alert-div");
-let showRemainingGuesses = document.querySelectorAll(".display-guesses");
+let showRemainingGuessesNodeList = document.querySelectorAll(".display-guesses");
+let moneyAddedToStreakElement = document.querySelector(".money-added-to-streak");
+let curentStreakTotalElement = document.querySelector(".streak-total");
+let highestStreakTotalElement = document.querySelector(".highest-streak");
 
 // Keyboard
 const keyboardLettersArr = [...document.querySelectorAll(".letter")];
@@ -164,7 +167,7 @@ function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr
 }
 
 let startingGuessCount = 2
-showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
+showRemainingGuessesNodeList.forEach( (element) => element.innerHTML = startingGuessCount);
 
 function guessAmount(resetGuesses=undefined) {
     if (resetGuesses != undefined) {
@@ -172,15 +175,15 @@ function guessAmount(resetGuesses=undefined) {
     }
     else {
         startingGuessCount--;
-        showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
+        showRemainingGuessesNodeList.forEach( (element) => element.innerHTML = startingGuessCount);
 
         changeColorSettingsBasedOnGuessCount();
     }
 }
 
-function guessAddCount() {
+function addToGuessCountTotal() {
     startingGuessCount++;
-    showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
+    showRemainingGuessesNodeList.forEach( (element) => element.innerHTML = startingGuessCount);
 
     changeColorSettingsBasedOnGuessCount();   
 }
@@ -447,7 +450,7 @@ function enterLetter() {
         }
 
         dollarAmount(bankrollElement, 150);
-        guessAddCount();
+        addToGuessCountTotal();
         return;
     }
 
@@ -582,8 +585,8 @@ function winGameEnd(){
     if (localStorage.getItem("streak-cash") !== null) {
         let newCashBalance = storedCash + money;
         localStorage.setItem("streak-cash", newCashBalance);
-        document.querySelector(".money-added").innerHTML += `$${money}`;
-        document.querySelector(".streak-total").innerHTML = `$${newCashBalance}!`;
+        moneyAddedToStreakElement.innerHTML += `$${money}`;
+        curentStreakTotalElement.innerHTML = `$${newCashBalance}!`;
 
         // win phrase
         document.querySelector(".game-end-phrase").innerHTML = "Impressive!";
@@ -593,19 +596,19 @@ function winGameEnd(){
         if(newCashBalance > highestCashBalance) {
             highestCashBalance = newCashBalance;
             localStorage.setItem("highest-streak", highestCashBalance);
-            document.querySelector(".highest-streak").innerHTML = `$${highestCashBalance}`;
+            highestStreakTotalElement.innerHTML = `$${highestCashBalance}`;
         }
         else {
-            document.querySelector(".highest-streak").innerHTML = `$${highestCashBalance}`;
+            highestStreakTotalElement.innerHTML = `$${highestCashBalance}`;
         }
         return
     }
     // first win
-    document.querySelector(".money-added").innerHTML += `$${money}`;
+    moneyAddedToStreakElement.innerHTML += `$${money}`;
     localStorage.setItem("streak-cash", money);
-    document.querySelector(".streak-total").innerHTML = `$${money}!`;
+    curentStreakTotalElement.innerHTML = `$${money}!`;
     localStorage.setItem("highest-streak", money); 
-    document.querySelector(".highest-streak").innerHTML = `$${money}`;
+    highestStreakTotalElement.innerHTML = `$${money}`;
 }
 
 
@@ -701,17 +704,17 @@ function gameLose() {
 
     // set game-stats items
     localStorage.setItem("streak-cash", 0);
-    document.querySelector(".streak-total").innerHTML = "$0";
+    curentStreakTotalElement.innerHTML = "$0";
     document.querySelector(".game-end-phrase").innerHTML = "That was tough, but you're tougher! See you tomorrow...";
-    document.querySelector(".money-added").innerHTML += "$0";
+    moneyAddedToStreakElement.innerHTML += "$0";
 
     // check for highest streak
     let highestStreak = localStorage.getItem("highest-streak");
     if(highestStreak !== null) {
-        document.querySelector(".highest-streak").innerHTML = `$${highestStreak}`;
+        highestStreakTotalElement.innerHTML = `$${highestStreak}`;
     } 
     else {
-        document.querySelector(".highest-streak").innerHTML = "-";
+        highestStreakTotalElement.innerHTML = "-";
     }
 
     setTimeout( () => {
