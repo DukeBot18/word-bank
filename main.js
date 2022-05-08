@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, deleteBtn, enterBtn, checkPotentialPurchase } from "./functions.js";
+import { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn, checkPotentialPurchase } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -18,7 +18,7 @@ console.log(Date.now());
 
 // Reset puzzle once per day
 let dayInMilliseconds = 800000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr);
 
 
 /*===============
@@ -26,7 +26,7 @@ USER INPUT ROUTES
 ===============*/
 
 // click enter btn
-enterBtn.addEventListener("click", enterLetter);
+keyboardEnterBtn.addEventListener("click", enterLetter);
 
 // various key events
 document.addEventListener("keydown", function (event) {
@@ -59,7 +59,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 // guess mode toggle
-makeAGuessBtn.addEventListener("click", function() {
+keyboardMakeAGuessBtn.addEventListener("click", function() {
     // remove hint possiblity
     if(!hintElement.classList.contains("visible")) {
         revealHintBtn.classList.remove("hint-focus");
@@ -95,7 +95,7 @@ for (let element of keyboardLettersArr) {
 }
 
 // deleting letters in guess mode
-deleteBtn.addEventListener("click", function() {
+keyboardDeleteBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
 });
 
@@ -103,10 +103,10 @@ deleteBtn.addEventListener("click", function() {
 ADDITONAL GUESS FUNCTIONALITY
 ===========================*/
 increaseCurrentGuessesBtn.addEventListener("click", function() {
-    if(makeAGuessBtn.classList.contains("guess-mode")){
+    if(keyboardMakeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        makeAGuessBtn.classList.remove("guess-mode");
-        makeAGuessBtn.classList.remove("guess-highlight");
+        keyboardMakeAGuessBtn.classList.remove("guess-mode");
+        keyboardMakeAGuessBtn.classList.remove("guess-highlight");
         for(let i = 0; i < phraseLettersArr.length; i++) {
             if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                 phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
@@ -153,10 +153,10 @@ revealHintBtn.addEventListener("click", function() {
     if (hintElement.classList.contains("visible")){
         return;
     }
-    if(makeAGuessBtn.classList.contains("guess-mode")){
+    if(keyboardMakeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        makeAGuessBtn.classList.remove("guess-mode");
-        makeAGuessBtn.classList.remove("guess-highlight");
+        keyboardMakeAGuessBtn.classList.remove("guess-mode");
+        keyboardMakeAGuessBtn.classList.remove("guess-highlight");
         for(let i = 0; i < phraseLettersArr.length; i++) {
             if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                 phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);

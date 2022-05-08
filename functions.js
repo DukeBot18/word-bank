@@ -1,5 +1,6 @@
 // Helper functions
-export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, deleteBtn, enterBtn, checkPotentialPurchase };
+export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn
+    , checkPotentialPurchase };
 
 // DOM elements
 let puzzleElement = document.querySelector(".phrase-container");
@@ -13,14 +14,14 @@ let alertElement = document.querySelector(".alert-div");
 const keyboardLettersArr = [...document.querySelectorAll(".letter")];
 
 // buttons
-let makeAGuessBtn = document.querySelector(".make-guess-btn");
+let keyboardMakeAGuessBtn = document.querySelector(".make-guess-btn");
 let increaseCurrentGuessesBtn = document.querySelector(".remaining-guesses-btn");
 let revealHintBtn = document.querySelector(".hint-btn");
-let deleteBtn = document.querySelector(".delete-btn");
-let enterBtn = document.querySelector(".enter");
+let keyboardDeleteBtn = document.querySelector(".delete-btn");
+let keyboardEnterBtn = document.querySelector(".enter");
 
 // puzzle
-let dailyPuzzle;
+let currentDayPuzzle;
 
 // TODO:
 let currentPuzzleCount = 0;
@@ -30,7 +31,7 @@ function resetPuzzle(obj, divContainer, categoryDiv, hintElement, currentMoney, 
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
     let arr = puzzle["phrase"].split(" ");
-    dailyPuzzle = puzzle["phrase"];
+    currentDayPuzzle = puzzle["phrase"];
     let category = puzzle["category"];
     let hint = puzzle["hint"];
     generatePuzzle(arr, divContainer, categoryDiv, category, userGuessBtn, lettersArr);
@@ -224,7 +225,7 @@ function checkBankroll(dollars) {
 
 function correctLetter(letter=undefined) {
     if(letter != undefined) {
-        return dailyPuzzle.includes(letter);
+        return currentDayPuzzle.includes(letter);
     }
 }
 
@@ -246,7 +247,7 @@ ADDING AND DELETING LETTERS
 =========================*/
 function letterGuessDelete(...args) {
     // GUESS MODE ACTIVE \\
-    if (makeAGuessBtn.classList.contains("guess-mode")) {
+    if (keyboardMakeAGuessBtn.classList.contains("guess-mode")) {
         // Delete route
         if (args[0] == "delete") {
             for (let i = phraseLettersArr.length - 1; i > 0; i--) {
@@ -298,8 +299,8 @@ function letterGuessDelete(...args) {
 
         // Exit guess mode
         if (args[0] == "guess") {
-            makeAGuessBtn.classList.remove("guess-mode");
-            makeAGuessBtn.classList.remove("guess-highlight");
+            keyboardMakeAGuessBtn.classList.remove("guess-mode");
+            keyboardMakeAGuessBtn.classList.remove("guess-highlight");
             potentialPurchaseElement.innerHTML = "";
 
             // remove current guesses
@@ -355,8 +356,8 @@ function letterGuessDelete(...args) {
             // remove any highlighted letters
             checkHighlight(keyboardLettersArr);
 
-            makeAGuessBtn.classList.add("guess-mode");
-            makeAGuessBtn.classList.add("guess-highlight");
+            keyboardMakeAGuessBtn.classList.add("guess-mode");
+            keyboardMakeAGuessBtn.classList.add("guess-highlight");
 
             // alert user of possible letter purchase
             if(startingGuessCount > 0 && (money <= 140 && money >= 40)) {
@@ -452,7 +453,7 @@ function enterLetter() {
     }
 
     // GUESS MODE INACTIVE \\
-    if (!makeAGuessBtn.classList.contains("guess-mode")) {
+    if (!keyboardMakeAGuessBtn.classList.contains("guess-mode")) {
         // get highlighted letter
         let letter = document.querySelector(".highlight");
         if (letter === null) {
@@ -613,9 +614,9 @@ function disableActionButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.setAttribute("disabled", "");
     });
-    makeAGuessBtn.setAttribute("disabled", "");
-    enterBtn.setAttribute("disabled", "");
-    deleteBtn.setAttribute("disabled", "");
+    keyboardMakeAGuessBtn.setAttribute("disabled", "");
+    keyboardEnterBtn.setAttribute("disabled", "");
+    keyboardDeleteBtn.setAttribute("disabled", "");
     revealHintBtn.setAttribute("disabled", "");
     increaseCurrentGuessesBtn.setAttribute("disabled", "");
     return;
@@ -625,9 +626,9 @@ function enableButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.removeAttribute("disabled");
     });
-    makeAGuessBtn.removeAttribute("disabled");
-    enterBtn.removeAttribute("disabled");
-    deleteBtn.removeAttribute("disabled");
+    keyboardMakeAGuessBtn.removeAttribute("disabled");
+    keyboardEnterBtn.removeAttribute("disabled");
+    keyboardDeleteBtn.removeAttribute("disabled");
     revealHintBtn.removeAttribute("disabled");
     increaseCurrentGuessesBtn.removeAttribute("disabled", "");
     return;
@@ -642,8 +643,8 @@ function checkPotentialPurchase(Cost) {
             else if(money - Cost < 150) {
                 alertElement.classList.add("add-alert");
                 alertElement.innerHTML = "You sure? This purchase without any guesses left could lose you the game...";
-                enterBtn.setAttribute("disabled", "");
-                setTimeout(() => enterBtn.removeAttribute("disabled"), 2500);                
+                keyboardEnterBtn.setAttribute("disabled", "");
+                setTimeout(() => keyboardEnterBtn.removeAttribute("disabled"), 2500);                
                 setTimeout(removeAlert, 5000, alertElement);
                 return;
             } 
@@ -675,8 +676,8 @@ function checkGameLoss() {
         else {
             alertElement.classList.add("add-alert");
             alertElement.innerHTML = "There is still hope! Choose letters wisely...";
-            enterBtn.setAttribute("disabled", "");
-            setTimeout(() => enterBtn.removeAttribute("disabled"), 1000);
+            keyboardEnterBtn.setAttribute("disabled", "");
+            setTimeout(() => keyboardEnterBtn.removeAttribute("disabled"), 1000);
             setTimeout(removeAlert, 3500, alertElement);
             return;
         }
