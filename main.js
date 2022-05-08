@@ -1,6 +1,6 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, answerLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn, checkPotentialPurchase } from "./functions.js";
+import { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, puzzleAnswerLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, backspaceBtn, enterBtn, checkPotentialPurchase } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
@@ -18,7 +18,7 @@ console.log(Date.now());
 
 // Reset puzzle once per day
 let dayInMilliseconds = 800000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr);
 
 
 /*===============
@@ -26,7 +26,7 @@ USER INPUT ROUTES
 ===============*/
 
 // click enter btn
-keyboardEnterBtn.addEventListener("click", enterLetter);
+enterBtn.addEventListener("click", enterLetter);
 
 // various key events
 document.addEventListener("keydown", function (event) {
@@ -59,7 +59,7 @@ document.addEventListener("keydown", function (event) {
 });
 
 // guess mode toggle
-keyboardMakeAGuessBtn.addEventListener("click", function() {
+makeAGuessBtn.addEventListener("click", function() {
     // remove hint possiblity
     if(!hintElement.classList.contains("visible")) {
         revealHintBtn.classList.remove("hint-focus");
@@ -95,7 +95,7 @@ for (let element of keyboardLettersArr) {
 }
 
 // deleting letters in guess mode
-keyboardDeleteBtn.addEventListener("click", function() {
+backspaceBtn.addEventListener("click", function() {
     letterGuessDelete("delete");
 });
 
@@ -103,17 +103,17 @@ keyboardDeleteBtn.addEventListener("click", function() {
 ADDITONAL GUESS FUNCTIONALITY
 ===========================*/
 increaseCurrentGuessesBtn.addEventListener("click", function() {
-    if(keyboardMakeAGuessBtn.classList.contains("guess-mode")){
+    if(makeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        keyboardMakeAGuessBtn.classList.remove("guess-mode");
-        keyboardMakeAGuessBtn.classList.remove("guess-highlight");
-        for(let i = 0; i < answerLettersArr.length; i++) {
-            if (answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                answerLettersArr[i].removeChild(answerLettersArr[i].lastElementChild);
+        makeAGuessBtn.classList.remove("guess-mode");
+        makeAGuessBtn.classList.remove("guess-highlight");
+        for(let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+            if (puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                puzzleAnswerLettersArr[i].removeChild(puzzleAnswerLettersArr[i].lastElementChild);
             }
             // remove highlighted box
-            if (answerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-                answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+            if (puzzleAnswerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
             }            
         }        
     }
@@ -153,17 +153,17 @@ revealHintBtn.addEventListener("click", function() {
     if (hintElement.classList.contains("visible")){
         return;
     }
-    if(keyboardMakeAGuessBtn.classList.contains("guess-mode")){
+    if(makeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        keyboardMakeAGuessBtn.classList.remove("guess-mode");
-        keyboardMakeAGuessBtn.classList.remove("guess-highlight");
-        for(let i = 0; i < answerLettersArr.length; i++) {
-            if (answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                answerLettersArr[i].removeChild(answerLettersArr[i].lastElementChild);
+        makeAGuessBtn.classList.remove("guess-mode");
+        makeAGuessBtn.classList.remove("guess-highlight");
+        for(let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+            if (puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                puzzleAnswerLettersArr[i].removeChild(puzzleAnswerLettersArr[i].lastElementChild);
             }
             // remove highlighted box
-            if (answerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-                answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+            if (puzzleAnswerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
             }            
         }        
     }

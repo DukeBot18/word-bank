@@ -1,5 +1,5 @@
 // Helper functions
-export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, answerLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, keyboardMakeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, keyboardDeleteBtn, keyboardEnterBtn, checkPotentialPurchase };
+export { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, puzzleAnswerLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, backspaceBtn, enterBtn, checkPotentialPurchase };
 
 // DOM elements
 let puzzleElement = document.querySelector(".phrase-container");
@@ -8,12 +8,13 @@ let hintElement = document.querySelector(".hint");
 let bankrollElement = document.querySelector("#bankroll");
 let potentialPurchaseElement = document.querySelector("#potential-purchase");
 let alertElement = document.querySelector(".alert-div");
+let showRemainingGuesses = document.querySelectorAll(".display-guesses");
 
 // Keyboard
 const keyboardLettersArr = [...document.querySelectorAll(".letter")];
-let keyboardDeleteBtn = document.querySelector(".delete-btn");
-let keyboardEnterBtn = document.querySelector(".enter");
-let keyboardMakeAGuessBtn = document.querySelector(".make-guess-btn");
+let backspaceBtn = document.querySelector(".delete-btn");
+let enterBtn = document.querySelector(".enter");
+let makeAGuessBtn = document.querySelector(".make-guess-btn");
 
 // buttons
 let increaseCurrentGuessesBtn = document.querySelector(".remaining-guesses-btn");
@@ -21,7 +22,7 @@ let revealHintBtn = document.querySelector(".hint-btn");
 
 // puzzle
 let currentDayPuzzle;
-let answerLettersArr;
+let puzzleAnswerLettersArr;
 
 // TODO:
 let currentPuzzleCount = 0;
@@ -30,7 +31,9 @@ let currentPuzzleCount = 0;
 function resetPuzzle(obj, divContainer, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr) {
     // Generate random phrase from object
     let puzzle = obj[Math.floor(Math.random() * obj.length)];
+    console.log(puzzle);
     let arr = puzzle["phrase"].split(" ");
+    console.log(arr);
     currentDayPuzzle = puzzle["phrase"];
     let category = puzzle["category"];
     let hint = puzzle["hint"];
@@ -49,7 +52,7 @@ let start = 0;
 let puzzleCount = 0;
 
 
-let longestWord = 0;
+let longestWordInPuzzle = 0;
 
 function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessBtn, lettersArr) {
     if (start != puzzleCount) {
@@ -61,8 +64,8 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
     categoryDiv.innerHTML = category;
 
     for (let i = 0; i < wordArr.length; i++) {
-        if (wordArr[i].length > longestWord) {
-            longestWord = wordArr[i].length;
+        if (wordArr[i].length > longestWordInPuzzle) {
+            longestWordInPuzzle = wordArr[i].length;
         }
 
         // add div container
@@ -90,8 +93,8 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
     }
 
     // switch phrase box width and height for longest word length
-    if (longestWord <= 9) {
-        switch(longestWord) {
+    if (longestWordInPuzzle <= 9) {
+        switch(longestWordInPuzzle) {
             case 9:
                 document.querySelectorAll(".answer-letter-box").forEach(element => {
                     element.classList.add("length-9");
@@ -110,12 +113,12 @@ function generatePuzzle(wordArr, divContainer, categoryDiv, category, userGuessB
         }
     }
 
-    if (longestWord <= 7 && wordArr.length >= 5) {
+    if (longestWordInPuzzle <= 7 && wordArr.length >= 5) {
         puzzleElement.classList.add("length-spacer");
     }
 
     
-    answerLettersArr = [...document.querySelectorAll(".answer-letter-box")];
+    puzzleAnswerLettersArr = [...document.querySelectorAll(".answer-letter-box")];
     // add to total puzzle count
     puzzleCount++;
 }
@@ -161,8 +164,7 @@ function clearPreviousPuzzle(divContainer, categoryDiv, userGuessBtn, lettersArr
 }
 
 let startingGuessCount = 2
-document.querySelector(".guesses-left").innerHTML = startingGuessCount;
-document.querySelector(".header-remaining-guesses").innerHTML = startingGuessCount;
+showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
 
 function guessAmount(resetGuesses=undefined) {
     if (resetGuesses != undefined) {
@@ -170,8 +172,7 @@ function guessAmount(resetGuesses=undefined) {
     }
     else {
         startingGuessCount--;
-        document.querySelector(".guesses-left").innerHTML = startingGuessCount;
-        document.querySelector(".header-remaining-guesses").innerHTML = startingGuessCount;
+        showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
 
         setttingForGuessAmount();
     }
@@ -179,8 +180,7 @@ function guessAmount(resetGuesses=undefined) {
 
 function guessAddCount() {
     startingGuessCount++;
-    document.querySelector(".guesses-left").innerHTML = startingGuessCount;
-    document.querySelector(".header-remaining-guesses").innerHTML = startingGuessCount;
+    showRemainingGuesses.forEach( (element) => element.innerHTML = startingGuessCount);
 
     setttingForGuessAmount();   
 }
@@ -246,23 +246,23 @@ ADDING AND DELETING LETTERS
 =========================*/
 function letterGuessDelete(...args) {
     // GUESS MODE ACTIVE \\
-    if (keyboardMakeAGuessBtn.classList.contains("guess-mode")) {
+    if (makeAGuessBtn.classList.contains("guess-mode")) {
         // Delete route
         if (args[0] == "delete") {
-            for (let i = answerLettersArr.length - 1; i > 0; i--) {
-                if (answerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+            for (let i = puzzleAnswerLettersArr.length - 1; i > 0; i--) {
+                if (puzzleAnswerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
                     // if last element, keep guess mode highlight
-                    for(let j = i; j < answerLettersArr.length; j++) {
-                        if(answerLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
-                            answerLettersArr[i].removeChild(answerLettersArr[i].lastElementChild);
+                    for(let j = i; j < puzzleAnswerLettersArr.length; j++) {
+                        if(puzzleAnswerLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
+                            puzzleAnswerLettersArr[i].removeChild(puzzleAnswerLettersArr[i].lastElementChild);
                             return;
                         }
-                        if(answerLettersArr[j+1] == undefined && !answerLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
-                            answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                        if(puzzleAnswerLettersArr[j+1] == undefined && !puzzleAnswerLettersArr[j].lastElementChild.classList.contains("added-guess-input")) {
+                            puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
                             break;
                         }
                         else {
-                            answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                            puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
                             break;
                         }
                     }
@@ -270,22 +270,22 @@ function letterGuessDelete(...args) {
                     // keep highlight on first avalable box
                     let tempArr = [];
                     for(let j = 0; j < i; j++) {
-                        tempArr.push(answerLettersArr[j]);
+                        tempArr.push(puzzleAnswerLettersArr[j]);
                     }
                     
                     let availableBox = tempArr.some((element) => element.firstElementChild.classList.contains("non-visible"));
 
                     if (!availableBox) {
-                        answerLettersArr[i].classList.add("guess-mode-current-guess-box");
+                        puzzleAnswerLettersArr[i].classList.add("guess-mode-current-guess-box");
                         return;
                     }
                     
                     // locate previous box to highlight
                     let counter = 1;
-                    while (answerLettersArr[i-counter] != undefined) {
-                        if (answerLettersArr[i-counter].firstElementChild.classList.contains("non-visible")) {
-                            answerLettersArr[i-counter].classList.add("guess-mode-current-guess-box");
-                            answerLettersArr[i-counter].removeChild(answerLettersArr[i-counter].lastElementChild);
+                    while (puzzleAnswerLettersArr[i-counter] != undefined) {
+                        if (puzzleAnswerLettersArr[i-counter].firstElementChild.classList.contains("non-visible")) {
+                            puzzleAnswerLettersArr[i-counter].classList.add("guess-mode-current-guess-box");
+                            puzzleAnswerLettersArr[i-counter].removeChild(puzzleAnswerLettersArr[i-counter].lastElementChild);
                             return
                         }
                         else {
@@ -298,18 +298,18 @@ function letterGuessDelete(...args) {
 
         // Exit guess mode
         if (args[0] == "guess") {
-            keyboardMakeAGuessBtn.classList.remove("guess-mode");
-            keyboardMakeAGuessBtn.classList.remove("guess-highlight");
+            makeAGuessBtn.classList.remove("guess-mode");
+            makeAGuessBtn.classList.remove("guess-highlight");
             potentialPurchaseElement.innerHTML = "";
 
             // remove current guesses
-            for(let i = 0; i < answerLettersArr.length; i++) {
-                if (answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                    answerLettersArr[i].removeChild(answerLettersArr[i].lastElementChild);
+            for(let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+                if (puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                    puzzleAnswerLettersArr[i].removeChild(puzzleAnswerLettersArr[i].lastElementChild);
                 }
                 // remove highlighted box
-                if (answerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-                    answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                if (puzzleAnswerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                    puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
                 }
                 
             }
@@ -318,24 +318,24 @@ function letterGuessDelete(...args) {
 
         // Enter Letters
         else if (args[0] == "letter") {
-            for(let i = 0; i < answerLettersArr.length; i++) {
-                if (answerLettersArr[i].firstElementChild.classList.contains("non-visible") && !answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+            for(let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+                if (puzzleAnswerLettersArr[i].firstElementChild.classList.contains("non-visible") && !puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
 
                     // if keyboard input
                     if (args[1] == "keyboard") {
-                        answerLettersArr[i].innerHTML += `<i class="added-guess-input">${args[2]}</i>`;
+                        puzzleAnswerLettersArr[i].innerHTML += `<i class="added-guess-input">${args[2]}</i>`;
                     }
                      // mouse click addition
                     else {
                         let tempArr = args[1].textContent.split("$");
-                        answerLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
+                        puzzleAnswerLettersArr[i].innerHTML += `<i class="added-guess-input">${tempArr[0]}</i>`;
                     }
                     // remove highlight from box unless last viable box
                     let tempCount = 1
-                    while(answerLettersArr[i+tempCount] != undefined) {
-                        if (answerLettersArr[i+tempCount].firstElementChild.classList.contains("non-visible")) {
-                            answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
-                            answerLettersArr[i+tempCount].classList.add("guess-mode-current-guess-box");
+                    while(puzzleAnswerLettersArr[i+tempCount] != undefined) {
+                        if (puzzleAnswerLettersArr[i+tempCount].firstElementChild.classList.contains("non-visible")) {
+                            puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                            puzzleAnswerLettersArr[i+tempCount].classList.add("guess-mode-current-guess-box");
                             break;
                         }
                         else {
@@ -355,8 +355,8 @@ function letterGuessDelete(...args) {
             // remove any highlighted letters
             checkHighlight(keyboardLettersArr);
 
-            keyboardMakeAGuessBtn.classList.add("guess-mode");
-            keyboardMakeAGuessBtn.classList.add("guess-highlight");
+            makeAGuessBtn.classList.add("guess-mode");
+            makeAGuessBtn.classList.add("guess-highlight");
 
             // alert user of possible letter purchase
             if(startingGuessCount > 0 && (money <= 140 && money >= 40)) {
@@ -366,10 +366,10 @@ function letterGuessDelete(...args) {
             }
 
             // add phrase box highlight
-            for(let i = 0; i < answerLettersArr.length; i++) {
-                if (answerLettersArr[i].firstElementChild.classList.contains("non-visible") && !answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+            for(let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+                if (puzzleAnswerLettersArr[i].firstElementChild.classList.contains("non-visible") && !puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
 
-                    answerLettersArr[i].classList.add("guess-mode-current-guess-box")
+                    puzzleAnswerLettersArr[i].classList.add("guess-mode-current-guess-box")
                     return;
                 }
             }          
@@ -452,7 +452,7 @@ function enterLetter() {
     }
 
     // GUESS MODE INACTIVE \\
-    if (!keyboardMakeAGuessBtn.classList.contains("guess-mode")) {
+    if (!makeAGuessBtn.classList.contains("guess-mode")) {
         // get highlighted letter
         let letter = document.querySelector(".highlight");
         if (letter === null) {
@@ -520,7 +520,7 @@ function enterLetter() {
         }
 
         // check to make sure all phrase boxes filled
-        if (!answerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).every(element => element.lastElementChild.classList.contains("added-guess-input"))) {
+        if (!puzzleAnswerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).every(element => element.lastElementChild.classList.contains("added-guess-input"))) {
             alertElement.classList.add("add-alert");
             alertElement.innerHTML = "Please enter input for all boxes before entering";
             setTimeout(removeAlert, 3000, alertElement);
@@ -528,22 +528,22 @@ function enterLetter() {
         }
 
         // if all boxes filled check against answer
-        for (let i = 0; i < answerLettersArr.length; i++) {
-            if (answerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
-                if (answerLettersArr[i].lastElementChild.innerHTML == answerLettersArr[i].firstElementChild.innerHTML) {
-                    answerLettersArr[i].classList.add("correct-letter-fade");
-                    answerLettersArr[i].firstElementChild.classList.remove("non-visible");
+        for (let i = 0; i < puzzleAnswerLettersArr.length; i++) {
+            if (puzzleAnswerLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
+                if (puzzleAnswerLettersArr[i].lastElementChild.innerHTML == puzzleAnswerLettersArr[i].firstElementChild.innerHTML) {
+                    puzzleAnswerLettersArr[i].classList.add("correct-letter-fade");
+                    puzzleAnswerLettersArr[i].firstElementChild.classList.remove("non-visible");
                 }
                 // remove the guessed letters
-                answerLettersArr[i].removeChild(answerLettersArr[i].lastElementChild);
-                if (answerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
-                    answerLettersArr[i].classList.remove("guess-mode-current-guess-box");
+                puzzleAnswerLettersArr[i].removeChild(puzzleAnswerLettersArr[i].lastElementChild);
+                if (puzzleAnswerLettersArr[i].classList.contains("guess-mode-current-guess-box")) {
+                    puzzleAnswerLettersArr[i].classList.remove("guess-mode-current-guess-box");
                 }
             }
         }
 
         // add back guess-highlight to first available
-        for (let first of answerLettersArr) {
+        for (let first of puzzleAnswerLettersArr) {
             if (first.firstElementChild.classList.contains("non-visible")) {
                 first.classList.add("guess-mode-current-guess-box");
                 break;
@@ -564,7 +564,7 @@ function enterLetter() {
 }
 
 function puzzleSolved() {
-    return answerLettersArr.every(element => {
+    return puzzleAnswerLettersArr.every(element => {
         return !element.firstElementChild.classList.contains("non-visible")
     });
 }
@@ -613,9 +613,9 @@ function disableActionButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.setAttribute("disabled", "");
     });
-    keyboardMakeAGuessBtn.setAttribute("disabled", "");
-    keyboardEnterBtn.setAttribute("disabled", "");
-    keyboardDeleteBtn.setAttribute("disabled", "");
+    makeAGuessBtn.setAttribute("disabled", "");
+    enterBtn.setAttribute("disabled", "");
+    backspaceBtn.setAttribute("disabled", "");
     revealHintBtn.setAttribute("disabled", "");
     increaseCurrentGuessesBtn.setAttribute("disabled", "");
     return;
@@ -625,9 +625,9 @@ function enableButtons() {
     document.querySelectorAll(".letter").forEach(element => {
         element.removeAttribute("disabled");
     });
-    keyboardMakeAGuessBtn.removeAttribute("disabled");
-    keyboardEnterBtn.removeAttribute("disabled");
-    keyboardDeleteBtn.removeAttribute("disabled");
+    makeAGuessBtn.removeAttribute("disabled");
+    enterBtn.removeAttribute("disabled");
+    backspaceBtn.removeAttribute("disabled");
     revealHintBtn.removeAttribute("disabled");
     increaseCurrentGuessesBtn.removeAttribute("disabled", "");
     return;
@@ -642,8 +642,8 @@ function checkPotentialPurchase(Cost) {
             else if(money - Cost < 150) {
                 alertElement.classList.add("add-alert");
                 alertElement.innerHTML = "You sure? This purchase without any guesses left could lose you the game...";
-                keyboardEnterBtn.setAttribute("disabled", "");
-                setTimeout(() => keyboardEnterBtn.removeAttribute("disabled"), 2500);                
+                enterBtn.setAttribute("disabled", "");
+                setTimeout(() => enterBtn.removeAttribute("disabled"), 2500);                
                 setTimeout(removeAlert, 5000, alertElement);
                 return;
             } 
@@ -653,7 +653,7 @@ function checkPotentialPurchase(Cost) {
 function checkGameLoss() {
     if(!puzzleSolved() && startingGuessCount == 0 && money < 150) {
         //check values left of letters in puzzle
-        let lettersLeft = answerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.firstElementChild.textContent);
+        let lettersLeft = puzzleAnswerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible")).map(element => element.firstElementChild.textContent);
 
         let map = new Map();
 
@@ -675,8 +675,8 @@ function checkGameLoss() {
         else {
             alertElement.classList.add("add-alert");
             alertElement.innerHTML = "There is still hope! Choose letters wisely...";
-            keyboardEnterBtn.setAttribute("disabled", "");
-            setTimeout(() => keyboardEnterBtn.removeAttribute("disabled"), 1000);
+            enterBtn.setAttribute("disabled", "");
+            setTimeout(() => enterBtn.removeAttribute("disabled"), 1000);
             setTimeout(removeAlert, 3500, alertElement);
             return;
         }
@@ -687,7 +687,7 @@ function gameLose() {
     disableActionButtons();
     
     // reveal puzzle
-    let remainingPuzzle = answerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible"));
+    let remainingPuzzle = puzzleAnswerLettersArr.filter(element => element.firstElementChild.classList.contains("non-visible"));
 
     for (let i = 0; i < remainingPuzzle.length; i++) {
         let timeAdder = i * 500;
