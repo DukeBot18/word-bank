@@ -339,7 +339,6 @@ h1 {
 .hint-container {
     display: none;
     text-align: center;
-    max-height: 3vh;
 }
 
 .hint {

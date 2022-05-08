@@ -1,16 +1,16 @@
 // Phrase data and generation function
 import { phraseObject } from "./phrases.js";
-import { resetPuzzle, guessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr, enterLetter, checkHighlight, potentialPurchase, addGuessBtn, hintBtn, deleteBtn, enterBtn, checkPotentialPurchase } from "./functions.js";
+import { resetPuzzle, startingGuessCount, guessAmount, money, dollarAmount, correctLetter, phraseLettersArr, removeAlert, letterGuessDelete, puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr, enterLetter, checkHighlight, potentialPurchaseElement, increaseCurrentGuessesBtn, revealHintBtn, deleteBtn, enterBtn, checkPotentialPurchase } from "./functions.js";
 
 /*=================================
 GENERATED CONTENT FROM DAILY PHRASE 
 =================================*/
 
 // add starting bankroll
-currentMoney.innerHTML = "$ " + money;
+bankrollElement.innerHTML = "$ " + money;
 
 // setup initial puzzle
-resetPuzzle(Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, currentMoney);
+resetPuzzle(Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement);
 
 let today = new Date();
 console.log(today);
@@ -18,7 +18,7 @@ console.log(Date.now());
 
 // Reset puzzle once per day
 let dayInMilliseconds = 800000;
-setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), insertPhrase, categoryDiv, hintElement, currentMoney, userGuessBtn, lettersArr);
+setInterval(resetPuzzle, dayInMilliseconds, Object.values(phraseObject), puzzleElement, categoryElement, hintElement, bankrollElement, makeAGuessBtn, keyboardLettersArr);
 
 
 /*===============
@@ -32,15 +32,15 @@ enterBtn.addEventListener("click", enterLetter);
 document.addEventListener("keydown", function (event) {
     // remove hint possiblity
     if(!hintElement.classList.contains("visible")) {
-        hintBtn.classList.remove("hint-focus");
-        potentialPurchase.innerHTML = "";
+        revealHintBtn.classList.remove("hint-focus");
+        potentialPurchaseElement.innerHTML = "";
     }
     // remove add guess possibility
-    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
-        addGuessBtn.classList.remove("guess-focus-default");
-        addGuessBtn.classList.remove("guess-focus-one");
-        addGuessBtn.classList.remove("guess-focus-zero");
-        potentialPurchase.innerHTML = "";
+    if(increaseCurrentGuessesBtn.classList.contains("guess-focus-default") || increaseCurrentGuessesBtn.classList.contains("guess-focus-one") || increaseCurrentGuessesBtn.classList.contains("guess-focus-zero")) {
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-default");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-one");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-zero");
+        potentialPurchaseElement.innerHTML = "";
     }
 
     event.preventDefault();
@@ -59,36 +59,36 @@ document.addEventListener("keydown", function (event) {
 });
 
 // guess mode toggle
-userGuessBtn.addEventListener("click", function() {
+makeAGuessBtn.addEventListener("click", function() {
     // remove hint possiblity
     if(!hintElement.classList.contains("visible")) {
-        hintBtn.classList.remove("hint-focus");
-        potentialPurchase.innerHTML = "";
+        revealHintBtn.classList.remove("hint-focus");
+        potentialPurchaseElement.innerHTML = "";
     }
     // remove add guess possibility
-    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
-        addGuessBtn.classList.remove("guess-focus-default");
-        addGuessBtn.classList.remove("guess-focus-one");
-        addGuessBtn.classList.remove("guess-focus-zero");
-        potentialPurchase.innerHTML = "";
+    if(increaseCurrentGuessesBtn.classList.contains("guess-focus-default") || increaseCurrentGuessesBtn.classList.contains("guess-focus-one") || increaseCurrentGuessesBtn.classList.contains("guess-focus-zero")) {
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-default");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-one");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-zero");
+        potentialPurchaseElement.innerHTML = "";
     }   
     letterGuessDelete("guess");
 });
 
 // adding letters with click
-for (let element of lettersArr) {
+for (let element of keyboardLettersArr) {
     element.addEventListener("click", function() {
         // remove hint possiblity
         if(!hintElement.classList.contains("visible")) {
-            hintBtn.classList.remove("hint-focus");
-            potentialPurchase.innerHTML = "";
+            revealHintBtn.classList.remove("hint-focus");
+            potentialPurchaseElement.innerHTML = "";
         }
         // remove add guess possibility
-        if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
-            addGuessBtn.classList.remove("guess-focus-default");
-            addGuessBtn.classList.remove("guess-focus-one");
-            addGuessBtn.classList.remove("guess-focus-zero");
-            potentialPurchase.innerHTML = "";
+        if(increaseCurrentGuessesBtn.classList.contains("guess-focus-default") || increaseCurrentGuessesBtn.classList.contains("guess-focus-one") || increaseCurrentGuessesBtn.classList.contains("guess-focus-zero")) {
+            increaseCurrentGuessesBtn.classList.remove("guess-focus-default");
+            increaseCurrentGuessesBtn.classList.remove("guess-focus-one");
+            increaseCurrentGuessesBtn.classList.remove("guess-focus-zero");
+            potentialPurchaseElement.innerHTML = "";
         }         
         letterGuessDelete("letter", element);
     });
@@ -102,11 +102,11 @@ deleteBtn.addEventListener("click", function() {
 /*===========================
 ADDITONAL GUESS FUNCTIONALITY
 ===========================*/
-addGuessBtn.addEventListener("click", function() {
-    if(userGuessBtn.classList.contains("guess-mode")){
+increaseCurrentGuessesBtn.addEventListener("click", function() {
+    if(makeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        userGuessBtn.classList.remove("guess-mode");
-        userGuessBtn.classList.remove("guess-highlight");
+        makeAGuessBtn.classList.remove("guess-mode");
+        makeAGuessBtn.classList.remove("guess-highlight");
         for(let i = 0; i < phraseLettersArr.length; i++) {
             if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                 phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
@@ -118,29 +118,29 @@ addGuessBtn.addEventListener("click", function() {
         }        
     }
     // remove highlights from other entry possibilities
-    checkHighlight(lettersArr);
+    checkHighlight(keyboardLettersArr);
 
     // remove hint possiblity
     if(!hintElement.classList.contains("visible")) {
-        hintBtn.classList.remove("hint-focus");
-        potentialPurchase.innerHTML = "";
+        revealHintBtn.classList.remove("hint-focus");
+        potentialPurchaseElement.innerHTML = "";
     }
 
-    if (guessCount >= 2) {
-        addGuessBtn.classList.toggle("guess-focus-default"); 
+    if (startingGuessCount >= 2) {
+        increaseCurrentGuessesBtn.classList.toggle("guess-focus-default"); 
     }
-    else if (guessCount === 1) {
-        addGuessBtn.classList.toggle("guess-focus-one");
+    else if (startingGuessCount === 1) {
+        increaseCurrentGuessesBtn.classList.toggle("guess-focus-one");
     }
-    else if (guessCount === 0) {
-        addGuessBtn.classList.toggle("guess-focus-zero");
+    else if (startingGuessCount === 0) {
+        increaseCurrentGuessesBtn.classList.toggle("guess-focus-zero");
     }
 
-    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
-        potentialPurchase.innerHTML = "-150";
+    if(increaseCurrentGuessesBtn.classList.contains("guess-focus-default") || increaseCurrentGuessesBtn.classList.contains("guess-focus-one") || increaseCurrentGuessesBtn.classList.contains("guess-focus-zero")) {
+        potentialPurchaseElement.innerHTML = "-150";
     }
     else {
-        potentialPurchase.innerHTML = "";
+        potentialPurchaseElement.innerHTML = "";
     }
 
 });
@@ -148,15 +148,15 @@ addGuessBtn.addEventListener("click", function() {
 /*===========================
 HINT SETTINGS BUTTONS & STATS
 ===========================*/
-hintBtn.addEventListener("click", function() { 
+revealHintBtn.addEventListener("click", function() { 
     // exit if hint provided
     if (hintElement.classList.contains("visible")){
         return;
     }
-    if(userGuessBtn.classList.contains("guess-mode")){
+    if(makeAGuessBtn.classList.contains("guess-mode")){
         // remove current guesses
-        userGuessBtn.classList.remove("guess-mode");
-        userGuessBtn.classList.remove("guess-highlight");
+        makeAGuessBtn.classList.remove("guess-mode");
+        makeAGuessBtn.classList.remove("guess-highlight");
         for(let i = 0; i < phraseLettersArr.length; i++) {
             if (phraseLettersArr[i].lastElementChild.classList.contains("added-guess-input")) {
                 phraseLettersArr[i].removeChild(phraseLettersArr[i].lastElementChild);
@@ -168,21 +168,21 @@ hintBtn.addEventListener("click", function() {
         }        
     }
     // remove add guess possibility
-    if(addGuessBtn.classList.contains("guess-focus-default") || addGuessBtn.classList.contains("guess-focus-one") || addGuessBtn.classList.contains("guess-focus-zero")) {
-        addGuessBtn.classList.remove("guess-focus-default");
-        addGuessBtn.classList.remove("guess-focus-one");
-        addGuessBtn.classList.remove("guess-focus-zero");
-        potentialPurchase.innerHTML = "";
+    if(increaseCurrentGuessesBtn.classList.contains("guess-focus-default") || increaseCurrentGuessesBtn.classList.contains("guess-focus-one") || increaseCurrentGuessesBtn.classList.contains("guess-focus-zero")) {
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-default");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-one");
+        increaseCurrentGuessesBtn.classList.remove("guess-focus-zero");
+        potentialPurchaseElement.innerHTML = "";
     }    
     // remove highlights from other entry possibilities
-    checkHighlight(lettersArr);
-    hintBtn.classList.toggle("hint-focus");
+    checkHighlight(keyboardLettersArr);
+    revealHintBtn.classList.toggle("hint-focus");
     checkPotentialPurchase(150);
-    if (hintBtn.classList.contains("hint-focus")) {
-        potentialPurchase.innerHTML = "-150";
+    if (revealHintBtn.classList.contains("hint-focus")) {
+        potentialPurchaseElement.innerHTML = "-150";
     }
     else {
-        potentialPurchase.innerHTML = "";
+        potentialPurchaseElement.innerHTML = "";
     }
     // make visible
 });
